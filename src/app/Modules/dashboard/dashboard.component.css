@@ -1,5 +1,3 @@
-
-
 .container {
     display: flex;
     height: 98%;
@@ -71,6 +69,36 @@
     padding-left: 2%;
 }
 
+.container1 form {
+    display: flex;
+    flex-direction: column;
+}
+
+.container1 form h1 {
+    text-align: center;
+}
+
+.container1 form input {
+    margin-bottom: 2%;
+    padding: 1%;
+    border-radius: 5px;
+    border: none;
+}
+
+.container1 form button {
+    background-color: #264F73;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 2%;
+}
+
+.container1 form button:hover {
+    background-color: #47A1F6;
+    transition: all 0.3s;
+}
+
 .container2 {
     background-color: #081B26;
     color: white;
@@ -106,15 +134,18 @@
 }
 
 .search-input {
-    padding-right: 30px; /* Ajusta el espacio a la derecha para que quepa el icono */
+    padding-right: 30px;
+    /* Ajusta el espacio a la derecha para que quepa el icono */
 }
 
 .search-icon {
     position: absolute;
-    right: 10px; /* Ajusta la posición del icono a la derecha */
+    right: 10px;
+    /* Ajusta la posición del icono a la derecha */
     top: 50%;
     transform: translateY(-50%);
-    cursor: pointer; /* Cambia el cursor al pasar sobre el icono */
+    cursor: pointer;
+    /* Cambia el cursor al pasar sobre el icono */
 }
 
 
