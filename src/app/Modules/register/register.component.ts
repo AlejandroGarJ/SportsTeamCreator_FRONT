@@ -10,7 +10,7 @@ export class RegisterComponent {
   constructor(private router: Router) { }
 
   goToLogin() {
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
   }
 
 }
