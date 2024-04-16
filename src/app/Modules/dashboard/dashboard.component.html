@@ -4,7 +4,7 @@
             alt="Logo del Usuario" width="70%">
         <ul>
             <li>
-                <h4><i class="fa-solid fa-user"></i> Mis Equipos</h4>
+                <h4><i class="fa-solid fa-user"></i> Mis Clubes</h4>
             </li>
             <ul>
                 <li><button>Real Madrid</button></li>
@@ -30,17 +30,31 @@
         <div class="bottom-container">
             <!-- Contenido del container inferior -->
             <div class="container1">
-                <form action="">
-                    <h1>Entrar a un Club</h1>
-                    <input type="text" placeholder="ID Club">
-                    <input type="text" placeholder="Codigo Acceso Club">
-                    <button>Entrar</button>
-                </form>
+                <div class="subcontainer1">
+                    <h1>Crear un Club</h1>
+                    <form action="">
+                        <input type="text" placeholder="Nombre del Club">
+                        <input type="text" placeholder="ID del Club">
+                        <input type="text" placeholder="Codigo de Acceso">
+                        <input type="text" placeholder="Pais">
+                        <input type="text" placeholder="Ciudad">
+                        <button>Crear</button>
+                    </form>
+                </div>
+                <div class="subcontainer2">
+                    <h1>Unirse a un Club</h1>
+                    <form action="">
+                        <input type="text" placeholder="ID del Club">
+                        <input type="text" placeholder="Codigo de Acceso">
+                        <button>Unirse</button>
+                    </form>
+                </div>
             </div>
             <div class="container2">
-                <h2>Contenido 2</h2>
-                <p>Este es el contenido del segundo contenedor.</p>
+                <h1>Calendario</h1>
+                <div class="calendario">
+                    <full-calendar [options]="calendarOptions"></full-calendar>
+                </div>
             </div>
         </div>
     </div>
-</div>

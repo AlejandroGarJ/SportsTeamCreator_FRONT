@@ -60,13 +60,33 @@
 }
 
 .container1 {
+    color: white;
+    border-radius: 20px;
+    width: 48%;
+    margin-right: 2%;
+}
+
+.container1 .subcontainer1 {
     background-color: #081B26;
     color: white;
     border-radius: 20px;
-    padding: 1%;
-    width: 48%;
-    margin-right: 2%;
-    padding-left: 2%;
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 1%;
+    width: 96%;
+    height: 56%;
+    margin-bottom: 2%;
+}
+
+.container1 .subcontainer2 {
+    padding-left: 3%;
+    padding-right: 3%;
+    padding-top: 1%;
+    background-color: #081B26;
+    color: white;
+    border-radius: 20px;
+    width: 96%;
+    height: 40%;
 }
 
 .container1 form {
@@ -79,7 +99,7 @@
 }
 
 .container1 form input {
-    margin-bottom: 2%;
+    margin-bottom: 3%;
     padding: 1%;
     border-radius: 5px;
     border: none;
@@ -91,7 +111,7 @@
     border: none;
     padding: 10px;
     border-radius: 10px;
-    margin-top: 2%;
+    margin-top: 4%;
 }
 
 .container1 form button:hover {
