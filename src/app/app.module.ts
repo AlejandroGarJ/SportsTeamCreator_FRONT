@@ -8,6 +8,10 @@ import { LoginComponent } from './Modules/login/login.component';
 import { DashboardComponent } from './Modules/dashboard/dashboard.component';
 import { RegisterComponent } from './Modules/register/register.component';
 import { PasswordForgetComponent } from './Modules/password-forget/password-forget.component';
+import {FormsModule} from "@angular/forms";
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Loader1Component } from './shared/components/loader1/loader1.component';
+
 
 @NgModule({
   declarations: [
@@ -15,13 +19,17 @@ import { PasswordForgetComponent } from './Modules/password-forget/password-forg
     LoginComponent,
     DashboardComponent,
     RegisterComponent,
-    PasswordForgetComponent
+    PasswordForgetComponent,
+    Loader1Component,
+  
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FullCalendarModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FullCalendarModule,
+        FormsModule,
+        HttpClientModule
+    ],
   providers: [
     provideClientHydration()
   ],

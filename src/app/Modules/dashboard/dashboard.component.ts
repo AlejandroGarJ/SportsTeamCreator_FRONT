@@ -1,6 +1,9 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import {Router} from "@angular/router";
+import {DashboardService} from "./dashboard.service";
+import { Club } from '../../Core/Models/club.model';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,6 +11,83 @@ import dayGridPlugin from '@fullcalendar/daygrid';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent {
+
+  clubName:string = "";
+  clubs: Club[]=[];
+  mostrarClubes: boolean = false;
+  pagina: number = 1;
+  noHayClubes: boolean = false;
+  showLoader: boolean = true;
+  ngOnInit(){}
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event: any) {
+    this.reajustarClubWrapper();
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    
+    const clickedElement = event.target as HTMLElement;
+    const searchInputElement = document.getElementById('searchInput');
+    const clubWrapper = document.getElementById('clubWrapper');
+    // Verificar si el clic ocurrió fuera del elemento searchInput
+    if (searchInputElement && !searchInputElement.contains(clickedElement) && clubWrapper && !clubWrapper.contains(clickedElement) ) {
+   
+      this.mostrarClubes = false;
+      searchInputElement.style.borderBottomLeftRadius = 30 + "px";
+      searchInputElement.style.borderBottomRightRadius = 30 + "px";
+      
+      this.clubs = [];
+      this.pagina = 1;
+      
+    }
+  }
+
+  changeNameClub(){
+    this.pagina = 1;
+    this.searchClub(true);
+  }
+
+  infiniteScroll(scroll: Event){
+    const target = scroll.target as HTMLElement;
+    if(target.scrollTop == (target.scrollHeight - target.clientHeight)){
+
+      if(this.pagina != 1000){
+        this.pagina++;
+        this.searchClub();
+      }
+    
+    }
+  }
+
+
+
+  reajustarClubWrapper(): void {
+    const searchInput = document.getElementById("searchInput");
+    const clubWrapper = document.getElementById("clubWrapper");
+    
+    if (searchInput && clubWrapper) {
+      const inputRect = searchInput.getBoundingClientRect();
+      
+      const topPosition = inputRect.top + window.scrollY + inputRect.height;
+      const leftPosition = inputRect.left + window.scrollX; // Utilizamos solo la posición izquierda de searchInput
+      
+      clubWrapper.style.left = leftPosition + "px";
+      clubWrapper.style.top = topPosition + "px";
+      clubWrapper.style.width = inputRect.width + "px";
+      searchInput.style.borderBottomLeftRadius = 0 + "px";
+  
+      clubWrapper.style.display = "block";
+
+
+    }
+    
+    
+  }
+  
+
+  constructor(private router: Router, private dashboardService: DashboardService) { }
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
@@ -34,4 +114,60 @@ export class DashboardComponent {
       }
     }
   };
+
+
+  showWrapperClub() {
+    const searchInput = document.getElementById("searchInput");
+    if(searchInput != null) searchInput.style.borderBottomRightRadius = 0 + "px";
+    this.mostrarClubes = true;
+    setTimeout(() => {
+      this.reajustarClubWrapper();
+    }, 100); // 100 milisegundos de retraso
+
+
+;   
+  }
+
+  searchClub(overrideClub: boolean = false){
+
+    this.dashboardService.searchClub(this.clubName, this.pagina).subscribe(
+      (response) => {
+
+        if(this.pagina <= response.last_page){
+          if(this.pagina != 1000){
+           
+          if(overrideClub == true){
+            this.clubs = response.data;
+          }else this.clubs = this.clubs.concat(response.data);
+        
+          this.showWrapperClub();
+          }
+        }else{
+          this.pagina = 1000;
+        }
+        console.log(response);
+        console.log(this.pagina);
+        if(this.pagina >= response.last_page){
+          this.showLoader = false;
+          
+          const loadingContainer = document.getElementById("loaderContainer");
+
+          if(loadingContainer != null){
+            loadingContainer.style.display = 'none';
+          }
+          
+        } 
+        else{
+          const loadingContainer = document.getElementById("loaderContainer");
+
+          if(loadingContainer != null){
+            loadingContainer.style.display = 'flex';
+        } this.showLoader = true;
+
+      }
+       
+      })
+  }
 }
+
+
