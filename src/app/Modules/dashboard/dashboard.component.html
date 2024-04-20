@@ -20,25 +20,25 @@
                 <h4 class="subtitulo">Gestiona tus clubes</h4>
             </div>
             <div class="search">
-                <input type="text" id="searchInput" placeholder="Buscar" class="search-input"  [(ngModel)]="clubName" (click)="searchClub()" (ngModelChange)="changeNameClub()">
+                <input type="text" id="searchInput" placeholder="Buscar" class="search-input" [(ngModel)]="clubName"
+                    (click)="searchClub()" (ngModelChange)="changeNameClub()">
                 <div *ngIf="mostrarClubes" class="clubWrapper" id="clubWrapper" (scroll)="infiniteScroll($event)">
                     @if(clubs.length>0){
-                        <p *ngFor="let club of clubs">
-                            {{club.nombre}}
-                        </p>
-                        
+                    <p *ngFor="let club of clubs">
+                        {{club.nombre}}
+                    </p>
+
                     }
-                   
+
                     <div class="loader" id="loaderContainer">
-                        <app-loader1 *ngIf="showLoader" ></app-loader1>
+                        <app-loader1 *ngIf="showLoader"></app-loader1>
                     </div>
                 </div>
-              
-                <span class="search-icon">&#128269;</span>
+
                 <div class="imagen">
                     <img src="./../../assets/img/60efbe9d4eaabad6613a97e798ebff87.jpg" alt="Foto de perfil">
                 </div>
-                
+
             </div>
         </div>
         <div class="bottom-container">
