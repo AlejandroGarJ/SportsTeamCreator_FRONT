@@ -1,14 +1,92 @@
-<div class="imagen-fondo">
-    <div class="contenedor-login">
-        <form action="" class="formulario-login">
-            <h1>Iniciar sesión</h1>
-            <input type="text" placeholder="Email">
-            <input type="password" placeholder="Contraseña">
-            <a (click)="goToPasswordForget()">¿Has olvidado la contraseña?</a>
-            <br>
-            <button type="submit">Iniciar sesión</button>
-            <br>
-            <a class="con-borde" (click)="goToRegister()">¿No tienes cuenta? Registrate</a>
-        </form>
+<div class="all">
+    <div class="header">
+        <div class="spotifyWhiteLogo">
+            <img src="./../../../../assets/img/spotifyWhiteLogo.png" alt="">
+        </div>
+    
     </div>
-</div>
+    
+    <div class="body">
+    
+        <div class="loginContainer">
+    
+            <div class="titulo">
+                <h1>Inicia sesión en Spotify</h1>
+            </div>
+            
+        
+            <ul class="socialsButtons">
+    
+                <li>
+                    <button>
+                        <div class="logo">  <img id="googleLogo" src="../../../../assets/img/googleLogo.png" alt=""></div>
+                        <div class="continue"><h3>Continuar con Google</h3></div> 
+                    </button>
+                </li>
+                <li>
+                    <button>
+                        <div class="logo">  <img id="googleLogo" src="../../../../assets/img/facebookLogo.png" alt=""></div>
+                        <div class="continue"><h3>Continuar con Facebook</h3></div> 
+                    </button>
+                </li>
+                <li>
+                    <button>
+                        <div class="logo">  <img id="googleLogo" src="../../../../assets/img/appleLogo.png" alt=""></div>
+                        <div class="continue"><h3>Continuar con Apple</h3></div> 
+                    </button>
+                </li>
+                
+            </ul>
+    
+            <hr>
+    
+            <div class="form">
+    
+                <div class="input">
+                    <h4>Correo electrónico o nombre de usuario</h4>
+                    <input type="text" id="password" class="inputElement" placeholder="Correo electrónico o nombre de usuario">
+                </div>
+                <br>
+                <div class="input" id="inputPassword">
+                    <h4>Contraseña</h4>
+                    <input type="password" id="password" class="inputElement" placeholder="Contraseña">
+                </div>
+                <br>
+    
+                <div class="remember">
+    
+                    <div class="groupSwitchText">
+                    <app-switcher class="switcher"></app-switcher> 
+                    <p>Recuérdame</p>
+    
+                     </div>
+                </div>
+    
+                <div class="loginButton">
+                    <button class="buttonLogin">
+                        <h4>Iniciar Sesión</h4>
+                    </button>
+                </div>   
+                
+                <h4 class="passwordForgot">¿Se te ha olvidad la contraseña?</h4>
+            
+                <hr>
+    
+                <div class="register">
+    
+                    <div class="registerContainer">
+                    <h4 class="noAcc">¿No tienes cuenta?</h4>
+                    <h4 class="subscribe">Subscribete a Spotify</h4>
+                      </div>
+                </div>
+            </div>
+            
+                 
+           
+      
+       
+           
+        </div>
+    </div>
+    
+    </div>

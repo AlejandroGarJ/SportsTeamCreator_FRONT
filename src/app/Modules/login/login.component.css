@@ -1,76 +1,279 @@
-.imagen-fondo {
-    background-image: url('/assets/img/campo.png');
-    background-size: cover;
-    background-position: center;
-    height: 100%;
+
+
+.all{
+    
+
+    background: linear-gradient(#302c2c 0%, #080404 100%);
+}
+.header{
+    background-color: #181414;
+    height: 100px;
+    display: flex;
+}
+
+.spotifyWhiteLogo{
+    margin-top: 30px;
+    margin-left: 35px;
+}
+
+.spotifyWhiteLogo:hover{
+    cursor:pointer;
+}
+
+h1{
+    font-family: 'Gotham';
+    font-weight: 400;
+}
+
+
+  .loginContainer{
+    background-color: #181414;
+    width: 734px;
+    height: 1000px;
+    margin: 0 auto;
+    margin-top: 36px;
+    border-radius: 8px;
+    color: white;
+    padding-top: 32px;
+  }
+  
+  .titulo h1{
+    margin-top: 28px;
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .warning{
+    display: inline-flex;
+    text-align: center;
+  }
+
+  .socialsButtons{
+    list-style: none;
+    text-align: center;
+    padding-left: 0px;
+    align-items: center;
+  }
+
+  .socialsButtons button{
+    background-color: transparent;
+    border: 1px solid grey;
+    padding: 14px 31px;
+    width: 370px;
+    margin-bottom: 8px;
+    display: inline-flex;
+    border-radius: 9999px;
+    box-sizing: border-box;
+    float: none;
+    line-height: normal;
+  }
+
+  .socialsButtons button:hover{
+    border: 1px solid white;
+    cursor: pointer;
+  }
+
+  .logo{
     display: flex;
     justify-content: center;
     align-items: center;
-}
 
-.contenedor-login {
-    background-color: white;
-    padding: 1%;
-    border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-    min-width: 20%;
-}
+  }
+  
+  .body{
+    margin-top: 0px;
 
-.formulario-login {
-    max-width: 90%;
-    margin: 1%;
-}
+  }
 
-.formulario-login h1 {
+  
+  h3{
+    color: #e8e8e5;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-family: "Gotham";
+    font-size: 1rem;
+  }
+
+  hr{
+margin: 35px 100px;
+  border-width: 1px medium medium;
+  border-style: solid none none;
+  border-color: rgb(41, 41, 41) currentcolor currentcolor;
+  border-image: none;
+  }
+
+  .continue{
+    width: 100%;
+    text-align: center !important;
+  }
+
+ 
+
+
+  .form{
     text-align: center;
-    color: #112E40;
-}
-
-.formulario-login a {
-    color: #112E40;
-    text-decoration: none;
-    margin-top: 2%;
-}
-
-.formulario-login a:hover {
-    color: #47A1F6;
-}
-
-.formulario-login .con-borde {
-    color: #112E40;
-    text-decoration: none;
-    border-bottom: 2px solid black;
-}
-
-.formulario-login .con-borde:hover {
-    color: #47A1F6;
-    border-bottom: 2px solid #47A1F6;
-}
-
-.formulario-login input {
+    align-items: center;
     display: block;
-    width: 100%;
-    margin-bottom: 4%;
-    padding: 10px;
-    border: 0;
-    border-bottom: 1px solid #ccc;
-    border-radius: 3px;
-}
+  }
 
-.formulario-login button {
-    background-color: #112E40;
-    color: white;
-    width: 100%;
+  .input{
+
+    display: inline-block; /* Permite que el div tenga un ancho determinado */
+    width: 370px; /* Ancho determinado del div */
+    text-align: left; /* Alinea el texto a la izquierda dentro del div */
+    
+  }
+
+  h4{
+    font-family: "Gotham";
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: #e8e8e5;
+    margin-bottom: 10px;
+  }
+
+  .inputElement{
+    width:  100%;
+    height: 48px;
+    background-color: transparent;
+    border: 1px solid grey;
+    border-radius: 4px;
+    outline: none; 
+    margin-bottom: 10px;
+    color: #E0E0E0;
+    font-family: "Gotham";
     text-align: center;
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .inputElement:hover{
+    border: 1px solid white;
+  }
+
+  .inputElement:focus{
+    border: 2px solid white;
+  }
+
+ 
+  #password{
+    text-align: start !important;
+    
+    padding-left: 30px;
+    width: 345px;
+  }
+
+  .remember{
+    display: inline-block; 
+    width: 370px; 
+    text-align: left; 
+    margin-top: 15px;
+  }
+
+  .groupSwitchText{
+    display: flex;
+  }
+
+  .groupSwitchText p{
+    font-family: "Gotham";
+    margin-top: 6px;
+    margin-left: 10px;
+    font-size: 0.9rem;
+  }
+
+  .loginButton{
+    margin-top: 30px;
+  }
+
+  .buttonLogin{
+    width: 370px;
+    height: 48px;
+    border-radius: 9999px;
+    background-color: #20d464;
     border: none;
-    margin-top: 10%;
-    margin-bottom: 10%;
-    padding: 10px;
-    border-radius: 3px;
+  }
+
+  .buttonLogin:hover{
     cursor: pointer;
-    transition: background-color 0.3s;
+    background-color: #20dc64;
+    scale: 1.1;
+  }
+
+  .buttonLogin h4{
+    color: black;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 15px;
+  }
+
+  .passwordForgot{
+    margin-top: 25px;
+    text-decoration: underline;
+    font-weight: 200;
+  }
+  .passwordForgot:hover, .subscribe:hover{
+    cursor: pointer;
+    color: #20dc64;
+  }
+
+  .register{
+    margin-top: 40px;
+    display: inline-block;
+  }
+
+  .registerContainer{
+    display: flex;
+  }
+
+  .noAcc{
+    color: grey;
+    font-weight: 200;
+  }
+
+  .subscribe{
+    text-decoration: underline;
+    margin-left: 5px;
+    font-weight: 200;
+  }
+
+  /* En el CSS del componente principal */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo gris semi-transparente */
+  z-index: 9999; /* Para que esté por encima de todo */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.formulario-login button:hover {
-    background-color: #47A1F6;
+.loader {
+  /* Estilos para el loader, por ejemplo */
+  color: white;
+  font-size: 24px;
 }
+
+  @media (max-width: 768px) {
+   
+    .spotifyWhiteLogo img{
+
+        height: 36px;
+        width: auto;
+    }
+
+    .loginContainer{
+        margin: 0px;
+        width: 100%;
+        border-radius: 0px;
+    
+    }
+
+   
+
+   
+
+   
+  }
