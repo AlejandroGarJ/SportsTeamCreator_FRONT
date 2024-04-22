@@ -1,22 +1,127 @@
-<div class="imagen-fondo">
-    <div class="contenedor-login">
-        <form action="" class="formulario-login">
-            <h1>Registrarse</h1>
-            <input type="text" placeholder="DNI">
-            <input type="text" placeholder="Nombre">
-            <input type="text" placeholder="Apellidos">
-            <input type="date" placeholder="Fecha de Nacimiento">
-            <input type="text" placeholder="Email">
-            <select name="Genero" id="Genero">
-                <option disabled selected value="Genero">Genero</option>
-                <option value="Hombre">Hombre</option>
-                <option value="Mujer">Mujer</option>
-            </select>
-            <input type="password" placeholder="Contraseña">
-            <input type="password" placeholder="Repetir Contraseña">
-            <button type="submit">Registrar Cuenta</button>
-            <br>
-            <a (click)="goToLogin()">¿Ya tienes cuenta? Inicar Sesion</a>
-        </form>
+<div class="all">
+    <div class="header">
+        <div class="spotifyWhiteLogo">
+            <img src="./../../../assets/img/logo.jpeg" alt="">
+        </div>
+
     </div>
+
+    <div class="body">
+
+        <div class="loginContainer">
+
+            <div class="titulo">
+                <h1>Inicia sesión en SportsTeamCreator</h1>
+            </div>
+
+
+            <ul class="socialsButtons">
+
+                <li>
+                    <button>
+                        <div class="logo"> <img id="googleLogo" src="../../../../assets/img/googleLogo.png" alt="">
+                        </div>
+                        <div class="continue">
+                            <h3>Continuar con Google</h3>
+                        </div>
+                    </button>
+                </li>
+                <li>
+                    <button>
+                        <div class="logo"> <img id="googleLogo" src="../../../../assets/img/facebookLogo.png" alt="">
+                        </div>
+                        <div class="continue">
+                            <h3>Continuar con Facebook</h3>
+                        </div>
+                    </button>
+                </li>
+                <li>
+                    <button>
+                        <div class="logo"> <img id="googleLogo" src="../../../../assets/img/appleLogo.png" alt=""></div>
+                        <div class="continue">
+                            <h3>Continuar con Apple</h3>
+                        </div>
+                    </button>
+                </li>
+
+            </ul>
+
+            <hr>
+
+            <div class="form">
+                <div class="input">
+                    <h4>DNI</h4>
+                    <input type="text" id="dni" class="inputElement" placeholder="DNI" [(ngModel)]="dni">
+                </div>
+                <div class="input">
+                    <h4>Nombre</h4>
+                    <input type="text" id="name" class="inputElement" placeholder="Nombre" [(ngModel)]="nombre">
+                </div>
+                <div class="input">
+                    <h4>Apellidos</h4>
+                    <input type="text" id="surname" class="inputElement" placeholder="Apellidos"
+                        [(ngModel)]="apellidos">
+                </div>
+                <div class="input">
+                    <h4>Fecha de nacimiento</h4>
+                    <input type="date" id="birthDate" class="inputElement" placeholder="Fecha de nacimiento"
+                        [(ngModel)]="fechaNacimiento">
+                </div>
+                <div class="input">
+                    <h4>Correo electrónico</h4>
+                    <input type="text" id="email" class="inputElement" placeholder="Correo electrónico"
+                        [(ngModel)]="email">
+                </div>
+                <div class="input">
+                    <h4>Genero</h4>
+                    <select name="genero" id="genero" [(ngModel)]="genero">
+                        <option value="Hombre">Hombre</option>
+                        <option value="Mujer">Mujer</option>
+                    </select>
+                </div>
+                <br>
+                <div class="input" id="inputPassword">
+                    <h4>Contraseña</h4>
+                    <input type="password" id="password" class="inputElement" placeholder="Contraseña"
+                        [(ngModel)]="contrasena">
+                </div>
+                <div class="input" id="inputPassword">
+                    <h4>Repetir contraseña</h4>
+                    <input type="password" id="password" class="inputElement" placeholder="Repetir contraseña"
+                        [(ngModel)]="contrasena2">
+                </div>
+
+                <br>
+
+                <div class="loginButton">
+                    <button class="buttonLogin" (click)="iniciarSesion()">
+                        <h4 *ngIf="!comprobandoRegister">Registrarse</h4>
+
+                        <div class="loader">
+                            <app-loader1 *ngIf="comprobandoRegister"></app-loader1>
+                        </div>
+
+                    </button>
+
+                </div>
+
+                <hr>
+
+                <div class="register">
+
+                    <div class="registerContainer">
+                        <h4 class="noAcc">¿Ya tienes cuenta?</h4>
+                        <h4 class="subscribe">Inicia sesion en SportsTeamCreator</h4>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+    </div>
+
 </div>
