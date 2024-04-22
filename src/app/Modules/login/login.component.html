@@ -1,7 +1,7 @@
 <div class="all">
     <div class="header">
         <div class="spotifyWhiteLogo">
-            <img src="./../../../../assets/img/spotifyWhiteLogo.png" alt="">
+            <img src="./../../../assets/img/logo.jpeg" alt="">
         </div>
     
     </div>
@@ -11,7 +11,7 @@
         <div class="loginContainer">
     
             <div class="titulo">
-                <h1>Inicia sesión en Spotify</h1>
+                <h1>Inicia sesión en SportsTeamCreator</h1>
             </div>
             
         
@@ -44,13 +44,18 @@
     
                 <div class="input">
                     <h4>Correo electrónico o nombre de usuario</h4>
-                    <input type="text" id="password" class="inputElement" placeholder="Correo electrónico o nombre de usuario">
+                    <input type="text" id="email" class="inputElement" placeholder="Correo electrónico" [(ngModel)]="email">
+                    <h4 *ngIf="emailMal" class="warningMessage">{{mensajeErrorEmail}}</h4>
                 </div>
                 <br>
                 <div class="input" id="inputPassword">
                     <h4>Contraseña</h4>
-                    <input type="password" id="password" class="inputElement" placeholder="Contraseña">
+                    <input type="password" id="password" class="inputElement" placeholder="Contraseña" [(ngModel)]="contrasena">
+                    <h4 *ngIf="contrasenaMal" class="warningMessage">{{mensajeErrorContrasena}}</h4>
                 </div>
+
+                
+               
                 <br>
     
                 <div class="remember">
@@ -63,9 +68,15 @@
                 </div>
     
                 <div class="loginButton">
-                    <button class="buttonLogin">
-                        <h4>Iniciar Sesión</h4>
+                    <button class="buttonLogin" (click)="iniciarSesion()">
+                        <h4 *ngIf="!comprobandoLogin">Iniciar Sesión</h4>
+
+                        <div class="loader">
+                            <app-loader1 *ngIf="comprobandoLogin"></app-loader1>
+                        </div>
+                       
                     </button>
+                   
                 </div>   
                 
                 <h4 class="passwordForgot">¿Se te ha olvidad la contraseña?</h4>
@@ -76,7 +87,7 @@
     
                     <div class="registerContainer">
                     <h4 class="noAcc">¿No tienes cuenta?</h4>
-                    <h4 class="subscribe">Subscribete a Spotify</h4>
+                    <h4 class="subscribe">Registrate en SportsTeamCreator</h4>
                       </div>
                 </div>
             </div>

@@ -13,3 +13,8 @@ html {
     src: url("./assets/fonts/gotham/GothamMedium.ttf")
   
   }
+
+
+  :root {
+    --hover-color: #47A1F6;
+  }

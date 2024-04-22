@@ -3,16 +3,18 @@
 .all{
     
 
-    background: linear-gradient(#302c2c 0%, #080404 100%);
+    background: linear-gradient(#3e5368
+    0%, #081c34 100%);
+
 }
 .header{
-    background-color: #181414;
+    background-color:#081c34;
     height: 100px;
     display: flex;
 }
 
 .spotifyWhiteLogo{
-    margin-top: 30px;
+    margin-top: 10px;
     margin-left: 35px;
 }
 
@@ -27,7 +29,7 @@ h1{
 
 
   .loginContainer{
-    background-color: #181414;
+    background-color: #081c34;
     width: 734px;
     height: 1000px;
     margin: 0 auto;
@@ -155,14 +157,22 @@ margin: 35px 100px;
     border: 2px solid white;
   }
 
+  .warningMessage{
+    margin-top: 3px;
+    color: red;
+    font-weight: 100;
+   
+    
+  }
  
-  #password{
+  #password, #email{
     text-align: start !important;
     
     padding-left: 30px;
     width: 345px;
   }
 
+  
   .remember{
     display: inline-block; 
     width: 370px; 
@@ -189,18 +199,18 @@ margin: 35px 100px;
     width: 370px;
     height: 48px;
     border-radius: 9999px;
-    background-color: #20d464;
+    background-color:var(--hover-color);
     border: none;
   }
 
   .buttonLogin:hover{
     cursor: pointer;
-    background-color: #20dc64;
+    filter: brightness(1.2);
     scale: 1.1;
   }
 
   .buttonLogin h4{
-    color: black;
+    color: #081c34;
     margin-top: 0px;
     margin-bottom: 0px;
     font-size: 15px;
@@ -213,7 +223,7 @@ margin: 35px 100px;
   }
   .passwordForgot:hover, .subscribe:hover{
     cursor: pointer;
-    color: #20dc64;
+    color: var(--hover-color);
   }
 
   .register{
@@ -251,9 +261,16 @@ margin: 35px 100px;
 }
 
 .loader {
-  /* Estilos para el loader, por ejemplo */
+  text-align: center !important;
   color: white;
   font-size: 24px;
+  width: 30px;
+  margin: 0 auto;
+
+}
+.spotifyWhiteLogo img{
+    height: 80px;
+    width: auto;
 }
 
   @media (max-width: 768px) {
