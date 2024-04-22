@@ -1,29 +1,29 @@
 .container {
     display: flex;
-    height: 98%;
-   
-        width: 100%;
-        height: 100%;
-        --s: 37px; /* control the size */
-      
-        --c: #0000, #282828 0.5deg 119.5deg, #0000 120deg;
-        --g1: conic-gradient(from 60deg at 56.25% calc(425% / 6), var(--c));
-        --g2: conic-gradient(from 180deg at 43.75% calc(425% / 6), var(--c));
-        --g3: conic-gradient(from -60deg at 50% calc(175% / 12), var(--c));
-        background: var(--g1), var(--g1) var(--s) calc(1.73 * var(--s)), var(--g2),
-          var(--g2) var(--s) calc(1.73 * var(--s)), var(--g3) var(--s) 0,
-          var(--g3) 0 calc(1.73 * var(--s)) #1e1e1e;
-        background-size: calc(2 * var(--s)) calc(3.46 * var(--s));
-      
-      
-      
+    height: 100%;
+
+    width: 100%;
+    --s: 37px;
+    /* control the size */
+
+    --c: #0000, #282828 0.5deg 119.5deg, #0000 120deg;
+    --g1: conic-gradient(from 60deg at 56.25% calc(425% / 6), var(--c));
+    --g2: conic-gradient(from 180deg at 43.75% calc(425% / 6), var(--c));
+    --g3: conic-gradient(from -60deg at 50% calc(175% / 12), var(--c));
+    background: var(--g1), var(--g1) var(--s) calc(1.73 * var(--s)), var(--g2),
+        var(--g2) var(--s) calc(1.73 * var(--s)), var(--g3) var(--s) 0,
+        var(--g3) 0 calc(1.73 * var(--s)) #1e1e1e;
+    background-size: calc(2 * var(--s)) calc(3.46 * var(--s));
+
+
+
 }
 
 
 .sidebar {
     padding: 1%;
     margin: 1%;
-    margin-bottom: 0;
+    margin-bottom: 1%;
     width: 15%;
     background-color: #081B26;
     color: white;
@@ -71,7 +71,7 @@
 }
 
 .bottom-container {
-    height: 87%;
+    height: 85%;
     display: flex;
     justify-content: space-between;
 }
@@ -175,9 +175,11 @@
     /* Ajusta el espacio a la derecha para que quepa el icono */
     border: none;
 }
-p{
+
+p {
     color: black;
 }
+
 .search-icon {
     position: absolute;
     right: 10px;
@@ -198,24 +200,27 @@ p{
 }
 
 
-.clubWrapper{
+.clubWrapper {
     position: absolute;
     display: none;
     background-color: white;
-    overflow: auto; 
+    overflow: auto;
     max-height: 200px;
     z-index: 1000;
     text-align: start;
 }
 
-.search-input:focus{
+.search-input:focus {
     border: none;
 }
 
 .loader {
     height: 50px;
     padding: 18px;
-    display: flex; /* Utiliza un contenedor flex */
-    justify-content: center; /* Centra horizontalmente el contenido */
-    align-items: center; /* Centra verticalmente el contenido */
+    display: flex;
+    /* Utiliza un contenedor flex */
+    justify-content: center;
+    /* Centra horizontalmente el contenido */
+    align-items: center;
+    /* Centra verticalmente el contenido */
 }
