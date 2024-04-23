@@ -69,12 +69,15 @@
                 </div>
                 <div class="input">
                     <h4>Correo electrónico</h4>
-                    <input type="text" id="email" class="inputElement" placeholder="Correo electrónico"
+                    <input type="email" id="email" class="inputElement" placeholder="Correo electrónico"
                         [(ngModel)]="email">
+                    <h4 *ngIf="emailMal" class="warningMessage">{{mensajeErrorEmail}}</h4>
+
                 </div>
                 <div class="input">
-                    <h4>Genero</h4>
+                    <h4>Género</h4>
                     <select name="genero" id="genero" [(ngModel)]="genero">
+                        <option disabled selected>Selecciona tu género</option>
                         <option value="Hombre">Hombre</option>
                         <option value="Mujer">Mujer</option>
                     </select>
@@ -111,15 +114,12 @@
 
                     <div class="registerContainer">
                         <h4 class="noAcc">¿Ya tienes cuenta?</h4>
-                        <h4 class="subscribe">Inicia sesion en SportsTeamCreator</h4>
+                        <a routerLink="/">
+                            <h4 class="subscribe">Inicia sesion en SportsTeamCreator</h4>
+                        </a>
                     </div>
                 </div>
             </div>
-
-
-
-
-
 
         </div>
     </div>

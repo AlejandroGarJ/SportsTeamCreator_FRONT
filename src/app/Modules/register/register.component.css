@@ -165,8 +165,15 @@ select:focus {
     margin-top: 3px;
     color: red;
     font-weight: 100;
+}
 
-
+option {
+    color: black;
+    background-color: white;
+    font-weight: small;
+    font-size: 1rem;
+    font-family: "Gotham";
+    text-align: center;
 }
 
 #dni,

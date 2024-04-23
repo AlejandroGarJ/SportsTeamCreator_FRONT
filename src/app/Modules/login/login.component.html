@@ -3,70 +3,80 @@
         <div class="spotifyWhiteLogo">
             <img src="./../../../assets/img/logo.jpeg" alt="">
         </div>
-    
+
     </div>
-    
+
     <div class="body">
-    
+
         <div class="loginContainer">
-    
+
             <div class="titulo">
                 <h1>Inicia sesión en SportsTeamCreator</h1>
             </div>
-            
-        
+
+
             <ul class="socialsButtons">
-    
+
                 <li>
                     <button>
-                        <div class="logo">  <img id="googleLogo" src="../../../../assets/img/googleLogo.png" alt=""></div>
-                        <div class="continue"><h3>Continuar con Google</h3></div> 
+                        <div class="logo"> <img id="googleLogo" src="../../../../assets/img/googleLogo.png" alt="">
+                        </div>
+                        <div class="continue">
+                            <h3>Continuar con Google</h3>
+                        </div>
                     </button>
                 </li>
                 <li>
                     <button>
-                        <div class="logo">  <img id="googleLogo" src="../../../../assets/img/facebookLogo.png" alt=""></div>
-                        <div class="continue"><h3>Continuar con Facebook</h3></div> 
+                        <div class="logo"> <img id="googleLogo" src="../../../../assets/img/facebookLogo.png" alt="">
+                        </div>
+                        <div class="continue">
+                            <h3>Continuar con Facebook</h3>
+                        </div>
                     </button>
                 </li>
                 <li>
                     <button>
-                        <div class="logo">  <img id="googleLogo" src="../../../../assets/img/appleLogo.png" alt=""></div>
-                        <div class="continue"><h3>Continuar con Apple</h3></div> 
+                        <div class="logo"> <img id="googleLogo" src="../../../../assets/img/appleLogo.png" alt=""></div>
+                        <div class="continue">
+                            <h3>Continuar con Apple</h3>
+                        </div>
                     </button>
                 </li>
-                
+
             </ul>
-    
+
             <hr>
-    
+
             <div class="form">
-    
+
                 <div class="input">
                     <h4>Correo electrónico o nombre de usuario</h4>
-                    <input type="text" id="email" class="inputElement" placeholder="Correo electrónico" [(ngModel)]="email">
+                    <input type="text" id="email" class="inputElement" placeholder="Correo electrónico"
+                        [(ngModel)]="email">
                     <h4 *ngIf="emailMal" class="warningMessage">{{mensajeErrorEmail}}</h4>
                 </div>
                 <br>
                 <div class="input" id="inputPassword">
                     <h4>Contraseña</h4>
-                    <input type="password" id="password" class="inputElement" placeholder="Contraseña" [(ngModel)]="contrasena">
+                    <input type="password" id="password" class="inputElement" placeholder="Contraseña"
+                        [(ngModel)]="contrasena">
                     <h4 *ngIf="contrasenaMal" class="warningMessage">{{mensajeErrorContrasena}}</h4>
                 </div>
 
-                
-               
+
+
                 <br>
-    
+
                 <div class="remember">
-    
+
                     <div class="groupSwitchText">
-                    <app-switcher class="switcher"></app-switcher> 
-                    <p>Recuérdame</p>
-    
-                     </div>
+                        <app-switcher class="switcher"></app-switcher>
+                        <p>Recuérdame</p>
+
+                    </div>
                 </div>
-    
+
                 <div class="loginButton">
                     <button class="buttonLogin" (click)="iniciarSesion()">
                         <h4 *ngIf="!comprobandoLogin">Iniciar Sesión</h4>
@@ -74,30 +84,32 @@
                         <div class="loader">
                             <app-loader1 *ngIf="comprobandoLogin"></app-loader1>
                         </div>
-                       
+
                     </button>
-                   
-                </div>   
-                
+
+                </div>
+
                 <h4 class="passwordForgot">¿Se te ha olvidad la contraseña?</h4>
-            
+
                 <hr>
-    
+
                 <div class="register">
-    
+
                     <div class="registerContainer">
-                    <h4 class="noAcc">¿No tienes cuenta?</h4>
-                    <h4 class="subscribe">Registrate en SportsTeamCreator</h4>
-                      </div>
+                        <h4 class="noAcc">¿No tienes cuenta?</h4>
+                        <a routerLink="/register">
+                            <h4 class="subscribe">Registrate en SportsTeamCreator</h4>
+                        </a>
+                    </div>
                 </div>
             </div>
-            
-                 
-           
-      
-       
-           
+
+
+
+
+
+
         </div>
     </div>
-    
-    </div>
+
+</div>

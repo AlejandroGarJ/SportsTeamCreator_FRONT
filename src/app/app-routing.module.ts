@@ -7,7 +7,7 @@ import { LoginComponent } from './Modules/login/login.component';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'login', component: LoginComponent},
+  { path: '', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'password-forget', component: PasswordForgetComponent }
 ];
