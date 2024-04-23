@@ -90,14 +90,16 @@
                 </div>
                 <div class="input" id="inputPassword">
                     <h4>Repetir contraseña</h4>
-                    <input type="password" id="password" class="inputElement" placeholder="Repetir contraseña"
+                    <input type="password2" id="password2" class="inputElement" placeholder="Repetir contraseña"
                         [(ngModel)]="contrasena2">
+                    <h4 *ngIf="contrasenaMal" class="warningMessage">{{mensajeErrorContrasena}}</h4>
+
                 </div>
 
                 <br>
 
                 <div class="loginButton">
-                    <button class="buttonLogin" (click)="iniciarSesion()">
+                    <button class="buttonLogin" (click)="registrarUsuario()">
                         <h4 *ngIf="!comprobandoRegister">Registrarse</h4>
 
                         <div class="loader">

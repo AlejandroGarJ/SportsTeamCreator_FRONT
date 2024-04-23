@@ -7,11 +7,13 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './Modules/dashboard/dashboard.component';
 import { RegisterComponent } from './Modules/register/register.component';
 import { PasswordForgetComponent } from './Modules/password-forget/password-forget.component';
-import {FormsModule} from "@angular/forms";
+import { FormsModule } from "@angular/forms";
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Loader1Component } from './shared/components/loader1/loader1.component';
 import { LoginComponent } from './Modules/login/login.component';
 import { SwitcherComponent } from './shared/components/switcher/switcher.component';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 
 @NgModule({
@@ -23,15 +25,16 @@ import { SwitcherComponent } from './shared/components/switcher/switcher.compone
     Loader1Component,
     LoginComponent,
     SwitcherComponent,
-  
+
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FullCalendarModule,
-        FormsModule,
-        HttpClientModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FullCalendarModule,
+    FormsModule,
+    HttpClientModule,
+    MatNativeDateModule
+  ],
   providers: [
     provideClientHydration()
   ],
