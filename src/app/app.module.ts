@@ -36,7 +36,9 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatNativeDateModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    
+    
   ],
   bootstrap: [AppComponent]
 })
