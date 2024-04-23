@@ -33,7 +33,9 @@ import { SwitcherComponent } from './shared/components/switcher/switcher.compone
         HttpClientModule
     ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    
+    
   ],
   bootstrap: [AppComponent]
 })
