@@ -13,6 +13,8 @@ import { Loader1Component } from './shared/components/loader1/loader1.component'
 import { LoginComponent } from './Modules/login/login.component';
 import { SwitcherComponent } from './shared/components/switcher/switcher.component';
 import { MatNativeDateModule } from '@angular/material/core';
+import { DashboardClubUsuarioComponent } from './Modules/dashboard-club-usuario/dashboard-club-usuario.component';
+import { BanerLateralComponent } from './Modules/dashboard-club-usuario/baner-lateral/baner-lateral.component';
 
 
 
@@ -25,6 +27,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     Loader1Component,
     LoginComponent,
     SwitcherComponent,
+    DashboardClubUsuarioComponent,
+    BanerLateralComponent,
 
   ],
   imports: [
