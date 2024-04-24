@@ -137,7 +137,7 @@ export class DashboardComponent {
 
 
   unirseAClub(){
-    this.clubService.unirseClub({ id_club: this.idClub, codigoAcceso: this.claveClub, dni: "123" }).subscribe(
+    this.clubService.unirseClub({ id_club: this.idClub, codigoAcceso: this.claveClub, dni: this.usuarioLogeado.idUsuario }).subscribe(
       (response) => {
         console.log(response);
       },
