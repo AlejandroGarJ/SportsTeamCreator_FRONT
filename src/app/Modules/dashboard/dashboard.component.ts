@@ -29,14 +29,21 @@ export class DashboardComponent {
   ngOnInit(){
    
 
+
   }
   constructor(private router: Router, private dashboardService: DashboardService, private clubService: ClubControllerService) {
 
 
    this.usuarioLogeado = obtenerSessionUsuario();
+   
 
    console.log(this.usuarioLogeado);
    
+   }
+
+   seeName(){
+
+    console.log(this.usuarioLogeado.nombre);
    }
 
 

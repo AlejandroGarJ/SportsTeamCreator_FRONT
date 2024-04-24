@@ -7,6 +7,7 @@
                 <h4><i class="fa-solid fa-user"></i> Mis Clubes</h4>
             </li>
             <ul>
+                <button (click)="seeName()">Nombre</button>
                 <li><button>Real Madrid</button></li>
                 <li><button>Barcelona</button></li>
                 <li><button>Atletico de Madrid</button></li>
@@ -16,7 +17,7 @@
     <div class="main-content">
         <div class="top-container">
             <div class="welcome">
-                <h2>Bienvenido, Usuario</h2>
+                <h2>Bienvenido, {{usuarioLogeado.nombre}}</h2>
                 <h4 class="subtitulo">Gestiona tus clubes</h4>
             </div>
             <div class="search">
