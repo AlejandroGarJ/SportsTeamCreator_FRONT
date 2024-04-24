@@ -138,11 +138,15 @@ export class DashboardComponent {
 
   unirseAClub(){
     this.clubService.unirseClub({ id_club: this.idClub, codigoAcceso: this.claveClub, dni: this.usuarioLogeado.idUsuario }).subscribe(
-      (response) => {
-        console.log(response);
+      (response: any) => {
+        if (response === false) {
+          console.log("Te has unido al club exitosamente.");
+        } else {
+          console.log("No pudiste unirte al club. Por favor, verifica tus datos e intenta de nuevo.");
+        }
       },
       (error) => {
-        
+        console.error("Hubo un error al intentar unirse al club:", error);
       }
     );
   }
