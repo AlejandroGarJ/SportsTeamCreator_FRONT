@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 import { AuthUsuarioService } from '../../Core/Services/usuario/auth-usuario.service';
 import { SessionUsuario } from "../../Core/Models/session.model";
-
+import { Router } from '@angular/router';
 // Ahora puedes usar la interfaz SessionUsuario en este archivo
 
 
@@ -27,7 +27,7 @@ export class LoginComponent {
   };
 
   comprobandoLogin:boolean = false;
-  constructor(private authUsuario: AuthUsuarioService, ){}
+  constructor(private authUsuario: AuthUsuarioService, private router: Router){}
 
   iniciarSesion(){
     
@@ -44,8 +44,7 @@ export class LoginComponent {
             this.sessionUsuario.nombre = response['nombre'];
 
             localStorage.setItem('sessionUsuario', JSON.stringify(this.sessionUsuario));
-
-            console.log(localStorage.getItem('sessionUsuario'));
+            this.router.navigate(['/dashboard']);
 
           }
           else{
