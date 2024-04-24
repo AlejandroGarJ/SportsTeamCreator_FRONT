@@ -1,5 +1,9 @@
 import { Component, input } from '@angular/core';
 import { AuthUsuarioService } from '../../Core/Services/usuario/auth-usuario.service';
+import { SessionUsuario } from "../../Core/Models/session.model";
+
+// Ahora puedes usar la interfaz SessionUsuario en este archivo
+
 
 @Component({
   selector: 'app-login',
@@ -15,9 +19,14 @@ export class LoginComponent {
   mensajeErrorEmail:string = "";
   mensajeErrorContrasena:string = "";
   formatoCorrecto:boolean = true;
+  sessionUsuario: SessionUsuario = {
+
+    idUsuario: 0
+
+  };
 
   comprobandoLogin:boolean = false;
-  constructor(private authUsuario: AuthUsuarioService){}
+  constructor(private authUsuario: AuthUsuarioService, ){}
 
   iniciarSesion(){
     
@@ -29,7 +38,13 @@ export class LoginComponent {
         (response) => {
          
           if(response['ok'] === 'ok'){
-            alert("login correcto");
+          
+            this.sessionUsuario.idUsuario = response['dni'];
+            
+
+            localStorage.setItem('sessionUsuario', JSON.stringify(this.sessionUsuario));
+
+            console.log(localStorage.getItem('sessionUsuario'));
           }
           else{
             if(response['correo'] == 'correoIncorrecto'){

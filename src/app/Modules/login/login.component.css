@@ -31,7 +31,7 @@ h1{
   .loginContainer{
     background-color: #081c34;
     width: 734px;
-    height: 1000px;
+    height: auto;
     margin: 0 auto;
     margin-top: 36px;
     border-radius: 8px;
@@ -229,6 +229,7 @@ margin: 35px 100px;
   .register{
     margin-top: 40px;
     display: inline-block;
+    margin-bottom: 40px;
   }
 
   .registerContainer{

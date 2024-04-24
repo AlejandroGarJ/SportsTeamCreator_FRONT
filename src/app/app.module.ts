@@ -40,7 +40,9 @@ import { BanerLateralComponent } from './Modules/dashboard-club-usuario/baner-la
     MatNativeDateModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    
+    
   ],
   bootstrap: [AppComponent]
 })

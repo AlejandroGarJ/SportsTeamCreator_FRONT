@@ -4,6 +4,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import {Router} from "@angular/router";
 import {DashboardService} from "./dashboard.service";
 import { Club } from '../../Core/Models/club.model';
+import { ClubControllerService } from '../../Core/Services/club/club-controller.service';
+import { response } from 'express';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,7 +20,14 @@ export class DashboardComponent {
   pagina: number = 1;
   noHayClubes: boolean = false;
   showLoader: boolean = true;
-  ngOnInit(){}
+  idClub: string = "";
+  claveClub: string = "";
+  dniUsuario: string|null="";
+  ngOnInit(){
+
+   
+
+  }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -87,7 +96,7 @@ export class DashboardComponent {
   }
   
 
-  constructor(private router: Router, private dashboardService: DashboardService) { }
+  constructor(private router: Router, private dashboardService: DashboardService, private clubService: ClubControllerService) { }
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
@@ -114,6 +123,19 @@ export class DashboardComponent {
       }
     }
   };
+
+
+  unirseAClub(){
+    this.clubService.unirseClub({ id_club: this.idClub, codigoAcceso: this.claveClub, dni: this.dniUsuario }).subscribe(
+      (response) => {
+        console.log(response);
+      },
+      (error) => {
+        
+      }
+    );
+  }
+  
 
 
   showWrapperClub() {
@@ -168,6 +190,8 @@ export class DashboardComponent {
        
       })
   }
+
+  
 }
 
 
