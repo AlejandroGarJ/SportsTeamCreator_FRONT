@@ -17,7 +17,7 @@ export class AuthUsuarioService {
     return this.http.post<any>(environment.url + "/api/iniciarSesion", body);
 
   }
-
+  
   registrarUsuario(usuario: any): Observable<any> {
 
     return this.http.post<any>(environment.url + "/api/crear-usuario", usuario);

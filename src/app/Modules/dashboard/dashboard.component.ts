@@ -6,6 +6,8 @@ import {DashboardService} from "./dashboard.service";
 import { Club } from '../../Core/Models/club.model';
 import { ClubControllerService } from '../../Core/Services/club/club-controller.service';
 import { response } from 'express';
+import { SessionUsuario } from '../../Core/Models/session.model';
+import { obtenerSessionUsuario } from '../../shared/guardarSessionUsuario/guardarSessionUsuario';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,12 +24,21 @@ export class DashboardComponent {
   showLoader: boolean = true;
   idClub: string = "";
   claveClub: string = "";
-  dniUsuario: string|null="";
+  
+  usuarioLogeado: SessionUsuario;
   ngOnInit(){
-
    
 
   }
+  constructor(private router: Router, private dashboardService: DashboardService, private clubService: ClubControllerService) {
+
+
+   this.usuarioLogeado = obtenerSessionUsuario();
+
+   console.log(this.usuarioLogeado);
+   
+   }
+
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -96,7 +107,7 @@ export class DashboardComponent {
   }
   
 
-  constructor(private router: Router, private dashboardService: DashboardService, private clubService: ClubControllerService) { }
+  
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
@@ -126,7 +137,7 @@ export class DashboardComponent {
 
 
   unirseAClub(){
-    this.clubService.unirseClub({ id_club: this.idClub, codigoAcceso: this.claveClub, dni: this.dniUsuario }).subscribe(
+    this.clubService.unirseClub({ id_club: this.idClub, codigoAcceso: this.claveClub, dni: "123" }).subscribe(
       (response) => {
         console.log(response);
       },

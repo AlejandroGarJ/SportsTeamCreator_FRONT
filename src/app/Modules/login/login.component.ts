@@ -21,7 +21,8 @@ export class LoginComponent {
   formatoCorrecto:boolean = true;
   sessionUsuario: SessionUsuario = {
 
-    idUsuario: 0
+    idUsuario: 0,
+    nombre: ""
 
   };
 
@@ -40,11 +41,12 @@ export class LoginComponent {
           if(response['ok'] === 'ok'){
           
             this.sessionUsuario.idUsuario = response['dni'];
-            
+            this.sessionUsuario.nombre = response['nombre'];
 
             localStorage.setItem('sessionUsuario', JSON.stringify(this.sessionUsuario));
 
             console.log(localStorage.getItem('sessionUsuario'));
+
           }
           else{
             if(response['correo'] == 'correoIncorrecto'){
