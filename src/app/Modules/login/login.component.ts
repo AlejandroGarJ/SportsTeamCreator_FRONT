@@ -1,7 +1,7 @@
 import { Component, input } from '@angular/core';
 import { AuthUsuarioService } from '../../Core/Services/usuario/auth-usuario.service';
 import { SessionUsuario } from "../../Core/Models/session.model";
-
+import { Router } from '@angular/router';
 // Ahora puedes usar la interfaz SessionUsuario en este archivo
 
 
@@ -21,13 +21,14 @@ export class LoginComponent {
   formatoCorrecto:boolean = true;
   sessionUsuario: SessionUsuario = {
 
-    idUsuario: 0,
-    nombre: ""
+    dni: 0,
+    nombre: "",
+    token_session: ""
 
   };
 
   comprobandoLogin:boolean = false;
-  constructor(private authUsuario: AuthUsuarioService, ){}
+  constructor(private authUsuario: AuthUsuarioService, private router: Router){}
 
   iniciarSesion(){
     
@@ -40,13 +41,13 @@ export class LoginComponent {
          
           if(response['ok'] === 'ok'){
           
-            this.sessionUsuario.idUsuario = response['dni'];
+            this.sessionUsuario.dni = response['dni'];
             this.sessionUsuario.nombre = response['nombre'];
+            this.sessionUsuario.token_session = response['token'];
 
             localStorage.setItem('sessionUsuario', JSON.stringify(this.sessionUsuario));
-
-            console.log(localStorage.getItem('sessionUsuario'));
-
+            this.router.navigate(['/dashboard']);
+            
           }
           else{
             if(response['correo'] == 'correoIncorrecto'){
