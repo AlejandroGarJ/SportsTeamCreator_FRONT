@@ -48,12 +48,11 @@
                 <div class="subcontainer1">
                     <h1>Crear un Club</h1>
                     <form action="">
-                        <input type="text" placeholder="Nombre del Club">
-                        <input type="text" placeholder="ID del Club">
-                        <input type="text" placeholder="Codigo de Acceso">
-                        <input type="text" placeholder="Pais">
-                        <input type="text" placeholder="Ciudad">
-                        <button>Crear</button>
+                        <input type="text" placeholder="Nombre del Club" [(ngModel)]="nombreClubCrear" name="nombreClubCrear">
+                        <input type="text" placeholder="Codigo de Acceso" [(ngModel)]="codigoAccesoCrear" name="codigoAccesoCrear">
+                        <input type="text" placeholder="Pais" [(ngModel)]="paisCrear" name="paisCrear">
+                        <input type="text" placeholder="Ciudad" [(ngModel)]="ciudadCrear" name="ciudadCrear">
+                        <button (click)="crearClub()">Crear</button>
                     </form>
                 </div>
                 <div class="subcontainer2">

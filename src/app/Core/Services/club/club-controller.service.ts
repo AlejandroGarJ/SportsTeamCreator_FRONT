@@ -15,4 +15,10 @@ export class ClubControllerService {
     return this.http.post<any>(environment.url + "/api/unirseAClub", data);
 
   }
+
+  crearClub(data:any): Observable<any> {
+
+    return this.http.post<any>(environment.url + "/api/crearClub", data);
+
+  }
 }

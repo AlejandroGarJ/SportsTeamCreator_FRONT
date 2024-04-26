@@ -24,7 +24,10 @@ export class DashboardComponent {
   showLoader: boolean = true;
   idClub: string = "";
   claveClub: string = "";
-  
+  nombreClubCrear: string = "";
+  codigoAccesoCrear: string = "";
+  paisCrear: string = "";
+  ciudadCrear: string = "";
   usuarioLogeado: SessionUsuario;
   ngOnInit(){
    
@@ -143,6 +146,21 @@ export class DashboardComponent {
           console.log("Te has unido al club exitosamente.");
         } else {
           console.log("No pudiste unirte al club. Por favor, verifica tus datos e intenta de nuevo.");
+        }
+      },
+      (error) => {
+        console.error("Hubo un error al intentar unirse al club:", error);
+      }
+    );
+  }
+
+  crearClub(){
+    this.clubService.crearClub({nombre: this.nombreClubCrear, codigoAcceso: this.codigoAccesoCrear, localizacion: (this.ciudadCrear+", "+this.paisCrear), dni: this.usuarioLogeado.idUsuario }).subscribe(
+      (response: any) => {
+        if (response === false) {
+          console.log("Club creado exitosamente.");
+        } else {
+          console.log("No se pudo crear el club.");
         }
       },
       (error) => {
