@@ -147,19 +147,9 @@ export class DashboardComponent {
 
 
   unirseAClub(){
-<<<<<<< HEAD
-    this.clubService.unirseClub({ id_club: this.idClub, codigoAcceso: this.claveClub, dni: this.usuarioLogeado.idUsuario }).subscribe(
-      (response: any) => {
-        if (response === false) {
-          console.log("Te has unido al club exitosamente.");
-        } else {
-          console.log("No pudiste unirte al club. Por favor, verifica tus datos e intenta de nuevo.");
-        }
-=======
     this.clubService.unirseClub({ id_club: this.idClub, codigoAcceso: this.claveClub, dni: this.usuarioLogeado.dni }).subscribe(
       (response) => {
         console.log(response);
->>>>>>> bf6349b77a1707dbff28086b6c068db4a650ebf6
       },
       (error) => {
         console.error("Hubo un error al intentar unirse al club:", error);
@@ -168,7 +158,7 @@ export class DashboardComponent {
   }
 
   crearClub(){
-    this.clubService.crearClub({nombre: this.nombreClubCrear, codigoAcceso: this.codigoAccesoCrear, localizacion: (this.ciudadCrear+", "+this.paisCrear), dni: this.usuarioLogeado.idUsuario }).subscribe(
+    this.clubService.crearClub({nombre: this.nombreClubCrear, codigoAcceso: this.codigoAccesoCrear, localizacion: (this.ciudadCrear+", "+this.paisCrear), dni: this.usuarioLogeado.dni }).subscribe(
       (response: any) => {
         if (response === false) {
           console.log("Club creado exitosamente.");
