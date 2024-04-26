@@ -5,7 +5,6 @@ import {Router} from "@angular/router";
 import {DashboardService} from "./dashboard.service";
 import { Club } from '../../Core/Models/club.model';
 import { ClubControllerService } from '../../Core/Services/club/club-controller.service';
-import { response } from 'express';
 import { SessionUsuario } from '../../Core/Models/session.model';
 import { obtenerSessionUsuario } from '../../shared/guardarSessionUsuario/guardarSessionUsuario';
 
@@ -147,19 +146,9 @@ export class DashboardComponent {
 
 
   unirseAClub(){
-<<<<<<< HEAD
-    this.clubService.unirseClub({ id_club: this.idClub, codigoAcceso: this.claveClub, dni: this.usuarioLogeado.idUsuario }).subscribe(
-      (response: any) => {
-        if (response === false) {
-          console.log("Te has unido al club exitosamente.");
-        } else {
-          console.log("No pudiste unirte al club. Por favor, verifica tus datos e intenta de nuevo.");
-        }
-=======
     this.clubService.unirseClub({ id_club: this.idClub, codigoAcceso: this.claveClub, dni: this.usuarioLogeado.dni }).subscribe(
       (response) => {
         console.log(response);
->>>>>>> bf6349b77a1707dbff28086b6c068db4a650ebf6
       },
       (error) => {
         console.error("Hubo un error al intentar unirse al club:", error);
