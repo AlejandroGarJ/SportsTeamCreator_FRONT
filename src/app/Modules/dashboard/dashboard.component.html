@@ -7,7 +7,6 @@
                 <h4><i class="fa-solid fa-user"></i> Mis Clubes</h4>
             </li>
             <ul>
-                <button (click)="seeName()">Nombre</button>
                 <li><button>Real Madrid</button></li>
                 <li><button>Barcelona</button></li>
                 <li><button>Atletico de Madrid</button></li>
@@ -60,8 +59,8 @@
                 <div class="subcontainer2">
                     <h1>Unirse a un Club</h1>
                     <form action="">
-                        <input type="text" placeholder="ID del Club" [(ngModel)]="claveClub" name="claveClub">
-                        <input type="text" placeholder="Codigo de Acceso"  [(ngModel)]="idClub" name="idClub">
+                        <input type="text" placeholder="ID del Club" [(ngModel)]="idClub" name="idClub">
+                        <input type="text" placeholder="Codigo de Acceso"  [(ngModel)]="claveClub" name="claveClub">
                         <button (click)="unirseAClub()">Unirse</button>
                     </form>
                 </div>

@@ -28,7 +28,7 @@ export class DashboardComponent {
   usuarioLogeado: SessionUsuario;
   ngOnInit(){
    
-
+    console.log(this.usuarioLogeado.token_session);
 
   }
   constructor(private router: Router, private dashboardService: DashboardService, private clubService: ClubControllerService) {
@@ -37,7 +37,7 @@ export class DashboardComponent {
    this.usuarioLogeado = obtenerSessionUsuario();
    
 
-   console.log(this.usuarioLogeado);
+  
    
    }
 
@@ -144,7 +144,7 @@ export class DashboardComponent {
 
 
   unirseAClub(){
-    this.clubService.unirseClub({ id_club: this.idClub, codigoAcceso: this.claveClub, dni: this.usuarioLogeado.idUsuario }).subscribe(
+    this.clubService.unirseClub({ id_club: this.idClub, codigoAcceso: this.claveClub, dni: this.usuarioLogeado.dni }).subscribe(
       (response) => {
         console.log(response);
       },
