@@ -157,7 +157,7 @@ export class DashboardComponent {
   }
 
   crearClub(){
-    this.clubService.crearClub({nombre: this.nombreClubCrear, codigoAcceso: this.codigoAccesoCrear, localizacion: (this.ciudadCrear+", "+this.paisCrear), dni: this.usuarioLogeado.idUsuario }).subscribe(
+    this.clubService.crearClub({nombre: this.nombreClubCrear, codigoAcceso: this.codigoAccesoCrear, localizacion: (this.ciudadCrear+", "+this.paisCrear), dni: this.usuarioLogeado.dni }).subscribe(
       (response: any) => {
         if (response === false) {
           console.log("Club creado exitosamente.");
