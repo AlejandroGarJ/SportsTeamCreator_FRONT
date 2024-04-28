@@ -31,4 +31,18 @@ export class AuthUsuarioService {
     
     return this.http.post<any>(environment.url + "/api/comprobarToken", body);
   }
+
+
+  comprobarTokenContrasena(token: string, correo: string){
+    const body = { token, correo };
+
+    return this.http.post<any>(environment.url + "/api/comprobarTokenCorreo", body);
+  }
+
+  enviarCorreoCambioContrasena(correo: string){
+    const body = { correo };
+
+    return this.http.post<any>(environment.url + "/api/enviarCorreoCambioContrasena", body);
+  }
+
 }

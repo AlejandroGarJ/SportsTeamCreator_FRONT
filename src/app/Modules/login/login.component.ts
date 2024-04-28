@@ -125,4 +125,8 @@ export class LoginComponent {
 
     
   }
+
+  irACorreoCambioContrasena(){
+    this.router.navigate(['correo-cambio-contrasena']);
+  }
 }

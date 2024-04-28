@@ -15,6 +15,10 @@ import { SwitcherComponent } from './shared/components/switcher/switcher.compone
 import { MatNativeDateModule } from '@angular/material/core';
 import { DashboardClubUsuarioComponent } from './Modules/dashboard-club-usuario/dashboard-club-usuario.component';
 import { BanerLateralComponent } from './Modules/dashboard-club-usuario/baner-lateral/baner-lateral.component';
+import { CambiarContrasenaComponent } from './Core/Pages/cambiar-contrasena/cambiar-contrasena.component';
+import { NotFoundComponent } from './Core/Pages/not-found/not-found.component';
+import { CorreoCambioContrasenaComponent } from './Core/Pages/correo-cambio-contrasena/correo-cambio-contrasena.component';
+
 
 
 
@@ -29,7 +33,9 @@ import { BanerLateralComponent } from './Modules/dashboard-club-usuario/baner-la
     SwitcherComponent,
     DashboardClubUsuarioComponent,
     BanerLateralComponent,
-
+    CambiarContrasenaComponent,
+    NotFoundComponent,
+    CorreoCambioContrasenaComponent
   ],
   imports: [
     BrowserModule,
