@@ -1,13 +1,14 @@
 import { AfterViewInit, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import {Router} from "@angular/router";
-import {DashboardService} from "./dashboard.service";
+import { Router } from "@angular/router";
+import { DashboardService } from "./dashboard.service";
 import { Club } from '../../Core/Models/club.model';
 import { ClubControllerService } from '../../Core/Services/club/club-controller.service';
 import { response } from 'express';
 import { SessionUsuario } from '../../Core/Models/session.model';
 import { obtenerSessionUsuario } from '../../shared/guardarSessionUsuario/guardarSessionUsuario';
+import { co } from '@fullcalendar/core/internal-common';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,8 +17,8 @@ import { obtenerSessionUsuario } from '../../shared/guardarSessionUsuario/guarda
 })
 export class DashboardComponent {
 
-  clubName:string = "";
-  clubs: Club[]=[];
+  clubName: string = "";
+  clubs: Club[] = [];
   mostrarClubes: boolean = false;
   pagina: number = 1;
   noHayClubes: boolean = false;
@@ -29,25 +30,30 @@ export class DashboardComponent {
   paisCrear: string = "";
   ciudadCrear: string = "";
   usuarioLogeado: SessionUsuario;
-  ngOnInit(){
-   
+  clubes: any[] = [];
+  eventos: any[] = [];
+
+  ngOnInit() {
+
     console.log(this.usuarioLogeado.token_session);
+    this.clubesUsuario();
+    this.eventosUsuario();
 
   }
   constructor(private router: Router, private dashboardService: DashboardService, private clubService: ClubControllerService) {
 
 
-   this.usuarioLogeado = obtenerSessionUsuario();
-   
+    this.usuarioLogeado = obtenerSessionUsuario();
 
-  
-   
-   }
 
-   seeName(){
+
+
+  }
+
+  seeName() {
 
     console.log(this.usuarioLogeado.nombre);
-   }
+  }
 
 
   @HostListener('window:resize', ['$event'])
@@ -57,37 +63,37 @@ export class DashboardComponent {
 
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent) {
-    
+
     const clickedElement = event.target as HTMLElement;
     const searchInputElement = document.getElementById('searchInput');
     const clubWrapper = document.getElementById('clubWrapper');
     // Verificar si el clic ocurrió fuera del elemento searchInput
-    if (searchInputElement && !searchInputElement.contains(clickedElement) && clubWrapper && !clubWrapper.contains(clickedElement) ) {
-   
+    if (searchInputElement && !searchInputElement.contains(clickedElement) && clubWrapper && !clubWrapper.contains(clickedElement)) {
+
       this.mostrarClubes = false;
       searchInputElement.style.borderBottomLeftRadius = 30 + "px";
       searchInputElement.style.borderBottomRightRadius = 30 + "px";
-      
+
       this.clubs = [];
       this.pagina = 1;
-      
+
     }
   }
 
-  changeNameClub(){
+  changeNameClub() {
     this.pagina = 1;
     this.searchClub(true);
   }
 
-  infiniteScroll(scroll: Event){
+  infiniteScroll(scroll: Event) {
     const target = scroll.target as HTMLElement;
-    if(target.scrollTop == (target.scrollHeight - target.clientHeight)){
+    if (target.scrollTop == (target.scrollHeight - target.clientHeight)) {
 
-      if(this.pagina != 1000){
+      if (this.pagina != 1000) {
         this.pagina++;
         this.searchClub();
       }
-    
+
     }
   }
 
@@ -96,28 +102,42 @@ export class DashboardComponent {
   reajustarClubWrapper(): void {
     const searchInput = document.getElementById("searchInput");
     const clubWrapper = document.getElementById("clubWrapper");
-    
+
     if (searchInput && clubWrapper) {
       const inputRect = searchInput.getBoundingClientRect();
-      
+
       const topPosition = inputRect.top + window.scrollY + inputRect.height;
       const leftPosition = inputRect.left + window.scrollX; // Utilizamos solo la posición izquierda de searchInput
-      
+
       clubWrapper.style.left = leftPosition + "px";
       clubWrapper.style.top = topPosition + "px";
       clubWrapper.style.width = inputRect.width + "px";
       searchInput.style.borderBottomLeftRadius = 0 + "px";
-  
+
       clubWrapper.style.display = "block";
 
 
     }
-    
-    
-  }
-  
 
-  
+
+  }
+
+
+  eventosUsuario() {
+    this.clubService.obtenerEventosUsuario({ dni: this.usuarioLogeado.dni }).subscribe(
+      (response) => {
+        this.calendarOptions.events = response.map((evento: { titulo: any; fechaInicio: any; fechaFin: any; }) => ({
+          title: evento.titulo,
+          start: evento.fechaInicio,
+          end: evento.fechaFin
+        }));
+
+      },
+      (error) => {
+        console.error("Hubo un error al intentar obtener los eventos del usuario:", error);
+      }
+    );
+  }
 
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
@@ -157,8 +177,8 @@ export class DashboardComponent {
     );
   }
 
-  crearClub(){
-    this.clubService.crearClub({nombre: this.nombreClubCrear, codigoAcceso: this.codigoAccesoCrear, localizacion: (this.ciudadCrear+", "+this.paisCrear), dni: this.usuarioLogeado.dni }).subscribe(
+  crearClub() {
+    this.clubService.crearClub({ nombre: this.nombreClubCrear, codigoAcceso: this.codigoAccesoCrear, localizacion: (this.ciudadCrear + ", " + this.paisCrear), dni: this.usuarioLogeado.dni }).subscribe(
       (response: any) => {
         if (response === false) {
           console.log("Club creado exitosamente.");
@@ -171,63 +191,73 @@ export class DashboardComponent {
       }
     );
   }
-  
+
 
 
   showWrapperClub() {
     const searchInput = document.getElementById("searchInput");
-    if(searchInput != null) searchInput.style.borderBottomRightRadius = 0 + "px";
+    if (searchInput != null) searchInput.style.borderBottomRightRadius = 0 + "px";
     this.mostrarClubes = true;
     setTimeout(() => {
       this.reajustarClubWrapper();
     }, 100); // 100 milisegundos de retraso
 
 
-;   
+    ;
   }
 
-  searchClub(overrideClub: boolean = false){
+  searchClub(overrideClub: boolean = false) {
 
     this.dashboardService.searchClub(this.clubName, this.pagina).subscribe(
       (response) => {
 
-        if(this.pagina <= response.last_page){
-          if(this.pagina != 1000){
-           
-          if(overrideClub == true){
-            this.clubs = response.data;
-          }else this.clubs = this.clubs.concat(response.data);
-        
-          this.showWrapperClub();
+        if (this.pagina <= response.last_page) {
+          if (this.pagina != 1000) {
+
+            if (overrideClub == true) {
+              this.clubs = response.data;
+            } else this.clubs = this.clubs.concat(response.data);
+
+            this.showWrapperClub();
           }
-        }else{
+        } else {
           this.pagina = 1000;
         }
         console.log(response);
         console.log(this.pagina);
-        if(this.pagina >= response.last_page){
+        if (this.pagina >= response.last_page) {
           this.showLoader = false;
-          
+
           const loadingContainer = document.getElementById("loaderContainer");
 
-          if(loadingContainer != null){
+          if (loadingContainer != null) {
             loadingContainer.style.display = 'none';
           }
-          
-        } 
-        else{
+
+        }
+        else {
           const loadingContainer = document.getElementById("loaderContainer");
 
-          if(loadingContainer != null){
+          if (loadingContainer != null) {
             loadingContainer.style.display = 'flex';
-        } this.showLoader = true;
+          } this.showLoader = true;
 
-      }
-       
+        }
+
       })
   }
+  clubesUsuario() {
+    console.log(this.usuarioLogeado.dni);
+    this.clubService.obtenerClubes({ dni: this.usuarioLogeado.dni }).subscribe(
+      (response) => {
+        this.clubes = response;
+      },
+      (error) => {
+        console.error("Hubo un error al intentar obtener los clubes del usuario:", error);
+      }
+    );
+  }
 
-  
 }
 
 

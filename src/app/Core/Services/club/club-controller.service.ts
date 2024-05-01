@@ -10,15 +10,19 @@ export class ClubControllerService {
 
   constructor(private http: HttpClient) { }
 
-  unirseClub(data:any): Observable<any> {
-
+  unirseClub(data: any): Observable<any> {
     return this.http.post<any>(environment.url + "/api/unirseAClub", data);
-
   }
 
-  crearClub(data:any): Observable<any> {
-
+  crearClub(data: any): Observable<any> {
     return this.http.post<any>(environment.url + "/api/crearClub", data);
+  }
 
+  obtenerClubes(data: any): Observable<any> {
+    return this.http.post<any>(environment.url + "/api/clubesUsuario", data);
+  }
+
+  obtenerEventosUsuario(data: any): Observable<any> {
+    return this.http.post<any>(environment.url + "/api/obtenerEventosDeUsuario", data);
   }
 }
