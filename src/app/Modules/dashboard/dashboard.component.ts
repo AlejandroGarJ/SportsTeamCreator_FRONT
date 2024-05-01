@@ -22,7 +22,7 @@ export class DashboardComponent {
   pagina: number = 1;
   noHayClubes: boolean = false;
   showLoader: boolean = true;
-  idClub: string = "";
+  nombreClub: string = "";
   claveClub: string = "";
   nombreClubCrear: string = "";
   codigoAccesoCrear: string = "";
@@ -147,7 +147,7 @@ export class DashboardComponent {
 
 
   unirseAClub(){
-    this.clubService.unirseClub({ id_club: this.idClub, codigoAcceso: this.claveClub, dni: this.usuarioLogeado.dni }).subscribe(
+    this.clubService.unirseClub({ nombre: this.nombreClub, codigoAcceso: this.claveClub, dni: this.usuarioLogeado.dni, token_session: this.usuarioLogeado.token_session }).subscribe(
       (response) => {
         console.log(response);
       },
