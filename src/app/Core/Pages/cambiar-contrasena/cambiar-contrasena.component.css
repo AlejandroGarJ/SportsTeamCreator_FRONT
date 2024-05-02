@@ -74,6 +74,18 @@ h4{
     padding-top: 32px;
   text-align: center; 
  }
+
+ .loginContainer1{
+  background-color: #081c34;
+  width: 734px;
+  height: 200px;
+  margin: 0 auto;
+  margin-top: 36px;
+  border-radius: 8px;
+  color: white;
+  padding-top: 32px;
+text-align: center; 
+}
   
  .loginButton{
   margin-top: 30px;
@@ -131,6 +143,24 @@ h4{
         border-radius: 0px;
     
     }
+    .loginContainer1{
+      margin: 0px;
+      width: 100%;
+      border-radius: 0px;
+  
+  }
 
   }
 
+  .loader {
+    text-align: center !important;
+    color: white;
+    font-size: 24px;
+    width: 30px;
+    margin: 0 auto;
+  
+  }
+  /* Estilo personalizado para las notificaciones de éxito */
+.success-toast{
+  background-color: red !important;
+}

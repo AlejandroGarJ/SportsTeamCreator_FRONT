@@ -9,18 +9,17 @@ import { CambiarContrasenaComponent } from './Core/Pages/cambiar-contrasena/camb
 import { NotFoundComponent } from './Core/Pages/not-found/not-found.component';
 import { CorreoCambioContrasenaComponent } from './Core/Pages/correo-cambio-contrasena/correo-cambio-contrasena.component';
 
-
-
 const routes: Routes = [
   
-  { path: 'dashboard', component: DashboardComponent},
+  { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard]},
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'changePassword', component: PasswordForgetComponent },
   { path: 'cambiarContrasena', component: CambiarContrasenaComponent },
   { path: 'notFound', component: NotFoundComponent},
-  { path: 'correo-cambio-contrasena', component: CorreoCambioContrasenaComponent}
+  { path: 'correo-cambio-contrasena', component: CorreoCambioContrasenaComponent},
+  { path: '**', component: NotFoundComponent},
 
 ];
 

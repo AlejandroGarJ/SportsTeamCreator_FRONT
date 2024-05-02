@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { rutas } from '../../../../environments/environment';
 import { SessionUsuario } from '../../Models/session.model';
 import { obtenerSessionUsuario } from '../../../shared/guardarSessionUsuario/guardarSessionUsuario';
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-cambiar-contrasena',
   templateUrl: './cambiar-contrasena.component.html',
@@ -20,10 +21,10 @@ export class CambiarContrasenaComponent {
   mensajeError = "";
   tokenOk: boolean = false;
   rutas = rutas;
-  
+  loading = false;
+  contrasenaCambiada = false;
 
-
-  constructor(private route: ActivatedRoute, private authUsuario: AuthUsuarioService,private router: Router){
+  constructor(private route: ActivatedRoute, private authUsuario: AuthUsuarioService,private router: Router, private toastr: ToastrService){
     this.route.queryParams.subscribe(params => {
       this.token = params['token'];
       this.correo = params['correo'];
@@ -52,12 +53,10 @@ export class CambiarContrasenaComponent {
   }
 
   ngOnInit(){
-
-
-
   }
-
+  
   cambiarContrasena(){
+    this.loading = true;
     this.mensajeError = "";
     this.contrasenasCorrectas = true;
     this.comprobarContrasenas();
@@ -65,11 +64,17 @@ export class CambiarContrasenaComponent {
     if(this.contrasenasCorrectas){
       this.authUsuario.cambiarContrasena(this.token, this.correo, this.contrasena1).subscribe(
         (response) => {
-          console.log(response);
+          this.contrasenaCambiada = true;
+          this.loading = false;
+          this.toastr.success("Contraseña cambiada con éxito");
+          
+        },
+        (error) => {
+          this.loading = false;
+          this.toastr.error(error);
         }
       );
-    }
-    
+    }else this.loading = false;
     
   }
   comprobarContrasenas(){
@@ -81,13 +86,9 @@ export class CambiarContrasenaComponent {
       this.contrasenasCorrectas = false;
       this.mensajeError = "La contraseña tiene que tener más de 6 carácteres"
     }
-    
- 
   }
 
   irLogin(){
     this.router.navigate([this.rutas.login]);
   }
-
- 
 }

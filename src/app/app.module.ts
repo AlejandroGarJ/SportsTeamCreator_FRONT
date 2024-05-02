@@ -18,8 +18,8 @@ import { BanerLateralComponent } from './Modules/dashboard-club-usuario/baner-la
 import { CambiarContrasenaComponent } from './Core/Pages/cambiar-contrasena/cambiar-contrasena.component';
 import { NotFoundComponent } from './Core/Pages/not-found/not-found.component';
 import { CorreoCambioContrasenaComponent } from './Core/Pages/correo-cambio-contrasena/correo-cambio-contrasena.component';
-
-
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -43,7 +43,9 @@ import { CorreoCambioContrasenaComponent } from './Core/Pages/correo-cambio-cont
     FullCalendarModule,
     FormsModule,
     HttpClientModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [
     provideClientHydration(),
