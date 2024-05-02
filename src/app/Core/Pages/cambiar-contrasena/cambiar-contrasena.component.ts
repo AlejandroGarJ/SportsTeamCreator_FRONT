@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthUsuarioService } from '../../Services/usuario/auth-usuario.service';
 import { Router } from '@angular/router';
+import { rutas } from '../../../../environments/environment';
+import { SessionUsuario } from '../../Models/session.model';
+import { obtenerSessionUsuario } from '../../../shared/guardarSessionUsuario/guardarSessionUsuario';
 @Component({
   selector: 'app-cambiar-contrasena',
   templateUrl: './cambiar-contrasena.component.html',
@@ -16,6 +19,9 @@ export class CambiarContrasenaComponent {
   contrasenasCorrectas: boolean = false;
   mensajeError = "";
   tokenOk: boolean = false;
+  rutas = rutas;
+  
+
 
   constructor(private route: ActivatedRoute, private authUsuario: AuthUsuarioService,private router: Router){
     this.route.queryParams.subscribe(params => {
@@ -30,7 +36,7 @@ export class CambiarContrasenaComponent {
           this.tokenOk = response;
           if(response == false){
             this.router.navigate(['/notFound']);
-            console.log("Respuesta = "+response);
+           
           }
         } ,      
         (error) =>  console.log(error)
@@ -41,14 +47,13 @@ export class CambiarContrasenaComponent {
       this.router.navigate(['/notFound']);
     }
    
-    console.log(this.tokenOk);
   
-    
+ 
   }
 
   ngOnInit(){
 
-    
+
 
   }
 
@@ -58,9 +63,14 @@ export class CambiarContrasenaComponent {
     this.comprobarContrasenas();
 
     if(this.contrasenasCorrectas){
-     
+      this.authUsuario.cambiarContrasena(this.token, this.correo, this.contrasena1).subscribe(
+        (response) => {
+          console.log(response);
+        }
+      );
     }
-    console.log(this.tokenOk);
+    
+    
   }
   comprobarContrasenas(){
     if(this.contrasena1 != this.contrasena2){
@@ -73,6 +83,10 @@ export class CambiarContrasenaComponent {
     }
     
  
+  }
+
+  irLogin(){
+    this.router.navigate([this.rutas.login]);
   }
 
  

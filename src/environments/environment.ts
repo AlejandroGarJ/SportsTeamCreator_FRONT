@@ -7,4 +7,5 @@ export const environment = {
 export enum rutas  {
 
   login = '/login'
+  
 }

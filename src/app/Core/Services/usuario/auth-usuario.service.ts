@@ -45,4 +45,9 @@ export class AuthUsuarioService {
     return this.http.post<any>(environment.url + "/api/enviarCorreoCambioContrasena", body);
   }
 
+
+  cambiarContrasena(token: string, correo: string, contrasena: string){
+    const body = { token, correo, contrasena};
+    return this.http.post<any>(environment.url + "/api/cambiarContrasena", body);
+  }
 }
