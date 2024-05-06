@@ -18,6 +18,7 @@ export class DashboardComponent {
 
   clubName: string = "";
   clubs: Club[] = [];
+  clubes: Club[] = [];
   mostrarClubes: boolean = false;
   pagina: number = 1;
   noHayClubes: boolean = false;
@@ -29,42 +30,21 @@ export class DashboardComponent {
   paisCrear: string = "";
   ciudadCrear: string = "";
   usuarioLogeado: SessionUsuario;
-<<<<<<< HEAD
-  clubes: any[] = [];
-  eventos: any[] = [];
 
   ngOnInit() {
-
     console.log(this.usuarioLogeado.token_session);
-    this.clubesUsuario();
     this.eventosUsuario();
-=======
->>>>>>> alejandro
-
-  ngOnInit(){
-    console.log(this.usuarioLogeado.token_session);
+    this.clubesUsuario();
   }
-  
+
   constructor(private router: Router, private dashboardService: DashboardService, private clubService: ClubControllerService) {
 
-<<<<<<< HEAD
-
     this.usuarioLogeado = obtenerSessionUsuario();
-
-
-
-
   }
 
+  irPerfil() { this.router.navigate(['/perfil']) }
+
   seeName() {
-=======
-   this.usuarioLogeado = obtenerSessionUsuario();
-   }
-
-   irPerfil(){this.router.navigate(['/perfil'])}
-
-   seeName(){
->>>>>>> alejandro
 
     console.log(this.usuarioLogeado.nombre);
   }
@@ -180,7 +160,7 @@ export class DashboardComponent {
   };
 
 
-  unirseAClub(){
+  unirseAClub() {
     this.clubService.unirseClub({ nombre: this.nombreClub, codigoAcceso: this.claveClub, dni: this.usuarioLogeado.dni, token_session: this.usuarioLogeado.token_session }).subscribe(
       (response) => {
         console.log(response);
@@ -264,7 +244,9 @@ export class DashboardComponent {
     console.log(this.usuarioLogeado.dni);
     this.clubService.obtenerClubes({ dni: this.usuarioLogeado.dni }).subscribe(
       (response) => {
+        console.log(response);
         this.clubes = response;
+        console.log(this.clubes);
       },
       (error) => {
         console.error("Hubo un error al intentar obtener los clubes del usuario:", error);

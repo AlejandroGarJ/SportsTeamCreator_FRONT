@@ -5,33 +5,23 @@ import { RegisterComponent } from './Modules/register/register.component';
 import { PasswordForgetComponent } from './Modules/password-forget/password-forget.component';
 import { LoginComponent } from './Modules/login/login.component';
 import { authGuard } from './Core/Guards/auth.guard';
-<<<<<<< HEAD
-import { DashboardClubUsuarioComponent } from './Modules/dashboard-club-usuario/dashboard-club-usuario.component';
-
-
-const routes: Routes = [
-
-  { path: 'dashboard', component: DashboardComponent },
-  { path: 'dashboard/club', component: DashboardClubUsuarioComponent },
-=======
 import { CambiarContrasenaComponent } from './Core/Pages/cambiar-contrasena/cambiar-contrasena.component';
 import { NotFoundComponent } from './Core/Pages/not-found/not-found.component';
 import { CorreoCambioContrasenaComponent } from './Core/Pages/correo-cambio-contrasena/correo-cambio-contrasena.component';
 import { PerfilComponent } from './Modules/Usuario/perfil/perfil.component';
 
 const routes: Routes = [
-  
-  { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard]},
->>>>>>> alejandro
+
+  { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'changePassword', component: PasswordForgetComponent },
   { path: 'cambiarContrasena', component: CambiarContrasenaComponent },
-  { path: 'notFound', component: NotFoundComponent},
-  { path: 'correo-cambio-contrasena', component: CorreoCambioContrasenaComponent},
-  { path: 'perfil', component: PerfilComponent, canActivate: [authGuard]},
-  { path: '**', component: NotFoundComponent},
+  { path: 'notFound', component: NotFoundComponent },
+  { path: 'correo-cambio-contrasena', component: CorreoCambioContrasenaComponent },
+  { path: 'perfil', component: PerfilComponent, canActivate: [authGuard] },
+  { path: '**', component: NotFoundComponent },
 
 ];
 

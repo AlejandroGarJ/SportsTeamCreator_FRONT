@@ -10,19 +10,6 @@ export const authGuard = () => {
   const authUsuarioService = inject(AuthUsuarioService);
   const usuarioSession = obtenerSessionUsuario();
 
-<<<<<<< HEAD
-  authUsuarioService.comprobarToken(usuarioSession.dni, usuarioSession.token_session).subscribe(
-    (response) => {
-      if (response) respuesta = true;
-      else {
-        respuesta = false;
-        router.navigate(['/']);
-      }
-    }
-
-  );
-  return respuesta;
-=======
   return authUsuarioService.comprobarToken(usuarioSession.dni, usuarioSession.token_session).pipe(
     map(response => !!response), // Transforma la respuesta en un booleano
     map(isAuthenticated => {
@@ -32,5 +19,4 @@ export const authGuard = () => {
       return isAuthenticated; // Devuelve true si está autenticado, false de lo contrario
     })
   );
->>>>>>> alejandro
 }

@@ -38,7 +38,8 @@
 
                 <span class="search-icon">&#128269;</span>
                 <div class="imagen">
-                    <img (click)="irPerfil()" class="perfil" src="./../../assets/img/60efbe9d4eaabad6613a97e798ebff87.jpg" alt="Foto de perfil">
+                    <img (click)="irPerfil()" class="perfil"
+                        src="./../../assets/img/60efbe9d4eaabad6613a97e798ebff87.jpg" alt="Foto de perfil">
                 </div>
 
             </div>
@@ -62,7 +63,7 @@
                     <h1>Unirse a un Club</h1>
                     <form action="">
                         <input type="text" placeholder="Nombre del Club" [(ngModel)]="nombreClub" name="nombreClub">
-                        <input type="text" placeholder="Codigo de Acceso"  [(ngModel)]="claveClub" name="claveClub">
+                        <input type="text" placeholder="Codigo de Acceso" [(ngModel)]="claveClub" name="claveClub">
                         <button (click)="unirseAClub()">Unirse</button>
                     </form>
                 </div>
