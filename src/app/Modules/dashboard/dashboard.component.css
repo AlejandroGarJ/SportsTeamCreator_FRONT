@@ -70,6 +70,10 @@
     border-radius: 20px;
 }
 
+img:hover{
+cursor: pointer;
+}
+
 .bottom-container {
     height: 85%;
     display: flex;

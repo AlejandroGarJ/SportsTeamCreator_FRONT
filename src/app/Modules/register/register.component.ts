@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { AuthUsuarioService } from '../../Core/Services/usuario/auth-usuario.service';
 import { DateAdapter } from '@angular/material/core';
-
+import { rutas } from '../../../environments/environment';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -21,9 +22,9 @@ export class RegisterComponent {
   mensajeErrorEmail: string = "";
   mensajeErrorContrasena: string = "";
   formatoCorrecto: boolean = true;
-
+  rutas = rutas;
   comprobandoRegister: boolean = false;
-  constructor(private authUsuario: AuthUsuarioService, private dateAdapter: DateAdapter<Date>) {
+  constructor(private authUsuario: AuthUsuarioService, private dateAdapter: DateAdapter<Date>, private router: Router) {
     this.dateAdapter.setLocale('es');  // Configura el localizador a español si es necesario
   }
 
@@ -106,4 +107,9 @@ export class RegisterComponent {
       this.mensajeErrorEmail = "Introduzca un email correcto";
     }
   }
+
+  irALogin(){
+    this.router.navigate([this.rutas.login]);
+  }
+  
 }

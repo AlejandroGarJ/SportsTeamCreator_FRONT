@@ -4,6 +4,12 @@
   width: 25px;
   height: 25px;
   position: relative;
+    text-align: center !important;
+    color: white;
+    font-size: 24px;
+    width: 30px;
+    margin: 0 auto;
+
  }
  
  .loader:before, .loader:after {
@@ -41,5 +47,6 @@
    -o-transform: rotate(360deg);
    transform: rotate(360deg);
   }
+  
  }
  

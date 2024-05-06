@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
 import { SessionUsuario } from '../../../Core/Models/session.model';
@@ -17,7 +18,7 @@ export class PerfilComponent {
   usuario: Usuario = UsuarioInit;
   modificando: boolean = false;
 
-  constructor(private router:Router, private infoUsuario:InfoUsuarioService, private http: HttpClient){
+  constructor(private router:Router, private infoUsuario: InfoUsuarioService, private http: HttpClient){
     this.usuarioLogeado = obtenerSessionUsuario();
 
     this.obtenerInfoUsuario();
@@ -26,8 +27,6 @@ export class PerfilComponent {
   ngOnInit(){
    
   }
-
-
   irCambioContrasena(){
     this.router.navigate(['correo-cambio-contrasena']);
   }
@@ -59,7 +58,9 @@ export class PerfilComponent {
           console.log(error);
           this.modificando = false;
         }
+        
         );
+
       }
     }
   }

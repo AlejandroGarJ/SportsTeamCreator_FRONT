@@ -1,0 +1,47 @@
+<div class="all" *ngIf="tokenOk">
+    <div class="header">
+        <div class="spotifyWhiteLogo">
+            <img (click)="irLogin()" src="./../../../assets/img/logo.jpeg" alt="">
+        </div>
+
+    </div>
+
+    <div *ngIf="tokenOk && !contrasenaCambiada" class="loginContainer">
+        
+        
+            <h1>Cambiar contraseña</h1>
+            <div class="input" id="inputPassword">
+                <h4>Nueva contraseña</h4>
+                <input type="password"  class="inputElement" placeholder="Contraseña" [(ngModel)]="contrasena1">
+        
+            </div>
+
+            <div class="input" id="inputPassword">
+                <h4>Confirmar contraseña</h4>
+                <input type="password"  class="inputElement" placeholder="Contraseña" [(ngModel)]="contrasena2">
+        
+            </div>
+
+            <div class="warning" *ngIf="!contrasenasCorrectas">
+                <h4>{{mensajeError}}</h4>
+            </div>
+            <div class="loginButton">
+                <button (click)="cambiarContrasena()" class="buttonLogin">
+                    <h4 *ngIf="!loading">Cambiar contraseña</h4>
+                    <div class="loader">
+                        <app-loader1 *ngIf="loading"></app-loader1>
+                    </div>
+                </button>
+
+            </div>
+      
+
+        
+    </div>
+    <div *ngIf="contrasenaCambiada" class="loginContainer1">
+        <h1>Cambiaste tu contraseña</h1>
+
+        <button class="buttonLogin" (click)="irLogin()"><h4>Volver al Login</h4></button>
+    </div>
+
+</div>

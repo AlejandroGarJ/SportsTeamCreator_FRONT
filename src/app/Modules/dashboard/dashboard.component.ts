@@ -5,7 +5,6 @@ import { Router } from "@angular/router";
 import { DashboardService } from "./dashboard.service";
 import { Club } from '../../Core/Models/club.model';
 import { ClubControllerService } from '../../Core/Services/club/club-controller.service';
-import { response } from 'express';
 import { SessionUsuario } from '../../Core/Models/session.model';
 import { obtenerSessionUsuario } from '../../shared/guardarSessionUsuario/guardarSessionUsuario';
 import { co } from '@fullcalendar/core/internal-common';
@@ -30,6 +29,7 @@ export class DashboardComponent {
   paisCrear: string = "";
   ciudadCrear: string = "";
   usuarioLogeado: SessionUsuario;
+<<<<<<< HEAD
   clubes: any[] = [];
   eventos: any[] = [];
 
@@ -38,10 +38,16 @@ export class DashboardComponent {
     console.log(this.usuarioLogeado.token_session);
     this.clubesUsuario();
     this.eventosUsuario();
+=======
+>>>>>>> alejandro
 
+  ngOnInit(){
+    console.log(this.usuarioLogeado.token_session);
   }
+  
   constructor(private router: Router, private dashboardService: DashboardService, private clubService: ClubControllerService) {
 
+<<<<<<< HEAD
 
     this.usuarioLogeado = obtenerSessionUsuario();
 
@@ -51,6 +57,14 @@ export class DashboardComponent {
   }
 
   seeName() {
+=======
+   this.usuarioLogeado = obtenerSessionUsuario();
+   }
+
+   irPerfil(){this.router.navigate(['/perfil'])}
+
+   seeName(){
+>>>>>>> alejandro
 
     console.log(this.usuarioLogeado.nombre);
   }

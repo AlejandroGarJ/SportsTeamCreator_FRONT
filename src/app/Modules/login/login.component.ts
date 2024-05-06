@@ -21,7 +21,7 @@ export class LoginComponent {
   formatoCorrecto:boolean = true;
   sessionUsuario: SessionUsuario = {
 
-    dni: 0,
+    dni: "",
     nombre: "",
     token_session: ""
 
@@ -124,5 +124,9 @@ export class LoginComponent {
     }
 
     
+  }
+
+  irACorreoCambioContrasena(){
+    this.router.navigate(['correo-cambio-contrasena']);
   }
 }
