@@ -21,8 +21,9 @@ export class LoginComponent {
   formatoCorrecto:boolean = true;
   sessionUsuario: SessionUsuario = {
 
-    idUsuario: 0,
-    nombre: ""
+    dni: 0,
+    nombre: "",
+    token_session: ""
 
   };
 
@@ -40,12 +41,13 @@ export class LoginComponent {
          
           if(response['ok'] === 'ok'){
           
-            this.sessionUsuario.idUsuario = response['dni'];
+            this.sessionUsuario.dni = response['dni'];
             this.sessionUsuario.nombre = response['nombre'];
+            this.sessionUsuario.token_session = response['token'];
 
             localStorage.setItem('sessionUsuario', JSON.stringify(this.sessionUsuario));
             this.router.navigate(['/dashboard']);
-
+            
           }
           else{
             if(response['correo'] == 'correoIncorrecto'){

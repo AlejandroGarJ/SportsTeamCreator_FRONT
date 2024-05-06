@@ -2,7 +2,8 @@ import internal from "stream";
 
 export interface SessionUsuario{
 
-    idUsuario: number,
-    nombre: string
+    dni: number,
+    nombre: string,
+    token_session: string
 
 }
