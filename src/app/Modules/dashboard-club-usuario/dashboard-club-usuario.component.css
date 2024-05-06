@@ -1,0 +1,20 @@
+.app-container {
+    display: flex;
+    height: 100vh;
+}
+
+app-baner-lateral {
+    margin: 1%;
+    border-radius: 12px;
+    padding: 1%;
+    width: 15%;
+    background-color: #0b1623;
+    color: white;
+}
+
+p {
+    flex: 1;
+    background-color: #1b1b1b;
+    color: white;
+    padding: 20px;
+}

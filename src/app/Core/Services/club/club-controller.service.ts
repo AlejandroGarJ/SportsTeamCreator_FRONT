@@ -25,4 +25,8 @@ export class ClubControllerService {
   obtenerEventosUsuario(data: any): Observable<any> {
     return this.http.post<any>(environment.url + "/api/obtenerEventosDeUsuario", data);
   }
+
+  obtenerEquiposUsuario(data: any): Observable<any> {
+    return this.http.post<any>(environment.url + "/api/equiposUsuario", data);
+  }
 }

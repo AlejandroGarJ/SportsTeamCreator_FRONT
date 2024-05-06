@@ -7,7 +7,7 @@
             </li>
             <ul>
                 <li *ngFor="let club of clubes">
-                    <a href="/dashboard/club"> <button>{{ club.nombre }}</button>
+                    <a href="/dashboard/club?clubId={{club.id_club}}"> <button>{{ club.nombre }}</button>
                     </a>
                 </li>
             </ul>

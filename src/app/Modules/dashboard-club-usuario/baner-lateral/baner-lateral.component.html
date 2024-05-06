@@ -1,1 +1,13 @@
-<p>baner-lateral works!</p>
+<img src="./../../assets/img/logo.jpeg" alt="Logo del Usuario" width="70%">
+<ul>
+    <li>
+        <h4><i class="fa-solid fa-user"></i> Mis Equipos</h4>
+    </li>
+    <ul>
+        <li *ngFor="let equipo of equipos">
+            <a href=""> <button>{{ equipo.nombre }}</button>
+            </a>
+        </li>
+    </ul>
+
+</ul>
