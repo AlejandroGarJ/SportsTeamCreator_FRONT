@@ -20,6 +20,7 @@ import { NotFoundComponent } from './Core/Pages/not-found/not-found.component';
 import { CorreoCambioContrasenaComponent } from './Core/Pages/correo-cambio-contrasena/correo-cambio-contrasena.component';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PerfilComponent } from './Modules/Usuario/perfil/perfil.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BanerLateralComponent,
     CambiarContrasenaComponent,
     NotFoundComponent,
-    CorreoCambioContrasenaComponent
+    CorreoCambioContrasenaComponent,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,

@@ -8,6 +8,7 @@ import { authGuard } from './Core/Guards/auth.guard';
 import { CambiarContrasenaComponent } from './Core/Pages/cambiar-contrasena/cambiar-contrasena.component';
 import { NotFoundComponent } from './Core/Pages/not-found/not-found.component';
 import { CorreoCambioContrasenaComponent } from './Core/Pages/correo-cambio-contrasena/correo-cambio-contrasena.component';
+import { PerfilComponent } from './Modules/Usuario/perfil/perfil.component';
 
 const routes: Routes = [
   
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'cambiarContrasena', component: CambiarContrasenaComponent },
   { path: 'notFound', component: NotFoundComponent},
   { path: 'correo-cambio-contrasena', component: CorreoCambioContrasenaComponent},
+  { path: 'perfil', component: PerfilComponent, canActivate: [authGuard]},
   { path: '**', component: NotFoundComponent},
 
 ];

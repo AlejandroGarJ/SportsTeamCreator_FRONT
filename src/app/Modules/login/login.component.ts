@@ -21,7 +21,7 @@ export class LoginComponent {
   formatoCorrecto:boolean = true;
   sessionUsuario: SessionUsuario = {
 
-    dni: 0,
+    dni: "",
     nombre: "",
     token_session: ""
 

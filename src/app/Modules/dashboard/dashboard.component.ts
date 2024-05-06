@@ -28,20 +28,17 @@ export class DashboardComponent {
   paisCrear: string = "";
   ciudadCrear: string = "";
   usuarioLogeado: SessionUsuario;
-  ngOnInit(){
-   
-    console.log(this.usuarioLogeado.token_session);
 
+  ngOnInit(){
+    console.log(this.usuarioLogeado.token_session);
   }
+  
   constructor(private router: Router, private dashboardService: DashboardService, private clubService: ClubControllerService) {
 
-
    this.usuarioLogeado = obtenerSessionUsuario();
-   
-
-  
-   
    }
+
+   irPerfil(){this.router.navigate(['/perfil'])}
 
    seeName(){
 
