@@ -16,7 +16,7 @@
     background-size: calc(2 * var(--s)) calc(3.46 * var(--s));
 
     font-family: 'Gotham';
-
+    margin: 0;
 
 }
 
@@ -25,7 +25,7 @@ app-baner-lateral {
     border-radius: 12px;
     padding: 1%;
     width: 15%;
-    background-color: #0b1623;
+    background-color: #081B26;
     color: white;
 }
 
@@ -40,7 +40,7 @@ app-baner-lateral {
 
 #arriba {
     border-radius: 12px;
-    background-color: #0b1623;
+    background-color: #081B26;
     height: 12%;
     display: flex;
     justify-content: space-between;
@@ -50,7 +50,7 @@ app-baner-lateral {
 
 #abajo {
     border-radius: 12px;
-    background-color: #0b1623;
+    background-color: #081B26;
     display: flex;
     justify-content: space-between;
     padding: 1%;
