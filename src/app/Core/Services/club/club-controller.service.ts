@@ -32,4 +32,10 @@ export class ClubControllerService {
   obtenerRolesUsuario(data: any): Observable<any> {
     return this.http.post<any>(environment.url + "/api/getRoles", data);
   }
+  obtenerDatosClub(data: any): Observable<any> {
+    return this.http.post<any>(environment.url + "/api/datosClub", data);
+  }
+  modificarClub(data: any): Observable<any> {
+    return this.http.post<any>(environment.url + "/api/modificarClub", data);
+  }
 }

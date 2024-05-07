@@ -4,22 +4,21 @@
         <div class="content">
             <h1>Editar Club</h1>
 
-
             <div class="input">
                 <h4>Nombre</h4>
-                <input type="text" class="inputElement" placeholder="Nombre">
+                <input type="text" class="inputElement" placeholder="Nombre" [(ngModel)]="nombreClub">
             </div>
             <div class="input">
                 <h4>Codigo Acceso</h4>
-                <input type="text" class="inputElement" placeholder="Codigo Acceso">
+                <input type="text" class="inputElement" placeholder="Codigo Acceso" [(ngModel)]="codigoAcceso">
             </div>
             <div class="input">
                 <h4>Localizacion</h4>
-                <input type="text" class="inputElement" placeholder="Localizacion">
+                <input type="text" class="inputElement" placeholder="Localizacion" [(ngModel)]="localizacion">
             </div>
 
             <div class="loginButton">
-                <button class="buttonLogin">
+                <button class="buttonLogin" (click)="modificarClub()">
                     Guardar
                 </button>
 
