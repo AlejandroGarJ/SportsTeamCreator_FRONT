@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
 import { obtenerSessionUsuario } from '../../shared/guardarSessionUsuario/guardarSessionUsuario';
 import { SessionUsuario } from '../../Core/Models/session.model';
+import { ClubControllerService } from '../../Core/Services/club/club-controller.service';
+import { co } from '@fullcalendar/core/internal-common';
+
 
 @Component({
   selector: 'app-dashboard-club-usuario',
@@ -12,7 +15,8 @@ export class DashboardClubUsuarioComponent {
   usuarioLogeado: SessionUsuario;
   id_club: number | null = null;
   nombreClub: string = "";
-  constructor(private route: ActivatedRoute) {
+  rol: string = "";
+  constructor(private route: ActivatedRoute, private clubService: ClubControllerService,) {
     this.usuarioLogeado = obtenerSessionUsuario();
   }
 
@@ -22,10 +26,20 @@ export class DashboardClubUsuarioComponent {
       const clubId = params['clubId'];
       const clubName = params['nombreClub'];
       if (clubId) {
-        this.id_club = Number(clubId); // Convert to a number and assign
+        this.id_club = Number(clubId);
         this.nombreClub = clubName;
       }
     });
+    this.sacarRoles();
   }
-
+  sacarRoles() {
+    this.clubService.obtenerRolesUsuario({ dni: this.usuarioLogeado, id_club: this.id_club }).subscribe({
+      next: (res: any) => {
+        this.rol = res;
+      },
+      error: (err) => {
+        console.error('Error fetching clubs:', err);
+      }
+    });
+  }
 }

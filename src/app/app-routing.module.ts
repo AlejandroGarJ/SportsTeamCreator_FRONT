@@ -9,6 +9,7 @@ import { CambiarContrasenaComponent } from './Core/Pages/cambiar-contrasena/camb
 import { NotFoundComponent } from './Core/Pages/not-found/not-found.component';
 import { CorreoCambioContrasenaComponent } from './Core/Pages/correo-cambio-contrasena/correo-cambio-contrasena.component';
 import { PerfilComponent } from './Modules/Usuario/perfil/perfil.component';
+import { MenuAdminComponent } from './Modules/club/menu-admin/menu-admin.component';
 import { DashboardClubUsuarioComponent } from './Modules/dashboard-club-usuario/dashboard-club-usuario.component';
 
 const routes: Routes = [
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'notFound', component: NotFoundComponent },
   { path: 'correo-cambio-contrasena', component: CorreoCambioContrasenaComponent },
   { path: 'perfil', component: PerfilComponent, canActivate: [authGuard] },
+  { path: 'menuadmin', component: MenuAdminComponent, canActivate: [authGuard] },
   { path: '**', component: NotFoundComponent },
 
 ];

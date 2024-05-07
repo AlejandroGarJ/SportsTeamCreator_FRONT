@@ -21,6 +21,7 @@ import { CorreoCambioContrasenaComponent } from './Core/Pages/correo-cambio-cont
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PerfilComponent } from './Modules/Usuario/perfil/perfil.component';
+import { MenuAdminComponent } from './Modules/club/menu-admin/menu-admin.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { PerfilComponent } from './Modules/Usuario/perfil/perfil.component';
     CambiarContrasenaComponent,
     NotFoundComponent,
     CorreoCambioContrasenaComponent,
-    PerfilComponent
+    PerfilComponent,
+    MenuAdminComponent
   ],
   imports: [
     BrowserModule,
