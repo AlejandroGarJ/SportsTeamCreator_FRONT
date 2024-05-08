@@ -24,8 +24,21 @@ export class RegisterComponent {
   formatoCorrecto: boolean = true;
   rutas = rutas;
   comprobandoRegister: boolean = false;
+  archivoSeleccionado: File | null = null;
   constructor(private authUsuario: AuthUsuarioService, private dateAdapter: DateAdapter<Date>, private router: Router) {
     this.dateAdapter.setLocale('es');  // Configura el localizador a español si es necesario
+  }
+
+  onFileSelected(event: any) {
+    this.archivoSeleccionado = event.target.files[0];
+   
+
+    if (this.archivoSeleccionado) {
+    const formData = new FormData();
+    formData.append('imagen', this.archivoSeleccionado);
+    console.log(formData);
+    }
+   
   }
 
   registrarUsuario() {

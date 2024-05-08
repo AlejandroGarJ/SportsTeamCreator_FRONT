@@ -95,6 +95,15 @@
                     <h4 *ngIf="contrasenaMal" class="warningMessage">{{mensajeErrorContrasena}}</h4>
 
                 </div>
+                <br>
+                <div class="input" id="inputFile">
+                    <h4>Imágen</h4>
+                    <input type="file" (change)="onFileSelected($event)" name="imagen">
+                    <h4 *ngIf="contrasenaMal" class="warningMessage">{{mensajeErrorContrasena}}</h4>
+
+                </div>
+
+               
 
                 <br>
 
@@ -121,6 +130,9 @@
                         </a>
                     </div>
                 </div>
+
+                
+
             </div>
 
         </div>
