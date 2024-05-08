@@ -8,6 +8,7 @@ import { ClubControllerService } from '../../Core/Services/club/club-controller.
 import { SessionUsuario } from '../../Core/Models/session.model';
 import { obtenerSessionUsuario } from '../../shared/guardarSessionUsuario/guardarSessionUsuario';
 import { co } from '@fullcalendar/core/internal-common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dashboard',
@@ -37,7 +38,7 @@ export class DashboardComponent {
     this.clubesUsuario();
   }
 
-  constructor(private router: Router, private dashboardService: DashboardService, private clubService: ClubControllerService) {
+  constructor(private router: Router, private dashboardService: DashboardService, private clubService: ClubControllerService, private toastr: ToastrService) {
 
     this.usuarioLogeado = obtenerSessionUsuario();
   }
@@ -164,6 +165,14 @@ export class DashboardComponent {
     this.clubService.unirseClub({ nombre: this.nombreClub, codigoAcceso: this.claveClub, dni: this.usuarioLogeado.dni, token_session: this.usuarioLogeado.token_session }).subscribe(
       (response) => {
         console.log(response);
+        if (response["unirseExito"] === true) {
+          this.toastr.success('Se ha unido al club exitosamente');
+          this.nombreClub = "";
+          this.claveClub = "";
+          this.clubesUsuario();
+        } else {
+          this.toastr.error('Error al unirse al club');
+        }
       },
       (error) => {
         console.error("Hubo un error al intentar unirse al club:", error);
@@ -174,10 +183,16 @@ export class DashboardComponent {
   crearClub() {
     this.clubService.crearClub({ nombre: this.nombreClubCrear, codigoAcceso: this.codigoAccesoCrear, localizacion: (this.ciudadCrear + ", " + this.paisCrear), dni: this.usuarioLogeado.dni }).subscribe(
       (response: any) => {
-        if (response === false) {
-          console.log("Club creado exitosamente.");
+        console.log(response);
+        if (response === true) {
+          this.toastr.success('Club creado exitosamente');
+          this.nombreClubCrear = "";
+          this.codigoAccesoCrear = "";
+          this.paisCrear = "";
+          this.ciudadCrear = "";
+          this.clubesUsuario();
         } else {
-          console.log("No se pudo crear el club.");
+          this.toastr.error('Error al crear el club');
         }
       },
       (error) => {
