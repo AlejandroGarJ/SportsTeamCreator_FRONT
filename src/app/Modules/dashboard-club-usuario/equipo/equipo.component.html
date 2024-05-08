@@ -1,8 +1,10 @@
 <div id="arriba">
     <div class="welcome">
         <h2>Bienvenido, {{usuarioLogeado.nombre}}</h2>
-        <h4 class="subtitulo">Gestiona tu equipo,</h4>
+        <h4 class="subtitulo">Gestiona tu equipo, {{nombreEquipo}}</h4>
     </div>
+    <a [routerLink]="['/dashboard/club']" [queryParams]="{clubId: id_club, nombreClub: nombreClub}"
+        (click)="mostrarEquipos()"><i class="fa-solid fa-house"></i></a>
 </div>
 <div id="abajo">
 

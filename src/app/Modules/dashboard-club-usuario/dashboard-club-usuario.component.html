@@ -1,15 +1,15 @@
 <div class="app-container">
     <app-baner-lateral></app-baner-lateral>
     <div id="container">
-        <div id="arriba" *ngIf="!mostarEquipos">
+        <div id="arriba" *ngIf="!mostrarEquipos">
             <div class="welcome">
                 <h2>Bienvenido, {{usuarioLogeado.nombre}}</h2>
                 <h4 class="subtitulo">Gestiona tus equipos del club, {{nombreClub}}</h4>
             </div>
             <a href="/menuadmin?id_club={{id_club}}"><i class="fa-solid fa-gear"></i></a>
         </div>
-        <div id="abajo" *ngIf="!mostarEquipos">
+        <div id="abajo" *ngIf="!mostrarEquipos">
 
         </div>
-        <app-equipo *ngIf="mostarEquipos"></app-equipo>
+        <app-equipo *ngIf="mostrarEquipos"></app-equipo>
     </div>

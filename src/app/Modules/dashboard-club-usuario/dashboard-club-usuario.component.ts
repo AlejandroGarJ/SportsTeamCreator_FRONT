@@ -4,6 +4,7 @@ import { obtenerSessionUsuario } from '../../shared/guardarSessionUsuario/guarda
 import { SessionUsuario } from '../../Core/Models/session.model';
 import { ClubControllerService } from '../../Core/Services/club/club-controller.service';
 import { co } from '@fullcalendar/core/internal-common';
+import { CompartidoService } from './compartido.service';
 
 
 @Component({
@@ -12,12 +13,12 @@ import { co } from '@fullcalendar/core/internal-common';
   styleUrl: './dashboard-club-usuario.component.css'
 })
 export class DashboardClubUsuarioComponent {
-  mostarEquipos: boolean = false;
+  mostrarEquipos: boolean = false;
   usuarioLogeado: SessionUsuario;
   id_club: number | null = null;
   nombreClub: string = "";
   rol: string = "";
-  constructor(private route: ActivatedRoute, private clubService: ClubControllerService,) {
+  constructor(private route: ActivatedRoute, private clubService: ClubControllerService, private compartido: CompartidoService) {
     this.usuarioLogeado = obtenerSessionUsuario();
   }
 
@@ -32,6 +33,9 @@ export class DashboardClubUsuarioComponent {
       }
     });
     this.sacarRoles();
+    this.compartido.mostrarEquipos$.subscribe(value => {
+      this.mostrarEquipos = value;
+    });
   }
   sacarRoles() {
     this.clubService.obtenerRolesUsuario({ dni: this.usuarioLogeado, id_club: this.id_club }).subscribe({

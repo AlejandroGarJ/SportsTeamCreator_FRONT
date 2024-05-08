@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ClubControllerService } from '../../../Core/Services/club/club-controller.service';
 import { ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
 import { ToastrService } from 'ngx-toastr';
+import { Location } from '@angular/common';
+
 @Component({
   selector: 'app-menu-admin',
   templateUrl: './menu-admin.component.html',
@@ -12,7 +14,7 @@ export class MenuAdminComponent {
   nombreClub: string = "";
   codigoAcceso: string = "";
   localizacion: string = "";
-  constructor(private route: ActivatedRoute, private clubService: ClubControllerService, private toastr: ToastrService) {
+  constructor(private route: ActivatedRoute, private clubService: ClubControllerService, private toastr: ToastrService, private location: Location) {
 
   }
   ngOnInit(): void {
@@ -66,5 +68,8 @@ export class MenuAdminComponent {
         console.error('Error fetching clubs:', err);
       }
     });
+  }
+  goBack(): void {
+    this.location.back();
   }
 }
