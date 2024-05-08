@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'notFound', component: NotFoundComponent },
   { path: 'correo-cambio-contrasena', component: CorreoCambioContrasenaComponent },
   { path: 'perfil', component: PerfilComponent, canActivate: [authGuard] },
-  { path: 'menuadmin', component: MenuAdminComponent, canActivate: [authGuard] },
+  { path: 'menuadmin', component: MenuAdminComponent },
   { path: '**', component: NotFoundComponent },
 
 ];

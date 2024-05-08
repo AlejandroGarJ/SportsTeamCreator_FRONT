@@ -64,3 +64,12 @@ app-baner-lateral {
 .subtitulo {
     opacity: 0.5;
 }
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #47A1F6;
+}

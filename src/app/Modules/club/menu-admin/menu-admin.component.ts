@@ -1,10 +1,7 @@
 import { Component } from '@angular/core';
 import { ClubControllerService } from '../../../Core/Services/club/club-controller.service';
 import { ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
-import { info } from 'console';
-import { co } from '@fullcalendar/core/internal-common';
-
-
+import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-menu-admin',
   templateUrl: './menu-admin.component.html',
@@ -15,14 +12,20 @@ export class MenuAdminComponent {
   nombreClub: string = "";
   codigoAcceso: string = "";
   localizacion: string = "";
-  constructor(private route: ActivatedRoute, private clubService: ClubControllerService,) {
+  constructor(private route: ActivatedRoute, private clubService: ClubControllerService, private toastr: ToastrService) {
 
   }
   ngOnInit(): void {
-    this.id_club = 40;
-    console.log('Club ID:', this.id_club);
+    this.route.queryParams.subscribe(params => {
+      const clubId = params['id_club'];
+      if (clubId) {
+        this.id_club = Number(clubId);
+        this.obtenerDatosClub();
+      }
+      console.log('Club ID:', this.id_club);
 
-    this.obtenerDatosClub();
+    }
+    );
   }
 
   obtenerDatosClub(): void {
@@ -53,7 +56,11 @@ export class MenuAdminComponent {
     };
     this.clubService.modificarClub(payload).subscribe({
       next: (res: any) => {
-        console.log(res);
+        if (res = true) {
+          this.toastr.success('Club modificado correctamente');
+        } else {
+          this.toastr.error('Error al modificar el club');
+        }
       },
       error: (err) => {
         console.error('Error fetching clubs:', err);
