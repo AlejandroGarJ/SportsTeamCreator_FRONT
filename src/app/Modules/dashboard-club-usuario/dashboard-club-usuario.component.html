@@ -6,10 +6,16 @@
                 <h2>Bienvenido, {{usuarioLogeado.nombre}}</h2>
                 <h4 class="subtitulo">Gestiona tus equipos del club, {{nombreClub}}</h4>
             </div>
-            <a href="/menuadmin?id_club={{id_club}}"><i class="fa-solid fa-gear"></i></a>
+            <a [routerLink]="['/menuadmin']" [queryParams]="{clubId: id_club}"><i class=" fa-solid fa-gear"></i></a>
+            <a [routerLink]="['/menujugadores']" [queryParams]="{clubId: id_club, nombreClub: nombreClub}"><i
+                    class="fa-solid fa-users"></i></a>
+
         </div>
         <div id="abajo" *ngIf="!mostrarEquipos">
-
+            <div class="calendario">
+                <h1>Calendario</h1>
+                <full-calendar [options]="calendarOptions"></full-calendar>
+            </div>
         </div>
         <app-equipo *ngIf="mostrarEquipos"></app-equipo>
     </div>

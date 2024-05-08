@@ -11,6 +11,8 @@ import { CorreoCambioContrasenaComponent } from './Core/Pages/correo-cambio-cont
 import { PerfilComponent } from './Modules/Usuario/perfil/perfil.component';
 import { MenuAdminComponent } from './Modules/club/menu-admin/menu-admin.component';
 import { DashboardClubUsuarioComponent } from './Modules/dashboard-club-usuario/dashboard-club-usuario.component';
+import { MenuJugadoresComponent } from './Modules/club/menu-jugadores/menu-jugadores.component';
+
 
 const routes: Routes = [
 
@@ -25,8 +27,8 @@ const routes: Routes = [
   { path: 'correo-cambio-contrasena', component: CorreoCambioContrasenaComponent },
   { path: 'perfil', component: PerfilComponent, canActivate: [authGuard] },
   { path: 'menuadmin', component: MenuAdminComponent },
+  { path: 'menujugadores', component: MenuJugadoresComponent },
   { path: '**', component: NotFoundComponent },
-
 ];
 
 @NgModule({

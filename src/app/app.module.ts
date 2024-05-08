@@ -23,6 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PerfilComponent } from './Modules/Usuario/perfil/perfil.component';
 import { MenuAdminComponent } from './Modules/club/menu-admin/menu-admin.component';
 import { EquipoComponent } from './Modules/dashboard-club-usuario/equipo/equipo.component';
+import { MenuJugadoresComponent } from './Modules/club/menu-jugadores/menu-jugadores.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { EquipoComponent } from './Modules/dashboard-club-usuario/equipo/equipo.
     CorreoCambioContrasenaComponent,
     PerfilComponent,
     MenuAdminComponent,
-    EquipoComponent
+    EquipoComponent,
+    MenuJugadoresComponent
   ],
   imports: [
     BrowserModule,

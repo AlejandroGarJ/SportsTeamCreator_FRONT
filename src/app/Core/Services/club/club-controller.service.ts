@@ -38,4 +38,11 @@ export class ClubControllerService {
   modificarClub(data: any): Observable<any> {
     return this.http.post<any>(environment.url + "/api/modificarClub", data);
   }
+
+  obtenerJugadores(data: any): Observable<any> {
+    return this.http.post<any>(environment.url + "/api/jugadoresClub", data);
+  }
+  nombreJugador(data: any): Observable<any> {
+    return this.http.post<any>(environment.url + "/api/nombreJugador", data);
+  }
 }

@@ -1,6 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-
+import { BehaviorSubject, Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,15 @@ export class CompartidoService {
   public idEquipo$ = this.idEquipo.asObservable();
   public nombreEquipo$ = this.nombreEquipo.asObservable();
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  obtenerEventosDeEquipo(data: any): Observable<any> {
+    return this.http.post<any>(environment.url + "/api/obtenerEventosDeEquipo", data);
+  }
+
+  obtenerEventosDeClub(data: any): Observable<any> {
+    return this.http.post<any>(environment.url + "/api/obtenerEventosDeClub", data);
+  }
 
   // Método para cambiar el estado
   setMostrarEquipos(valor: boolean): void {

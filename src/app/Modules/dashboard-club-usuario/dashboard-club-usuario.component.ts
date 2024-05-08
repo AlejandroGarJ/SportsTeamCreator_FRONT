@@ -3,8 +3,10 @@ import { ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
 import { obtenerSessionUsuario } from '../../shared/guardarSessionUsuario/guardarSessionUsuario';
 import { SessionUsuario } from '../../Core/Models/session.model';
 import { ClubControllerService } from '../../Core/Services/club/club-controller.service';
-import { co } from '@fullcalendar/core/internal-common';
+import { CalendarOptions } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
 import { CompartidoService } from './compartido.service';
+import { co } from '@fullcalendar/core/internal-common';
 
 
 @Component({
@@ -36,15 +38,68 @@ export class DashboardClubUsuarioComponent {
     this.compartido.mostrarEquipos$.subscribe(value => {
       this.mostrarEquipos = value;
     });
+    this.eventosDeClub();
   }
   sacarRoles() {
     this.clubService.obtenerRolesUsuario({ dni: this.usuarioLogeado, id_club: this.id_club }).subscribe({
       next: (res: any) => {
         this.rol = res;
+        console.log(this.rol);
       },
       error: (err) => {
         console.error('Error fetching clubs:', err);
       }
     });
+  }
+
+
+  eventosDeClub() {
+    this.compartido.obtenerEventosDeClub({ id_club: this.id_club }).subscribe(
+      (response) => {
+        this.calendarOptions.events = response.map((evento: { titulo: any; fechaInicio: any; fechaFin: any; }) => ({
+          title: evento.titulo,
+          start: evento.fechaInicio,
+          end: evento.fechaFin
+        }));
+
+      },
+      (error) => {
+        console.error("Hubo un error al intentar obtener los eventos del usuario:", error);
+      }
+    );
+  }
+
+  calendarOptions: CalendarOptions = {
+    initialView: 'dayGridMonth',
+    plugins: [dayGridPlugin],
+    events: [
+      { title: 'Cumple Ruben', date: '2024-04-14' }
+    ],
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,dayGridWeek,dayGridDay'
+    },
+    locale: 'es',
+    buttonText: { today: "Hoy", dayGridMonth: 'Mes', dayGridWeek: 'Semana', dayGridDay: "Dia" }, // Establece el texto del botón "Hoy" en español
+
+    windowResize: function (arg) {
+      const windowWidth = window.innerWidth;
+      if (windowWidth < 1000) {
+        arg.view.calendar.changeView('dayGridDay');
+      } else if (windowWidth < 1445) {
+        arg.view.calendar.changeView('dayGridWeek');
+      } else {
+        arg.view.calendar.changeView('dayGridMonth');
+      }
+    }
+  };
+
+  esAdmin() {
+    if (this.rol === 'administrador' || this.rol === 'gestor') {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

@@ -2,8 +2,9 @@ import { Component } from '@angular/core';
 import { obtenerSessionUsuario } from '../../../shared/guardarSessionUsuario/guardarSessionUsuario';
 import { SessionUsuario } from '../../../Core/Models/session.model';
 import { CompartidoService } from '../compartido.service';
-import { co } from '@fullcalendar/core/internal-common';
 import { ActivatedRoute } from '@angular/router';
+import { CalendarOptions } from '@fullcalendar/core';
+import dayGridPlugin from '@fullcalendar/daygrid';
 
 @Component({
   selector: 'app-equipo',
@@ -36,10 +37,52 @@ export class EquipoComponent {
     this.compartido.nombreEquipo$.subscribe(value => {
       this.nombreEquipo = value;
     });
-    console.log(this.idEquipo);
+    this.eventosDeEquipo();
   }
   mostrarEquipos() {
     this.compartido.setMostrarEquipos(false);
   }
+
+  eventosDeEquipo() {
+    this.compartido.obtenerEventosDeEquipo({ id_equipo: this.idEquipo }).subscribe(
+      (response) => {
+        this.calendarOptions.events = response.map((evento: { titulo: any; fechaInicio: any; fechaFin: any; }) => ({
+          title: evento.titulo,
+          start: evento.fechaInicio,
+          end: evento.fechaFin
+        }));
+
+      },
+      (error) => {
+        console.error("Hubo un error al intentar obtener los eventos del usuario:", error);
+      }
+    );
+  }
+
+  calendarOptions: CalendarOptions = {
+    initialView: 'dayGridMonth',
+    plugins: [dayGridPlugin],
+    events: [
+      { title: 'Cumple Ruben', date: '2024-04-14' }
+    ],
+    headerToolbar: {
+      left: 'prev,next today',
+      center: 'title',
+      right: 'dayGridMonth,dayGridWeek,dayGridDay'
+    },
+    locale: 'es',
+    buttonText: { today: "Hoy", dayGridMonth: 'Mes', dayGridWeek: 'Semana', dayGridDay: "Dia" }, // Establece el texto del botón "Hoy" en español
+
+    windowResize: function (arg) {
+      const windowWidth = window.innerWidth;
+      if (windowWidth < 1000) {
+        arg.view.calendar.changeView('dayGridDay');
+      } else if (windowWidth < 1445) {
+        arg.view.calendar.changeView('dayGridWeek');
+      } else {
+        arg.view.calendar.changeView('dayGridMonth');
+      }
+    }
+  };
 
 }
