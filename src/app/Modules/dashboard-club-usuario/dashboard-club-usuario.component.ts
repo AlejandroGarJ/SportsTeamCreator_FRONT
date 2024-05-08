@@ -12,6 +12,7 @@ import { co } from '@fullcalendar/core/internal-common';
   styleUrl: './dashboard-club-usuario.component.css'
 })
 export class DashboardClubUsuarioComponent {
+  mostarEquipos: boolean = false;
   usuarioLogeado: SessionUsuario;
   id_club: number | null = null;
   nombreClub: string = "";
