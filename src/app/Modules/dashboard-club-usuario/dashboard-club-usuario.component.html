@@ -126,7 +126,8 @@
                             <tr *ngFor="let equipo of equipos">
                                 <td>{{equipo.nombre}}</td>
                                 <td><button class="buttonTabla">Editar</button></td>
-                                <td><button class="buttonTabla">Eliminar</button></td>
+                                <td><button class="buttonTabla"
+                                        (click)="borrarEquipo(equipo.id_equipo)">Eliminar</button></td>
                             </tr>
                     </table>
                 </div>

@@ -299,6 +299,33 @@ export class DashboardClubUsuarioComponent {
   }
 
   unirmeAEquipo(id_equipo: any) {
-    console.log(id_equipo);
+    this.compartido.unirseEquipo({ dni: this.usuarioLogeado, id_equipo: id_equipo }).subscribe({
+      next: (res: any) => {
+        if (res = true) {
+          this.toastr.success('Te has unido al equipo correctamente');
+          this.equiposDelClub2();
+        } else {
+          this.toastr.error('Error al unirte al equipo');
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching clubs:', err);
+      }
+    });
+  }
+  borrarEquipo(id_equipo: any) {
+    this.compartido.borrarEquipo({ id_equipo: id_equipo }).subscribe({
+      next: (res: any) => {
+        if (res = true) {
+          this.toastr.success('Equipo borrado correctamente');
+          this.equiposDelClub2();
+        } else {
+          this.toastr.error('Error al borrar el equipo');
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching clubs:', err);
+      }
+    });
   }
 }

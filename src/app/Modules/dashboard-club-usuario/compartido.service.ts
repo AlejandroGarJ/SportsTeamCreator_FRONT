@@ -34,6 +34,12 @@ export class CompartidoService {
   crearEquipo(data: any): Observable<any> {
     return this.http.post<any>(environment.url + "/api/crearEquipo", data);
   }
+  borrarEquipo(data: any): Observable<any> {
+    return this.http.post<any>(environment.url + "/api/borrarEquipo", data);
+  }
+  unirseEquipo(data: any): Observable<any> {
+    return this.http.post<any>(environment.url + "/api/unirseEquipo", data);
+  }
 
   // Método para cambiar el estado
   setMostrarEquipos(valor: boolean): void {
