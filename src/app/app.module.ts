@@ -27,6 +27,8 @@ import { MenuAdminComponent2 } from './Modules/equipo/menu-admin/menu-admin.comp
 import { MatDialogModule } from '@angular/material/dialog';
 import { PopUpCrearEventoComponent } from './Modules/dashboard-club-usuario/pop-up-crear-evento/pop-up-crear-evento.component';
 import { PopUpDetallesEventoComponent } from './Modules/dashboard-club-usuario/pop-up-detalles-evento/pop-up-detalles-evento.component';
+import { PopUpCrearEquipoComponent } from './Modules/dashboard-club-usuario/pop-up-crear-equipo/pop-up-crear-equipo.component';
+import { PopUpEditarEquipoComponent } from './Modules/dashboard-club-usuario/pop-up-editar-equipo/pop-up-editar-equipo.component';
 
 
 @NgModule({
@@ -48,7 +50,9 @@ import { PopUpDetallesEventoComponent } from './Modules/dashboard-club-usuario/p
     EquipoComponent,
     MenuAdminComponent2,
     PopUpCrearEventoComponent,
-    PopUpDetallesEventoComponent
+    PopUpDetallesEventoComponent,
+    PopUpCrearEquipoComponent,
+    PopUpEditarEquipoComponent
   ],
   imports: [
     BrowserModule,

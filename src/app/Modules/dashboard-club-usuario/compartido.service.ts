@@ -31,6 +31,10 @@ export class CompartidoService {
     return this.http.post<any>(environment.url + "/api/crearEvento", data);
   }
 
+  crearEquipo(data: any): Observable<any> {
+    return this.http.post<any>(environment.url + "/api/crearEquipo", data);
+  }
+
   // Método para cambiar el estado
   setMostrarEquipos(valor: boolean): void {
     this.mostrarEquipos.next(valor);
@@ -41,5 +45,9 @@ export class CompartidoService {
   setNombreEquipo(valor: string): void {
     this.nombreEquipo.next(valor);
   }
+  equiposClub(data: any): Observable<any> {
+    return this.http.post<any>(environment.url + "/api/equiposClub", data);
+  }
+
 }
 

@@ -9,6 +9,8 @@ import { CompartidoService } from './compartido.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PopUpCrearEventoComponent } from './pop-up-crear-evento/pop-up-crear-evento.component';
 import { PopUpDetallesEventoComponent } from './pop-up-detalles-evento/pop-up-detalles-evento.component';
+import { ToastrService } from 'ngx-toastr';
+import { PopUpCrearEquipoComponent } from './pop-up-crear-equipo/pop-up-crear-equipo.component';
 
 
 @Component({
@@ -20,10 +22,13 @@ export class DashboardClubUsuarioComponent {
   calendario: boolean = true;
   jugadoresClub: boolean = false;
   equiposClub: boolean = false;
+  ajustesClub: boolean = false;
   mostrarEquipos: boolean = false;
   usuarioLogeado: SessionUsuario;
   id_club: number | null = null;
   nombreClub: string = "";
+  codigoAcceso: string = "";
+  localizacion: string = "";
   rol: string = "";
   jugadores: any[] = [];
   nombre: string = "";
@@ -33,9 +38,10 @@ export class DashboardClubUsuarioComponent {
   descripcion: string = "";
   admin: boolean = true;
   tipoEventoSeleccionado: string = 'todos';
+  visible: string = 'ajustes';
+  equipos: any[] = [];
 
-
-  constructor(private route: ActivatedRoute, private clubService: ClubControllerService, private compartido: CompartidoService, private dialog: MatDialog) {
+  constructor(private route: ActivatedRoute, private clubService: ClubControllerService, private compartido: CompartidoService, private dialog: MatDialog, private toastr: ToastrService) {
     this.usuarioLogeado = obtenerSessionUsuario();
   }
 
@@ -139,19 +145,33 @@ export class DashboardClubUsuarioComponent {
     this.calendario = true;
     this.jugadoresClub = false;
     this.equiposClub = false;
+    this.ajustesClub = false;
   }
   mostrarJugadores() {
     this.calendario = false;
     this.jugadoresClub = true;
     this.equiposClub = false;
+    this.ajustesClub = false;
     this.obtenerJugadores();
   }
   mostrarEquiposUnirse() {
     this.calendario = false;
     this.jugadoresClub = false;
     this.equiposClub = true;
+    this.ajustesClub = false;
+  }
+  mostrarAjustes() {
+    this.calendario = false;
+    this.jugadoresClub = false;
+    this.equiposClub = false;
+    this.ajustesClub = true;
+    this.obtenerDatosClub();
+    this.equiposDelClub();
   }
 
+  seleccionar(seccion: string) {
+    this.visible = seccion;
+  }
   obtenerJugadores(): void {
     this.clubService.obtenerJugadores({ id_club: this.id_club }).subscribe({
       next: (jugadores: any[]) => {
@@ -188,5 +208,71 @@ export class DashboardClubUsuarioComponent {
     dialogRef.afterClosed().subscribe(() => {
       this.eventosDeClub();
     });
+  }
+
+
+  crearEquipoPopUp(): void {
+    const dialogRef = this.dialog.open(PopUpCrearEquipoComponent, {
+      width: '50%',
+      height: '50%',
+      data: { id_club: this.id_club }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.equiposDelClub();
+    });
+  }
+
+  obtenerDatosClub(): void {
+    if (this.id_club !== null) {
+      const payload = { id_club: this.id_club };
+
+      this.clubService.obtenerDatosClub(payload).subscribe({
+        next: (res: any) => {
+          console.log(res);
+          this.nombreClub = res.nombre;
+          this.codigoAcceso = res.codigoAcceso;
+          this.localizacion = res.localizacion;
+        },
+        error: (err) => {
+          console.error('Error fetching clubs:', err);
+        }
+      });
+    } else {
+      console.error('Club ID is not available');
+    }
+  }
+  modificarClub(): void {
+    const payload = {
+      id_club: this.id_club,
+      nombre: this.nombreClub,
+      codigoAcceso: this.codigoAcceso,
+      localizacion: this.localizacion
+    };
+    this.clubService.modificarClub(payload).subscribe({
+      next: (res: any) => {
+        if (res = true) {
+          this.toastr.success('Club modificado correctamente');
+        } else {
+          this.toastr.error('Error al modificar el club');
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching clubs:', err);
+      }
+    });
+  }
+
+  equiposDelClub() {
+    this.compartido.equiposClub({ id_club: this.id_club }).subscribe(
+      (response) => {
+        this.equipos = response;
+      },
+      (error) => {
+        console.error("Hubo un error al intentar obtener los equipos del club:", error);
+      }
+    );
+  }
+  crearEquipo() {
   }
 }

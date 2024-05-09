@@ -15,7 +15,7 @@
         var(--g3) 0 calc(1.73 * var(--s)) #1e1e1e;
     background-size: calc(2 * var(--s)) calc(3.46 * var(--s));
 
-    font-family: 'Gotham';
+    font-family: 'Gotham', sans-serif;
     margin: 0;
 
 }
@@ -78,12 +78,33 @@ button {
 a:hover,
 button:hover {
     color: #47A1F6;
+    scale: 1.2;
 }
 
 .calendario {
     width: 100%;
     height: 83%;
     padding: 2%;
+}
+
+.ajustesclub {
+    width: 100%;
+    height: 83%;
+    padding: 2%;
+}
+
+.ajustesclub button {
+    margin-right: 1%;
+    border-radius: 12px;
+    background-color: #081B26;
+    color: white;
+    font-size: large;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.ajustesclub button:hover {
+    scale: 1.1;
 }
 
 .jugadores {
@@ -185,4 +206,84 @@ full-calendar {
     width: 10%;
     border-radius: 5px;
     border: none;
+}
+
+.content {
+    height: 500px;
+    margin-top: 30px;
+    font-family: "Gotham";
+
+}
+
+.content h1 {
+    font-family: "Gotham";
+    font-size: 2.7rem;
+    color: white;
+    margin-bottom: 40px;
+
+}
+
+.content p {
+    font-family: "Gotham";
+    color: white;
+}
+
+/* Input */
+
+.content h4 {
+    font-family: "Gotham";
+    color: white;
+    margin-bottom: 10px;
+}
+
+.inputElement {
+    width: 100%;
+    height: 40px;
+    background-color: transparent;
+    border: 1px solid grey;
+    border-radius: 4px;
+    outline: none;
+    margin-bottom: 10px;
+    color: #E0E0E0;
+    font-family: "Gotham";
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+
+/* Button */
+
+.loginButton {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-left: auto;
+}
+
+.loginButton button {
+    width: 220px;
+    height: 48px;
+    border-radius: 9999px;
+    background-color: #264F73;
+    border: none;
+    text-align: center;
+}
+
+.buttonLogin:hover {
+    cursor: pointer;
+    background-color: #47A1F6;
+    scale: 1.1;
+    color: white;
+}
+
+.buttonLogin h4 {
+    color: #081c34;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 15px;
+}
+
+.guardar-info {
+    display: flex;
 }
