@@ -58,6 +58,8 @@ export class MenuAdminComponent2 {
       next: (res: any) => {
         if (res = true) {
           this.toastr.success('Equipo modificado correctamente');
+          this.goBack();
+
         } else {
           this.toastr.error('Error al modificar el equipo');
         }

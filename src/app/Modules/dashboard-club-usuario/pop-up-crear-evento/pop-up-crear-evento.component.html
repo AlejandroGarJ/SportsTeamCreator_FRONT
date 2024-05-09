@@ -5,24 +5,31 @@
             <h1>Crear Evento:</h1>
             <label for="nombreEvento">Nombre Evento</label>
             <input type="text" placeholder="Nombre del Evento" [(ngModel)]="nombreEvento" name="nombreEvento">
-            <label for="fechaInicioEvento">Fecha de Incio Evento</label>
-            <input type="date" placeholder="Fecha de Incio Evento" [(ngModel)]="fechaInicio" name="fechaInicioEvento">
-            <label for="fechaFinEvento">Fecha de Incio Evento</label>
-            <input type="date" placeholder="Fecha final del Evento" [(ngModel)]="fechaFin" name="fechaFinEvento">
+            <label for="fechaInicio">Fecha y Hora de Inicio del Evento</label>
+            <div class="horaYfecha">
+                <input type="date" placeholder="Fecha de Incio Evento" [(ngModel)]="fechaInicio"
+                    name="fechaInicioEvento">
+                <input type="time" placeholder="Hora de Inicio" [(ngModel)]="horaInicio" name="horaInicio">
+            </div>
+            <label for="fechaFin">Fecha y Hora del Final del Evento</label>
+            <div class="horaYfecha">
+                <input type="date" placeholder="Fecha final del Evento" [(ngModel)]="fechaFin" name="fechaFinEvento">
+                <input type="time" placeholder="Hora de Fin" [(ngModel)]="horaFin" name="horaFin">
+            </div>
             <label for="descripcionEvento">Descripcion Evento</label>
             <input type="text" placeholder="Descripcion del Evento" [(ngModel)]="descripcionEvento"
                 name="descripcionEvento">
             <label for="lugarEvento">Lugar Evento</label>
             <input type="text" placeholder="Lugar del Evento" [(ngModel)]="lugarEvento" name="lugarEvento">
             <label for="tipoEvento">Tipo de Evento</label>
-            <select name="tipoEvento" id="tipoEvento">
+            <select name="tipoEvento" id="tipoEvento" [(ngModel)]="tipoEventoSeleccionado">
                 <option disabled selected>Selecciona un tipo de evento</option>
                 <option value="entrenamiento">entrenamiento</option>
                 <option value="partido">partido</option>
                 <option value="reunion">reunion</option>
                 <option value="otro">otro</option>
             </select>
-            <button>Crear</button>
+            <button (click)="crearEvento()">Crear</button>
         </form>
     </div>
 </div>

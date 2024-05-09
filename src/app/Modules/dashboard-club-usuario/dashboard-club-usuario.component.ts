@@ -8,6 +8,8 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import { CompartidoService } from './compartido.service';
 import { MatDialog } from '@angular/material/dialog';
 import { PopUpCrearEventoComponent } from './pop-up-crear-evento/pop-up-crear-evento.component';
+import { PopUpDetallesEventoComponent } from './pop-up-detalles-evento/pop-up-detalles-evento.component';
+
 
 @Component({
   selector: 'app-dashboard-club-usuario',
@@ -71,10 +73,13 @@ export class DashboardClubUsuarioComponent {
   eventosDeClub() {
     this.compartido.obtenerEventosDeClub({ id_club: this.id_club, tipo: this.tipoEventoSeleccionado }).subscribe(
       (response) => {
-        this.calendarOptions.events = response.map((evento: { titulo: any; fechaInicio: any; fechaFin: any; }) => ({
+        this.calendarOptions.events = response.map((evento: { titulo: any; fechaInicio: any; fechaFin: any; descripcion: any; ubicacion: any; tipo: any }) => ({
           title: evento.titulo,
           start: evento.fechaInicio,
-          end: evento.fechaFin
+          end: evento.fechaFin,
+          description: evento.descripcion,
+          location: evento.ubicacion,
+          type: evento.tipo
         }));
 
       },
@@ -87,6 +92,7 @@ export class DashboardClubUsuarioComponent {
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     plugins: [dayGridPlugin],
+    firstDay: 1,
     events: [
       { title: 'Cumple Ruben', date: '2024-04-14' }
     ],
@@ -107,8 +113,19 @@ export class DashboardClubUsuarioComponent {
       } else {
         arg.view.calendar.changeView('dayGridMonth');
       }
-    }
+    },
+
+    eventClick: this.handleEventClick.bind(this)
+
   };
+
+  handleEventClick(info: any) {
+    const dialogRef = this.dialog.open(PopUpDetallesEventoComponent, {
+      width: '50%',
+      height: '50%',
+      data: { nombreEvento: info.event.title, fechaInicio: info.event.start, fechaFin: info.event.end, descripcionEvento: info.event.extendedProps.description, lugarEvento: info.event.extendedProps.location, tipoEventoSeleccionado: info.event.extendedProps.type }
+    });
+  }
 
   esAdmin() {
     if (this.rol == 'administrador' || this.rol == 'gestor') {

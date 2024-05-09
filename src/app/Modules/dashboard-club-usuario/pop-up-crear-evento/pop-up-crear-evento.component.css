@@ -60,3 +60,10 @@ i:hover {
     transition: all 0.3s;
     cursor: pointer;
 }
+
+.horaYfecha {
+    display: flex;
+    gap: 2%;
+    justify-content: space-between;
+    width: 90%;
+}
