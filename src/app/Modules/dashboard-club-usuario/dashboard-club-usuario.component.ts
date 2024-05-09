@@ -11,6 +11,9 @@ import { PopUpCrearEventoComponent } from './pop-up-crear-evento/pop-up-crear-ev
 import { PopUpDetallesEventoComponent } from './pop-up-detalles-evento/pop-up-detalles-evento.component';
 import { ToastrService } from 'ngx-toastr';
 import { PopUpCrearEquipoComponent } from './pop-up-crear-equipo/pop-up-crear-equipo.component';
+import { Equipo } from '../../Core/Models/equipo.model'; // Import Equipo
+import { Observable, forkJoin } from 'rxjs';
+
 
 
 @Component({
@@ -39,7 +42,7 @@ export class DashboardClubUsuarioComponent {
   admin: boolean = true;
   tipoEventoSeleccionado: string = 'todos';
   visible: string = 'ajustes';
-  equipos: any[] = [];
+  equipos: Equipo[] = [];
 
   constructor(private route: ActivatedRoute, private clubService: ClubControllerService, private compartido: CompartidoService, private dialog: MatDialog, private toastr: ToastrService) {
     this.usuarioLogeado = obtenerSessionUsuario();
@@ -159,6 +162,7 @@ export class DashboardClubUsuarioComponent {
     this.jugadoresClub = false;
     this.equiposClub = true;
     this.ajustesClub = false;
+    this.equiposDelClubNoEstaUser();
   }
   mostrarAjustes() {
     this.calendario = false;
@@ -166,7 +170,7 @@ export class DashboardClubUsuarioComponent {
     this.equiposClub = false;
     this.ajustesClub = true;
     this.obtenerDatosClub();
-    this.equiposDelClub();
+    this.equiposDelClub2();
   }
 
   seleccionar(seccion: string) {
@@ -262,17 +266,39 @@ export class DashboardClubUsuarioComponent {
       }
     });
   }
-
-  equiposDelClub() {
-    this.compartido.equiposClub({ id_club: this.id_club }).subscribe(
-      (response) => {
-        this.equipos = response;
+  equiposDelClub2() {
+    this.compartido.equiposClub({ id_club: this.id_club }).subscribe({
+      next: (equipos: Equipo[]) => {
+        this.equipos = equipos;
       },
-      (error) => {
-        console.error("Hubo un error al intentar obtener los equipos del club:", error);
+      error: (err) => {
+        console.error('Error al obtener la información:', err);
       }
-    );
+    });
   }
-  crearEquipo() {
+
+  equiposDelClub(): Observable<Equipo[]> {
+    return this.compartido.equiposClub({ id_club: this.id_club });
+  }
+  equiposDelClubNoEstaUser() {
+    forkJoin({
+      equiposUsuario: this.clubService.obtenerEquiposUsuario({ dni: this.usuarioLogeado, id_club: this.id_club }),
+      todosEquipos: this.equiposDelClub()
+    }).subscribe({
+      next: ({ equiposUsuario, todosEquipos }) => {
+        this.equipos = todosEquipos.filter((equipoClub: Equipo) =>
+          !equiposUsuario.some((equipoUsuario: Equipo) =>
+            equipoUsuario.id_equipo === equipoClub.id_equipo));
+
+        // Aquí puedes procesar `this.equipos` como necesites
+      },
+      error: (err) => {
+        console.error('Error al obtener la información:', err);
+      }
+    });
+  }
+
+  unirmeAEquipo(id_equipo: any) {
+    console.log(id_equipo);
   }
 }

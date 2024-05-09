@@ -60,6 +60,20 @@
         <div id="abajo" *ngIf="!mostrarEquipos && equiposClub">
             <div class="calendario">
                 <h1>Equipos a los que puedes unirte del Club:</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Unirme</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let equipo of equipos">
+                            <td>{{equipo.nombre}}</td>
+                            <td><button class="buttonTabla" (click)="unirmeAEquipo(equipo.id_equipo)">Unirme</button>
+                            </td>
+                        </tr>
+                </table>
             </div>
         </div>
         <div id="abajo" *ngIf="!mostrarEquipos && ajustesClub">
