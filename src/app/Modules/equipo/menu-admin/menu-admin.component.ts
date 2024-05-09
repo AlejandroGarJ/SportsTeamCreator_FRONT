@@ -25,10 +25,10 @@ export class MenuAdminComponent2 {
     this.compartido.idEquipo$.subscribe(value => {
       this.idEquipo = value;
     });
-    this.obtenerDatosClub();
+    this.obtenerDatosEquipo();
   }
 
-  obtenerDatosClub(): void {
+  obtenerDatosEquipo(): void {
     if (this.idEquipo !== null) {
       const payload = { id_equipo: this.idEquipo };
 
@@ -40,7 +40,7 @@ export class MenuAdminComponent2 {
           this.genero = res.genero;
         },
         error: (err) => {
-          console.error('Error fetching clubs:', err);
+          console.error('Error fetching Equipos:', err);
         }
       });
     } else {
@@ -57,13 +57,13 @@ export class MenuAdminComponent2 {
     this.clubService.modificarEquipo(payload).subscribe({
       next: (res: any) => {
         if (res = true) {
-          this.toastr.success('Club modificado correctamente');
+          this.toastr.success('Equipo modificado correctamente');
         } else {
-          this.toastr.error('Error al modificar el club');
+          this.toastr.error('Error al modificar el equipo');
         }
       },
       error: (err) => {
-        console.error('Error fetching clubs:', err);
+        console.error('Error fetching Equipos:', err);
       }
     });
   }

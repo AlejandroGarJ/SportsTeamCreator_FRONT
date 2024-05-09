@@ -26,6 +26,9 @@ import { EquipoComponent } from './Modules/dashboard-club-usuario/equipo/equipo.
 import { MenuJugadoresComponent } from './Modules/club/menu-jugadores/menu-jugadores.component';
 import { MenuAdminComponent2 } from './Modules/equipo/menu-admin/menu-admin.component';
 import { MenuJugadoresComponent2 } from './Modules/equipo/menu-jugadores/menu-jugadores.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { PopUpCrearEventoComponent } from './Modules/dashboard-club-usuario/pop-up-crear-evento/pop-up-crear-evento.component';
+
 
 @NgModule({
   declarations: [
@@ -46,7 +49,8 @@ import { MenuJugadoresComponent2 } from './Modules/equipo/menu-jugadores/menu-ju
     EquipoComponent,
     MenuJugadoresComponent,
     MenuAdminComponent2,
-    MenuJugadoresComponent2
+    MenuJugadoresComponent2,
+    PopUpCrearEventoComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +60,8 @@ import { MenuJugadoresComponent2 } from './Modules/equipo/menu-jugadores/menu-ju
     HttpClientModule,
     MatNativeDateModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [
     provideClientHydration(),

@@ -6,8 +6,8 @@ import { ClubControllerService } from '../../Core/Services/club/club-controller.
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { CompartidoService } from './compartido.service';
-import { co } from '@fullcalendar/core/internal-common';
-
+import { MatDialog } from '@angular/material/dialog';
+import { PopUpCrearEventoComponent } from './pop-up-crear-evento/pop-up-crear-evento.component';
 
 @Component({
   selector: 'app-dashboard-club-usuario',
@@ -15,12 +15,25 @@ import { co } from '@fullcalendar/core/internal-common';
   styleUrl: './dashboard-club-usuario.component.css'
 })
 export class DashboardClubUsuarioComponent {
+  calendario: boolean = true;
+  jugadoresClub: boolean = false;
+  equiposClub: boolean = false;
   mostrarEquipos: boolean = false;
   usuarioLogeado: SessionUsuario;
   id_club: number | null = null;
   nombreClub: string = "";
   rol: string = "";
-  constructor(private route: ActivatedRoute, private clubService: ClubControllerService, private compartido: CompartidoService) {
+  jugadores: any[] = [];
+  nombre: string = "";
+  nombreEvento: string = "";
+  fechaInicio: string = "";
+  fechaFin: string = "";
+  descripcion: string = "";
+  admin: boolean = true;
+  tipoEventoSeleccionado: string = 'todos';
+
+
+  constructor(private route: ActivatedRoute, private clubService: ClubControllerService, private compartido: CompartidoService, private dialog: MatDialog) {
     this.usuarioLogeado = obtenerSessionUsuario();
   }
 
@@ -34,7 +47,7 @@ export class DashboardClubUsuarioComponent {
         this.nombreClub = clubName;
       }
     });
-    this.sacarRoles();
+    this.sacarRoles(); // Llama a sacarRoles() primero
     this.compartido.mostrarEquipos$.subscribe(value => {
       this.mostrarEquipos = value;
     });
@@ -45,6 +58,8 @@ export class DashboardClubUsuarioComponent {
       next: (res: any) => {
         this.rol = res;
         console.log(this.rol);
+        this.esAdmin(); // Llama a esAdmin() después de obtener los roles
+        console.log(this.admin);
       },
       error: (err) => {
         console.error('Error fetching clubs:', err);
@@ -54,7 +69,7 @@ export class DashboardClubUsuarioComponent {
 
 
   eventosDeClub() {
-    this.compartido.obtenerEventosDeClub({ id_club: this.id_club }).subscribe(
+    this.compartido.obtenerEventosDeClub({ id_club: this.id_club, tipo: this.tipoEventoSeleccionado }).subscribe(
       (response) => {
         this.calendarOptions.events = response.map((evento: { titulo: any; fechaInicio: any; fechaFin: any; }) => ({
           title: evento.titulo,
@@ -96,10 +111,65 @@ export class DashboardClubUsuarioComponent {
   };
 
   esAdmin() {
-    if (this.rol === 'administrador' || this.rol === 'gestor') {
-      return true;
+    if (this.rol == 'administrador' || this.rol == 'gestor') {
+      this.admin = true;
     } else {
-      return false;
+      this.admin = false;
     }
+  }
+
+  mostrarCalendario() {
+    this.calendario = true;
+    this.jugadoresClub = false;
+    this.equiposClub = false;
+  }
+  mostrarJugadores() {
+    this.calendario = false;
+    this.jugadoresClub = true;
+    this.equiposClub = false;
+    this.obtenerJugadores();
+  }
+  mostrarEquiposUnirse() {
+    this.calendario = false;
+    this.jugadoresClub = false;
+    this.equiposClub = true;
+  }
+
+  obtenerJugadores(): void {
+    this.clubService.obtenerJugadores({ id_club: this.id_club }).subscribe({
+      next: (jugadores: any[]) => {
+        this.jugadores = jugadores.map(jugador => ({
+          ...jugador,
+          nombre: null // Preparar para almacenar el nombre
+        }));
+        this.jugadores.forEach(jugador => this.nombreJugador(jugador));
+      },
+      error: (err) => {
+        console.error('Error fetching clubs:', err);
+      }
+    });
+  }
+
+  nombreJugador(jugador: any): void {
+    this.clubService.nombreJugador({ dni: jugador.dni }).subscribe({
+      next: (res: any) => {
+        jugador.nombre = res.nombre; // Guardar nombre directamente en el jugador
+      },
+      error: (err) => {
+        console.error('Error fetching player name:', err);
+      }
+    });
+  }
+
+  crearEvento(): void {
+    const dialogRef = this.dialog.open(PopUpCrearEventoComponent, {
+      width: '50%',
+      height: '50%',
+      data: { id_club: this.id_club }
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.eventosDeClub();
+    });
   }
 }

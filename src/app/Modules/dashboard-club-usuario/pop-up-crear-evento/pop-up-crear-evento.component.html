@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="crearEventos">
+        <i class="fa-solid fa-xmark" (click)="goBack()"></i>
+        <form action="">
+            <h1>Crear Evento:</h1>
+            <label for="nombreEvento">Nombre Evento</label>
+            <input type="text" placeholder="Nombre del Evento" [(ngModel)]="nombreEvento" name="nombreEvento">
+            <label for="fechaInicioEvento">Fecha de Incio Evento</label>
+            <input type="date" placeholder="Fecha de Incio Evento" [(ngModel)]="fechaInicio" name="fechaInicioEvento">
+            <label for="fechaFinEvento">Fecha de Incio Evento</label>
+            <input type="date" placeholder="Fecha final del Evento" [(ngModel)]="fechaFin" name="fechaFinEvento">
+            <label for="descripcionEvento">Descripcion Evento</label>
+            <input type="text" placeholder="Descripcion del Evento" [(ngModel)]="descripcionEvento"
+                name="descripcionEvento">
+            <label for="lugarEvento">Lugar Evento</label>
+            <input type="text" placeholder="Lugar del Evento" [(ngModel)]="lugarEvento" name="lugarEvento">
+            <label for="tipoEvento">Tipo de Evento</label>
+            <select name="tipoEvento" id="tipoEvento">
+                <option disabled selected>Selecciona un tipo de evento</option>
+                <option value="entrenamiento">entrenamiento</option>
+                <option value="partido">partido</option>
+                <option value="reunion">reunion</option>
+                <option value="otro">otro</option>
+            </select>
+            <button>Crear</button>
+        </form>
+    </div>
+</div>

@@ -3,19 +3,65 @@
     <div id="container">
         <div id="arriba" *ngIf="!mostrarEquipos">
             <div class="welcome">
-                <h2>Bienvenido, {{usuarioLogeado.nombre}}</h2>
-                <h4 class="subtitulo">Gestiona tus equipos del club, {{nombreClub}}</h4>
+                <h1>{{nombreClub}}</h1>
+                <h4 class="subtitulo">Bienvenido al dashboard del Club {{nombreClub}}</h4>
             </div>
-            <a [routerLink]="['/menuadmin']" [queryParams]="{clubId: id_club}"><i class=" fa-solid fa-gear"></i></a>
-            <a [routerLink]="['/menujugadores']" [queryParams]="{clubId: id_club, nombreClub: nombreClub}"><i
-                    class="fa-solid fa-users"></i></a>
+            <div class="botones">
+                <a [routerLink]="['/menuadmin']" [queryParams]="{clubId: id_club}"><i class=" fa-solid fa-gear"></i></a>
+                <button (click)="mostrarCalendario()"><i class="fa-solid fa-calendar-days"></i></button>
+                <button (click)="mostrarJugadores()"><i class="fa-solid fa-users"></i></button>
+                <button (click)="mostrarEquiposUnirse()"><i class="fa-solid fa-people-group"></i></button>
+            </div>
 
         </div>
-        <div id="abajo" *ngIf="!mostrarEquipos">
+        <div id="abajo" *ngIf="!mostrarEquipos && calendario">
             <div class="calendario">
-                <h1>Calendario</h1>
+                <div class="titulo">
+                    <h1>Calendario:</h1>
+                    <select name="eventosTipo" id="eventosTipo" [(ngModel)]="tipoEventoSeleccionado"
+                        (ngModelChange)="eventosDeClub()">
+                        <option value="todos" selected>Todos</option>
+                        <option value="entrenamiento">Entrenamiento</option>
+                        <option value="partido">Partido</option>
+                        <option value="reunion">Reunion</option>
+                        <option value="otro">Otro</option>
+                    </select>
+
+                    <button (click)="crearEvento()"><i class="fa-solid fa-plus"></i></button>
+                </div>
+
+
                 <full-calendar [options]="calendarOptions"></full-calendar>
             </div>
+
         </div>
+        <div id="abajo" *ngIf="!mostrarEquipos && jugadoresClub">
+            <div class="jugadores">
+                <h1>Jugadores del Club:</h1>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>DNI</th>
+                            <th>Nombre</th>
+                            <th>Rol</th>
+                            <th>Expulsar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let jugador of jugadores">
+                            <td>{{jugador.dni}}</td>
+                            <td>{{jugador.nombre}}</td>
+                            <td>{{jugador.rolClub}}</td>
+                            <td><button class="buttonTabla">Expulsar</button></td>
+                        </tr>
+                </table>
+            </div>
+        </div>
+        <div id="abajo" *ngIf="!mostrarEquipos && equiposClub">
+            <div class="calendario">
+                <h1>Equipos a los que puedes unirte del Club:</h1>
+            </div>
+        </div>
+
         <app-equipo *ngIf="mostrarEquipos"></app-equipo>
     </div>
