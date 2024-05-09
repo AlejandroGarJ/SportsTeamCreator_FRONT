@@ -3,8 +3,10 @@
         <h2>Bienvenido, {{usuarioLogeado.nombre}}</h2>
         <h4 class="subtitulo">Gestiona tu equipo, {{nombreEquipo}}</h4>
     </div>
+    <a [routerLink]="['/menuadminequipo']"><i class=" fa-solid fa-gear"></i></a>
     <a [routerLink]="['/dashboard/club']" [queryParams]="{clubId: id_club, nombreClub: nombreClub}"
         (click)="mostrarEquipos()"><i class="fa-solid fa-house"></i></a>
+
 </div>
 <div id="abajo">
 

@@ -45,4 +45,10 @@ export class ClubControllerService {
   nombreJugador(data: any): Observable<any> {
     return this.http.post<any>(environment.url + "/api/nombreJugador", data);
   }
+  obtenerDatosEquipo(data: any): Observable<any> {
+    return this.http.post<any>(environment.url + "/api/obtenerDatosEquipo", data);
+  }
+  modificarEquipo(data: any): Observable<any> {
+    return this.http.post<any>(environment.url + "/api/modificarEquipo", data);
+  }
 }

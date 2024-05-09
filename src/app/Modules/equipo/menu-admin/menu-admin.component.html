@@ -1,1 +1,30 @@
-<p>menu-admin works!</p>
+<div class="all">
+    <div class="main">
+        <i class="fa-solid fa-backward go-back" (click)="goBack()"></i>
+
+        <div class="content">
+            <h1>Editar Equipo</h1>
+
+            <div class="input">
+                <h4>Nombre</h4>
+                <input type="text" class="inputElement" placeholder="Nombre" [(ngModel)]="nombreEquipo">
+            </div>
+            <div class="input">
+                <h4>Categoria</h4>
+                <input type="text" class="inputElement" placeholder="Categoria" [(ngModel)]="categoria">
+            </div>
+            <div class="input">
+                <h4>Genero</h4>
+                <input type="text" class="inputElement" placeholder="Genero" [(ngModel)]="genero">
+            </div>
+
+            <div class="loginButton">
+                <button class="buttonLogin" (click)="modificarEquipo()">
+                    Guardar
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>

@@ -19,7 +19,7 @@ export class MenuAdminComponent {
   }
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      const clubId = params['id_club'];
+      const clubId = params['clubId'];
       if (clubId) {
         this.id_club = Number(clubId);
         this.obtenerDatosClub();
