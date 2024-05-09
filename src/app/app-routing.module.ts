@@ -11,9 +11,7 @@ import { CorreoCambioContrasenaComponent } from './Core/Pages/correo-cambio-cont
 import { PerfilComponent } from './Modules/Usuario/perfil/perfil.component';
 import { MenuAdminComponent } from './Modules/club/menu-admin/menu-admin.component';
 import { DashboardClubUsuarioComponent } from './Modules/dashboard-club-usuario/dashboard-club-usuario.component';
-import { MenuJugadoresComponent } from './Modules/club/menu-jugadores/menu-jugadores.component';
 import { MenuAdminComponent2 } from './Modules/equipo/menu-admin/menu-admin.component';
-import { MenuJugadoresComponent2 } from './Modules/equipo/menu-jugadores/menu-jugadores.component';
 
 const routes: Routes = [
 
@@ -29,8 +27,6 @@ const routes: Routes = [
   { path: 'perfil', component: PerfilComponent, canActivate: [authGuard] },
   { path: 'menuadmin', component: MenuAdminComponent },
   { path: 'menuadminequipo', component: MenuAdminComponent2 },
-  { path: 'menujugadores', component: MenuJugadoresComponent },
-  { path: 'menujugadoresequipo', component: MenuJugadoresComponent2 },
   { path: '**', component: NotFoundComponent },
 ];
 

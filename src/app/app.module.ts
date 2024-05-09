@@ -23,9 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PerfilComponent } from './Modules/Usuario/perfil/perfil.component';
 import { MenuAdminComponent } from './Modules/club/menu-admin/menu-admin.component';
 import { EquipoComponent } from './Modules/dashboard-club-usuario/equipo/equipo.component';
-import { MenuJugadoresComponent } from './Modules/club/menu-jugadores/menu-jugadores.component';
 import { MenuAdminComponent2 } from './Modules/equipo/menu-admin/menu-admin.component';
-import { MenuJugadoresComponent2 } from './Modules/equipo/menu-jugadores/menu-jugadores.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PopUpCrearEventoComponent } from './Modules/dashboard-club-usuario/pop-up-crear-evento/pop-up-crear-evento.component';
 import { PopUpDetallesEventoComponent } from './Modules/dashboard-club-usuario/pop-up-detalles-evento/pop-up-detalles-evento.component';
@@ -48,9 +46,7 @@ import { PopUpDetallesEventoComponent } from './Modules/dashboard-club-usuario/p
     PerfilComponent,
     MenuAdminComponent,
     EquipoComponent,
-    MenuJugadoresComponent,
     MenuAdminComponent2,
-    MenuJugadoresComponent2,
     PopUpCrearEventoComponent,
     PopUpDetallesEventoComponent
   ],

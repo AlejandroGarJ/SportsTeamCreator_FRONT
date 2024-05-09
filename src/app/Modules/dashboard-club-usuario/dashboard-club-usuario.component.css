@@ -147,11 +147,12 @@ th {
     border-radius: 20px;
     font-family: 'Gotham', sans-serif;
     font-size: 1rem;
-    transition: background-color 0.3s, transform 0.3s;
+    transition: background-color 0.3s;
 }
 
 .buttonTabla:hover {
     background-color: #47A1F6;
+    color: white;
 }
 
 full-calendar {
