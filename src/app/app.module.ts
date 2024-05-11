@@ -15,6 +15,7 @@ import { SwitcherComponent } from './shared/components/switcher/switcher.compone
 import { MatNativeDateModule } from '@angular/material/core';
 import { DashboardClubUsuarioComponent } from './Modules/dashboard-club-usuario/dashboard-club-usuario.component';
 import { BanerLateralComponent } from './Modules/dashboard-club-usuario/baner-lateral/baner-lateral.component';
+import { InfoClubComponent } from './Modules/info-club/info-club.component';
 
 
 
@@ -29,6 +30,7 @@ import { BanerLateralComponent } from './Modules/dashboard-club-usuario/baner-la
     SwitcherComponent,
     DashboardClubUsuarioComponent,
     BanerLateralComponent,
+    InfoClubComponent,
 
   ],
   imports: [

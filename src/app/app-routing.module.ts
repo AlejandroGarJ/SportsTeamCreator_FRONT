@@ -6,6 +6,7 @@ import { PasswordForgetComponent } from './Modules/password-forget/password-forg
 import { LoginComponent } from './Modules/login/login.component';
 import { authGuard } from './Core/Guards/auth.guard';
 import { DashboardClubUsuarioComponent } from './Modules/dashboard-club-usuario/dashboard-club-usuario.component';
+import { InfoClubComponent } from './Modules/info-club/info-club.component';
 
 
 const routes: Routes = [
@@ -15,7 +16,9 @@ const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'changePassword', component: PasswordForgetComponent }
+  { path: 'changePassword', component: PasswordForgetComponent },
+  { path: 'infoclub', component:  InfoClubComponent},
+  { path: '**', component: LoginComponent}
 
 ];
 
