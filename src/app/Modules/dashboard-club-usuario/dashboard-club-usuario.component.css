@@ -1,0 +1,289 @@
+.app-container {
+    display: flex;
+    height: 100vh;
+
+    width: 100%;
+    --s: 37px;
+    /* control the size */
+
+    --c: #0000, #282828 0.5deg 119.5deg, #0000 120deg;
+    --g1: conic-gradient(from 60deg at 56.25% calc(425% / 6), var(--c));
+    --g2: conic-gradient(from 180deg at 43.75% calc(425% / 6), var(--c));
+    --g3: conic-gradient(from -60deg at 50% calc(175% / 12), var(--c));
+    background: var(--g1), var(--g1) var(--s) calc(1.73 * var(--s)), var(--g2),
+        var(--g2) var(--s) calc(1.73 * var(--s)), var(--g3) var(--s) 0,
+        var(--g3) 0 calc(1.73 * var(--s)) #1e1e1e;
+    background-size: calc(2 * var(--s)) calc(3.46 * var(--s));
+
+    font-family: 'Gotham', sans-serif;
+    margin: 0;
+
+}
+
+app-baner-lateral {
+    margin: 1%;
+    border-radius: 12px;
+    padding: 1%;
+    width: 15%;
+    background-color: #081B26;
+    color: white;
+}
+
+#container {
+    flex: 1;
+    color: white;
+    margin-top: 1%;
+    margin-right: 1%;
+    margin-bottom: 1%;
+
+}
+
+#arriba {
+    border-radius: 12px;
+    background-color: #081B26;
+    height: 12%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1%;
+    margin-bottom: 1%;
+}
+
+#abajo {
+    border-radius: 12px;
+    background-color: #081B26;
+    display: flex;
+    justify-content: space-between;
+    padding: 1%;
+    height: 79%;
+}
+
+.welcome {
+    padding-left: 2%;
+}
+
+.subtitulo {
+    opacity: 0.5;
+}
+
+a,
+button {
+    color: white;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    font-size: large;
+    cursor: pointer;
+}
+
+a:hover,
+button:hover {
+    color: #47A1F6;
+    scale: 1.2;
+}
+
+.calendario {
+    width: 100%;
+    height: 83%;
+    padding: 2%;
+}
+
+.ajustesclub {
+    width: 100%;
+    height: 83%;
+    padding: 2%;
+}
+
+.ajustesclub button {
+    margin-right: 1%;
+    border-radius: 12px;
+    background-color: #081B26;
+    color: white;
+    font-size: large;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.ajustesclub button:hover {
+    scale: 1.1;
+}
+
+.jugadores {
+    width: 100%;
+    height: 50%;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    /* Elimina el espacio entre las celdas */
+    background-color: #ffffff1a;
+    /* Ligera transparencia blanca */
+    color: white;
+    /* Color del texto */
+    border-radius: 8px;
+    /* Bordes redondeados para la tabla */
+    overflow: hidden;
+    /* Oculta cualquier contenido fuera del borde redondeado */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Sombra sutil */
+}
+
+th,
+td {
+    text-align: left;
+    padding: 12px 15px;
+    /* Espaciado uniforme en celdas */
+}
+
+thead {
+    background-color: #4a6075;
+    /* Un tono más oscuro para el encabezado */
+}
+
+tr:nth-child(even) {
+    background-color: #2c3e50;
+    /* Color para filas alternas */
+}
+
+tr:hover {
+    background-color: #34495e;
+    /* Color cuando el mouse pasa sobre una fila */
+    cursor: pointer;
+    /* Indica que la fila es interactiva */
+}
+
+th {
+    position: sticky;
+    top: 0;
+    /* Hace que el encabezado sea fijo en la parte superior al desplazar */
+    z-index: 10;
+    /* Asegura que el encabezado está sobre otros elementos */
+}
+
+.buttonTabla {
+    padding: 8px 16px;
+    border: none;
+    background-color: #264F73;
+    color: white;
+    border-radius: 20px;
+    font-family: 'Gotham', sans-serif;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+}
+
+.buttonTabla:hover {
+    background-color: #47A1F6;
+    color: white;
+}
+
+full-calendar {
+    width: 100%;
+    height: 92%;
+}
+
+.titulo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2%;
+}
+
+.titulo i {
+    font-size: larger;
+    color: white;
+    border: 2px solid white;
+    padding: 10px;
+    border-radius: 100px;
+}
+
+.titulo i:hover {
+    color: #47A1F6;
+    border-color: #47A1F6;
+    cursor: pointer;
+}
+
+.calendario select {
+    width: 10%;
+    border-radius: 5px;
+    border: none;
+}
+
+.content {
+    height: 500px;
+    margin-top: 30px;
+    font-family: "Gotham";
+
+}
+
+.content h1 {
+    font-family: "Gotham";
+    font-size: 2.7rem;
+    color: white;
+    margin-bottom: 40px;
+
+}
+
+.content p {
+    font-family: "Gotham";
+    color: white;
+}
+
+/* Input */
+
+.content h4 {
+    font-family: "Gotham";
+    color: white;
+    margin-bottom: 10px;
+}
+
+.inputElement {
+    width: 100%;
+    height: 40px;
+    background-color: transparent;
+    border: 1px solid grey;
+    border-radius: 4px;
+    outline: none;
+    margin-bottom: 10px;
+    color: #E0E0E0;
+    font-family: "Gotham";
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+
+/* Button */
+
+.loginButton {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-left: auto;
+}
+
+.loginButton button {
+    width: 220px;
+    height: 48px;
+    border-radius: 9999px;
+    background-color: #264F73;
+    border: none;
+    text-align: center;
+}
+
+.buttonLogin:hover {
+    cursor: pointer;
+    background-color: #47A1F6;
+    scale: 1.1;
+    color: white;
+}
+
+.buttonLogin h4 {
+    color: #081c34;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-size: 15px;
+}
+
+.guardar-info {
+    display: flex;
+}

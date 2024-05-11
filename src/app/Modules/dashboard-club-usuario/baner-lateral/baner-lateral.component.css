@@ -1,0 +1,23 @@
+img {
+    width: 50%;
+}
+
+button {
+    background-color: #264F73;
+    color: white;
+    border: none;
+    padding: 10px;
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 6%;
+}
+
+button:hover {
+    background-color: #47A1F6;
+    transition: all 0.3s;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}

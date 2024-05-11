@@ -1,0 +1,35 @@
+<div class="all">
+    <div class="main">
+        <i class="fa-solid fa-backward go-back" (click)="irAtras()"></i>
+
+        <div class="content">
+            <h1>Editar perfil</h1>
+
+          
+            <div class="input">
+                <h4>Nombre</h4>
+                <input type="text" class="inputElement" placeholder="Nombre" [(ngModel)]="usuario.nombre">
+            </div>
+            <div class="input">
+                <h4>Apellidos</h4>
+                <input type="text" class="inputElement" placeholder="Apellidos" [(ngModel)]="usuario.apellidos">
+            </div>
+            <div class="input">
+                <h4>Email</h4>
+                <input type="text" class="inputElement" placeholder="Email" [(ngModel)]="usuario.correo">
+            </div>
+
+            <div class="guardar-info">
+                <h4 class="cambiarContra" (click)="irCambioContrasena()">Cambiar contraseña aquí</h4>
+            <div class="loginButton">
+                <button class="buttonLogin" (click)="guardar()">
+                    <h4 *ngIf="!modificando">Guardar</h4>
+                    <app-loader1 *ngIf="modificando"></app-loader1>
+
+                </button>
+
+            </div>
+           </div>
+        </div>
+    </div>
+</div>

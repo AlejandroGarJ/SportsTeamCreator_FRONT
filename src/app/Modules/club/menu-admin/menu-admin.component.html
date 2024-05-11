@@ -1,0 +1,31 @@
+<div class="all">
+    <div class="main">
+        <a [routerLink]="['/dashboard/club']" [queryParams]="{clubId: id_club, nombreClub: nombreClub}">
+            <i class="fa-solid fa-backward go-back"></i></a>
+
+        <div class="content">
+            <h1>Editar Club</h1>
+
+            <div class="input">
+                <h4>Nombre</h4>
+                <input type="text" class="inputElement" placeholder="Nombre" [(ngModel)]="nombreClub">
+            </div>
+            <div class="input">
+                <h4>Codigo Acceso</h4>
+                <input type="text" class="inputElement" placeholder="Codigo Acceso" [(ngModel)]="codigoAcceso">
+            </div>
+            <div class="input">
+                <h4>Localizacion</h4>
+                <input type="text" class="inputElement" placeholder="Localizacion" [(ngModel)]="localizacion">
+            </div>
+
+            <div class="loginButton">
+                <button class="buttonLogin" (click)="modificarClub()">
+                    Guardar
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>

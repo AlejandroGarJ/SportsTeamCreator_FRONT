@@ -1,7 +1,7 @@
 <div class="all">
     <div class="header">
         <div class="spotifyWhiteLogo">
-            <img src="./../../../assets/img/logo.jpeg" alt="">
+            <img (click)="irALogin()" src="./../../../assets/img/logo.jpeg" alt="">
         </div>
 
     </div>
@@ -95,9 +95,18 @@
                     <h4 *ngIf="contrasenaMal" class="warningMessage">{{mensajeErrorContrasena}}</h4>
 
                 </div>
+                <br>
+                <div class="input" id="inputFile">
+                    <h4>Imágen</h4>
+                    <input type="file" accept="image/*" (change)="onFileSelected($event)" name="imagen">
+                    <h4 *ngIf="contrasenaMal" class="warningMessage">{{mensajeErrorContrasena}}</h4>
+
+                </div>
+
+               
 
                 <br>
-
+                <button (click)="registrar()">REGISTRARSE</button>
                 <div class="loginButton">
                     <button class="buttonLogin" (click)="registrarUsuario()">
                         <h4 *ngIf="!comprobandoRegister">Registrarse</h4>
@@ -121,6 +130,9 @@
                         </a>
                     </div>
                 </div>
+
+                
+
             </div>
 
         </div>

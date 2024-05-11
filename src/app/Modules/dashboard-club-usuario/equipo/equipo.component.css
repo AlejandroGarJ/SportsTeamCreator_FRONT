@@ -1,0 +1,35 @@
+#arriba {
+    border-radius: 12px;
+    background-color: #081B26;
+    height: 12%;
+    display: flex;
+    justify-content: space-between;
+    padding: 1%;
+    margin-bottom: 1%;
+}
+
+#abajo {
+    border-radius: 12px;
+    background-color: #081B26;
+    display: flex;
+    justify-content: space-between;
+    padding: 1%;
+    height: 79%;
+}
+
+.welcome {
+    padding-left: 2%;
+}
+
+.subtitulo {
+    opacity: 0.5;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #47A1F6;
+}

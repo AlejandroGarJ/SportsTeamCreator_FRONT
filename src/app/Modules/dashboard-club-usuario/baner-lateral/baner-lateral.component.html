@@ -1,1 +1,16 @@
-<p>baner-lateral works!</p>
+<a href="/dashboard"><img src="./../../assets/img/logo.jpeg" alt="Logo del Usuario" width="70%"></a>
+<ul>
+    <li>
+        <h4><i class="fa-solid fa-user"></i> Mis Equipos</h4>
+    </li>
+    <ul>
+        <li *ngFor="let equipo of equipos">
+            <a [routerLink]="['/dashboard/club']" [queryParams]="{clubId: id_club, nombreClub: nombreClub}"
+                (click)="cambiarMostrarEquipos(equipo.id_equipo, equipo.nombre)">
+                <button>{{ equipo.nombre }}</button>
+            </a>
+
+        </li>
+    </ul>
+
+</ul>

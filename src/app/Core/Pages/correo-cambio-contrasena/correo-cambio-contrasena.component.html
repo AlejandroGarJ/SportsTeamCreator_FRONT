@@ -1,0 +1,58 @@
+<div class="all">
+    <div class="header">
+        <div class="spotifyWhiteLogo">
+            <img (click)="volver()" src="./../../../assets/img/logo.jpeg" alt="">
+        </div>
+
+    </div>
+
+    <div *ngIf="!correoEnviadoCorrectamente" class="loginContainer">
+
+        <h1>Cambiar contraseña</h1>
+        <div class="input" id="inputPassword">
+            <h4>Introduce tu correo electrónico</h4>
+            <input type="mail"  class="inputElement" placeholder="nombre@dominio.com" [(ngModel)]="correo">
+    
+        </div>
+
+        <div *ngIf="!correoCorrecto" class="warning">
+            <h4>Correo incorrecto</h4>
+        </div>
+        <div class="loginButton">
+            <button (click)="enviarCorreo()" class="buttonLogin">
+                <h4 *ngIf="!loading">Enviar correo de confirmación</h4>
+                <div class="loader">
+                    <app-loader1 *ngIf="loading"></app-loader1>
+                </div>
+            </button>
+
+        </div>
+      
+    </div>
+
+    <div *ngIf="correoEnviadoCorrectamente" class="loginContainer">
+
+        <h1>El correo se envio correctamente</h1>
+        
+
+       
+        <div class="loginButton">
+            <button (click)="volver()" class="buttonLogin">
+                <h4>Volver al login</h4>
+               
+            </button>
+
+        </div>
+      
+    </div>
+
+
+   
+
+
+
+
+
+ 
+
+</div>

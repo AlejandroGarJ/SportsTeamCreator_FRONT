@@ -1,0 +1,32 @@
+.container {
+    margin: 0;
+    padding: 2%;
+    font-family: gotham, sans-serif;
+    background-color: #081B26;
+    overflow-x: hidden;
+    height: 100vh;
+    color: white;
+}
+
+.container h1 {
+    text-align: center;
+    color: white;
+    font: bold;
+
+}
+
+.container h4 {
+    font: regular;
+    opacity: 0.9;
+}
+
+.container i {
+    color: white;
+    font-size: larger;
+    padding: 10px;
+}
+
+.container i:hover {
+    color: #47A1F6;
+    cursor: pointer;
+}

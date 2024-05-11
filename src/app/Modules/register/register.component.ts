@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { AuthUsuarioService } from '../../Core/Services/usuario/auth-usuario.service';
 import { DateAdapter } from '@angular/material/core';
-
+import { environment, rutas } from '../../../environments/environment';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { File } from 'buffer';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -21,11 +24,36 @@ export class RegisterComponent {
   mensajeErrorEmail: string = "";
   mensajeErrorContrasena: string = "";
   formatoCorrecto: boolean = true;
-
+  rutas = rutas;
+  imagen: any;
   comprobandoRegister: boolean = false;
-  constructor(private authUsuario: AuthUsuarioService, private dateAdapter: DateAdapter<Date>) {
+  archivoSeleccionado: File | null = null;
+  constructor(private authUsuario: AuthUsuarioService, private dateAdapter: DateAdapter<Date>, private router: Router, private http: HttpClient) {
     this.dateAdapter.setLocale('es');  // Configura el localizador a español si es necesario
   }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    let imagen: string = "";
+    if (file) {
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+            const base64String = reader.result as string;
+            this.imagen = base64String;
+           
+        };
+
+        reader.readAsDataURL(file);
+    }
+
+}
+
+registrar(){
+  console.log(this.imagen);
+}
+
+ 
 
   registrarUsuario() {
     this.resetearEstilos();
@@ -106,4 +134,9 @@ export class RegisterComponent {
       this.mensajeErrorEmail = "Introduzca un email correcto";
     }
   }
+
+  irALogin(){
+    this.router.navigate([this.rutas.login]);
+  }
+  
 }

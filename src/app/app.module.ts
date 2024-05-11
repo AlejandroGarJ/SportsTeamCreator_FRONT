@@ -17,6 +17,20 @@ import { DashboardClubUsuarioComponent } from './Modules/dashboard-club-usuario/
 import { BanerLateralComponent } from './Modules/dashboard-club-usuario/baner-lateral/baner-lateral.component';
 import { InfoClubComponent } from './Modules/info-club/info-club.component';
 
+import { CambiarContrasenaComponent } from './Core/Pages/cambiar-contrasena/cambiar-contrasena.component';
+import { NotFoundComponent } from './Core/Pages/not-found/not-found.component';
+import { CorreoCambioContrasenaComponent } from './Core/Pages/correo-cambio-contrasena/correo-cambio-contrasena.component';
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PerfilComponent } from './Modules/Usuario/perfil/perfil.component';
+import { MenuAdminComponent } from './Modules/club/menu-admin/menu-admin.component';
+import { EquipoComponent } from './Modules/dashboard-club-usuario/equipo/equipo.component';
+import { MenuAdminComponent2 } from './Modules/equipo/menu-admin/menu-admin.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { PopUpCrearEventoComponent } from './Modules/dashboard-club-usuario/pop-up-crear-evento/pop-up-crear-evento.component';
+import { PopUpDetallesEventoComponent } from './Modules/dashboard-club-usuario/pop-up-detalles-evento/pop-up-detalles-evento.component';
+import { PopUpCrearEquipoComponent } from './Modules/dashboard-club-usuario/pop-up-crear-equipo/pop-up-crear-equipo.component';
+import { PopUpEditarEquipoComponent } from './Modules/dashboard-club-usuario/pop-up-editar-equipo/pop-up-editar-equipo.component';
 
 
 @NgModule({
@@ -32,6 +46,17 @@ import { InfoClubComponent } from './Modules/info-club/info-club.component';
     BanerLateralComponent,
     InfoClubComponent,
 
+    CambiarContrasenaComponent,
+    NotFoundComponent,
+    CorreoCambioContrasenaComponent,
+    PerfilComponent,
+    MenuAdminComponent,
+    EquipoComponent,
+    MenuAdminComponent2,
+    PopUpCrearEventoComponent,
+    PopUpDetallesEventoComponent,
+    PopUpCrearEquipoComponent,
+    PopUpEditarEquipoComponent
   ],
   imports: [
     BrowserModule,
@@ -39,12 +64,15 @@ import { InfoClubComponent } from './Modules/info-club/info-club.component';
     FullCalendarModule,
     FormsModule,
     HttpClientModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    ToastrModule.forRoot(),
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [
     provideClientHydration(),
-    
-    
+
+
   ],
   bootstrap: [AppComponent]
 })
