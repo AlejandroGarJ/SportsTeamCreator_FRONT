@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
 import { AuthUsuarioService } from '../../Core/Services/usuario/auth-usuario.service';
 import { DateAdapter } from '@angular/material/core';
-import { rutas } from '../../../environments/environment';
+import { environment, rutas } from '../../../environments/environment';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { File } from 'buffer';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -23,23 +25,35 @@ export class RegisterComponent {
   mensajeErrorContrasena: string = "";
   formatoCorrecto: boolean = true;
   rutas = rutas;
+  imagen: any;
   comprobandoRegister: boolean = false;
   archivoSeleccionado: File | null = null;
-  constructor(private authUsuario: AuthUsuarioService, private dateAdapter: DateAdapter<Date>, private router: Router) {
+  constructor(private authUsuario: AuthUsuarioService, private dateAdapter: DateAdapter<Date>, private router: Router, private http: HttpClient) {
     this.dateAdapter.setLocale('es');  // Configura el localizador a español si es necesario
   }
 
   onFileSelected(event: any) {
-    this.archivoSeleccionado = event.target.files[0];
-   
+    const file = event.target.files[0];
+    let imagen: string = "";
+    if (file) {
+        const reader = new FileReader();
 
-    if (this.archivoSeleccionado) {
-    const formData = new FormData();
-    formData.append('imagen', this.archivoSeleccionado);
-    console.log(formData);
+        reader.onloadend = () => {
+            const base64String = reader.result as string;
+            this.imagen = base64String;
+           
+        };
+
+        reader.readAsDataURL(file);
     }
-   
-  }
+
+}
+
+registrar(){
+  console.log(this.imagen);
+}
+
+ 
 
   registrarUsuario() {
     this.resetearEstilos();
