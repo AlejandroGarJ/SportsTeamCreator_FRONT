@@ -11,6 +11,8 @@ import { CorreoCambioContrasenaComponent } from './Core/Pages/correo-cambio-cont
 import { PerfilComponent } from './Modules/Usuario/perfil/perfil.component';
 import { MenuAdminComponent } from './Modules/club/menu-admin/menu-admin.component';
 import { DashboardClubUsuarioComponent } from './Modules/dashboard-club-usuario/dashboard-club-usuario.component';
+import { InfoClubComponent } from './Modules/info-club/info-club.component';
+
 import { MenuAdminComponent2 } from './Modules/equipo/menu-admin/menu-admin.component';
 
 const routes: Routes = [
@@ -21,6 +23,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'changePassword', component: PasswordForgetComponent },
+  { path: 'infoclub', component:  InfoClubComponent},
   { path: 'cambiarContrasena', component: CambiarContrasenaComponent },
   { path: 'notFound', component: NotFoundComponent },
   { path: 'correo-cambio-contrasena', component: CorreoCambioContrasenaComponent },

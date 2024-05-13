@@ -15,6 +15,8 @@ import { SwitcherComponent } from './shared/components/switcher/switcher.compone
 import { MatNativeDateModule } from '@angular/material/core';
 import { DashboardClubUsuarioComponent } from './Modules/dashboard-club-usuario/dashboard-club-usuario.component';
 import { BanerLateralComponent } from './Modules/dashboard-club-usuario/baner-lateral/baner-lateral.component';
+import { InfoClubComponent } from './Modules/info-club/info-club.component';
+
 import { CambiarContrasenaComponent } from './Core/Pages/cambiar-contrasena/cambiar-contrasena.component';
 import { NotFoundComponent } from './Core/Pages/not-found/not-found.component';
 import { CorreoCambioContrasenaComponent } from './Core/Pages/correo-cambio-contrasena/correo-cambio-contrasena.component';
@@ -42,6 +44,8 @@ import { PopUpEditarEquipoComponent } from './Modules/dashboard-club-usuario/pop
     SwitcherComponent,
     DashboardClubUsuarioComponent,
     BanerLateralComponent,
+    InfoClubComponent,
+
     CambiarContrasenaComponent,
     NotFoundComponent,
     CorreoCambioContrasenaComponent,
