@@ -5,6 +5,9 @@ import { environment, rutas } from '../../../environments/environment';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { File } from 'buffer';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -25,16 +28,35 @@ export class RegisterComponent {
   mensajeErrorContrasena: string = "";
   formatoCorrecto: boolean = true;
   rutas = rutas;
-  imagen: any;
+  imagen: any = null;
   comprobandoRegister: boolean = false;
   archivoSeleccionado: File | null = null;
-  constructor(private authUsuario: AuthUsuarioService, private dateAdapter: DateAdapter<Date>, private router: Router, private http: HttpClient) {
-    this.dateAdapter.setLocale('es');  // Configura el localizador a español si es necesario
+  //Form
+  form: FormGroup;
+  constructor(private authUsuario: AuthUsuarioService,
+              private dateAdapter: DateAdapter<Date>,
+              private router: Router, 
+              private http: HttpClient,
+              private formBuilder: FormBuilder,
+              private toastr: ToastrService) {
+    this.dateAdapter.setLocale('es');
+    //Form initialize
+    this.form = this.formBuilder.group({
+      dni: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
+      nombre: ['', Validators.required],
+      apellidos: ['', Validators.required],
+      correo: ['', [Validators.required, Validators.email]],
+      fecha: ['', [Validators.required, this.validarFormatoFecha()]],
+      genero: ['', Validators.required],
+      contrasena: ['', [Validators.required, Validators.minLength(7)]]
+
+
+    });
   }
+
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
-    let imagen: string = "";
     if (file) {
         const reader = new FileReader();
 
@@ -49,91 +71,42 @@ export class RegisterComponent {
 
 }
 
-registrar(){
-  console.log(this.imagen);
+validarFormatoFecha(): Validators {
+  return (control: AbstractControl): {[key: string]: any} | null => {
+    const fechaRegex = /^\d{4}-\d{2}-\d{2}$/; // Expresión regular para el formato YYYY-MM-DD
+
+    if (control.value && !fechaRegex.test(control.value)) {
+      return { 'formatoFechaInvalido': true };
+    }
+
+    return null;
+  };
 }
 
- 
+reordenarFecha(){
+  this.form.value.fecha = this.form
+}
 
-  registrarUsuario() {
-    this.resetearEstilos();
-    this.comprobarFormatoRegistro();
-    if (this.formatoCorrecto) {
-      this.comprobandoRegister = true;
-      this.authUsuario.registrarUsuario({
-        dni: this.dni,
-        email: this.email,
-        nombre: this.nombre,
-        apellidos: this.apellidos,
-        fechaNacimiento: this.fechaNacimiento,
-        genero: this.genero,
-        contrasena: this.contrasena
-      }).subscribe(
-        (response) => {
-          if (response['ok'] === 'ok') {
-            alert("Registro completado con éxito");
-          } else {
-            this.procesarErrores(response);
-          }
-          this.comprobandoRegister = false;
-        },
-        (error) => {
-          alert('Hubo un problema al registrar el usuario.');
-          console.error(error);
-          this.comprobandoRegister = false;
-        }
-      );
-    }
-  }
-  emailIncorrecto() {
-    let inputEmail = document.getElementById("email");
-    if (inputEmail != null) inputEmail.style.border = "1px solid red";
-    this.emailMal = true;
-  }
-  contrasenaIncorrecta() {
-    let inputContrasena = document.getElementById("password");
-    let inputContrasena2 = document.getElementById("password2");
-    if (inputContrasena != null) inputContrasena.style.border = "1px solid red";
-    if (inputContrasena2 != null) inputContrasena2.style.border = "1px solid red";
-    this.contrasenaMal = true;
-  }
-  dniIncorrecto() {
-    let inputDni = document.getElementById("dni");
-    if (inputDni != null) inputDni.style.border = "1px solid red";
-  }
-  procesarErrores(response: any) {
-    if (response['email'] === 'emailUsado') {
-      this.emailIncorrecto();
-      this.mensajeErrorEmail = 'El correo ya está en uso';
-    }
-    if (response['dni'] === 'dniYaExiste') {
-      this.dniIncorrecto();
-      this.mensajeErrorContrasena = 'Contraseña demasiado débil';
-    }
-  }
 
-  resetearEstilos() {
-    let inputContrasena = document.getElementById("password");
-    let inputEmail = document.getElementById("email");
-    if (inputContrasena != null) inputContrasena.style.border = "1px solid grey";
-    if (inputEmail != null) inputEmail.style.border = "1px solid grey";
-    this.emailMal = false;
-    this.contrasenaMal = false;
-    this.formatoCorrecto = true;
-  }
 
-  comprobarFormatoRegistro() {
-    if (this.contrasena == "" || this.contrasena.length < 7) {
-      this.contrasenaIncorrecta();
-      this.formatoCorrecto = false;
-      this.mensajeErrorContrasena = "Introduzca una contraseña válida";
-    }
-    if (this.email == "" || this.email.indexOf('@') == -1) {
-      this.emailIncorrecto();
-      this.formatoCorrecto = false;
-      this.mensajeErrorEmail = "Introduzca un email correcto";
-    }
+onSubmit(){
+  console.log("hola");
+  if(this.form.valid){
+    this.form.value.imagen = this.imagen;
+    this.http.post<any>(environment.url + "/api/crear-usuario", this.form.value).subscribe(
+      () => {
+        this.toastr.success("Te registraste con éxito");
+        this.irALogin();
+      },
+      () => {
+        this.toastr.error("Asegurate de que el correo o el dni sean correctos");
+      }
+    );
   }
+  else{
+    console.log(this.form.value);
+  }
+}
 
   irALogin(){
     this.router.navigate([this.rutas.login]);

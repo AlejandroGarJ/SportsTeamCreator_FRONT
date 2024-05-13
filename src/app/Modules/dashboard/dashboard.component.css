@@ -178,7 +178,7 @@ img:hover {
 }
 
 .search-input {
-    padding-right: 30px;
+    padding-right: 100px;
     /* Ajusta el espacio a la derecha para que quepa el icono */
     border: none;
 }
@@ -205,8 +205,16 @@ p {
     height: auto;
     margin-left: 10%;
 }
-
-
+.perfil{
+   
+ 
+}
+.imagen{
+    max-width: 200px;
+    max-height: 200px;
+    display: flex;
+    justify-content: end;
+}
 .clubWrapper {
     position: absolute;
     display: none;

@@ -19,6 +19,13 @@
                 <input type="text" class="inputElement" placeholder="Email" [(ngModel)]="usuario.correo">
             </div>
 
+            <div class="input" id="inputFile">
+                <h4>Imágen</h4>
+                <input type="file" [(ngModel)]="imagen" accept="image/*" (change)="onFileSelected($event)" name="imagen">
+        
+
+            </div>
+
             <div class="guardar-info">
                 <h4 class="cambiarContra" (click)="irCambioContrasena()">Cambiar contraseña aquí</h4>
             <div class="loginButton">

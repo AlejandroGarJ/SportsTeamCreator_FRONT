@@ -9,6 +9,9 @@ import { SessionUsuario } from '../../Core/Models/session.model';
 import { obtenerSessionUsuario } from '../../shared/guardarSessionUsuario/guardarSessionUsuario';
 import { co } from '@fullcalendar/core/internal-common';
 import { ToastrService } from 'ngx-toastr';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,16 +34,26 @@ export class DashboardComponent {
   paisCrear: string = "";
   ciudadCrear: string = "";
   usuarioLogeado: SessionUsuario;
-
+  imagenUsuario: any;
   ngOnInit() {
     console.log(this.usuarioLogeado.token_session);
     this.eventosUsuario();
     this.clubesUsuario();
+
+    
+
   }
 
-  constructor(private router: Router, private dashboardService: DashboardService, private clubService: ClubControllerService, private toastr: ToastrService) {
+  constructor(private router: Router, private dashboardService: DashboardService, private clubService: ClubControllerService, private toastr: ToastrService, private http: HttpClient) {
 
     this.usuarioLogeado = obtenerSessionUsuario();
+
+    this.http.post<any>(environment.url + "/api/obtenerImagenPerfil", this.usuarioLogeado).subscribe(
+      (response) => {
+        this.imagenUsuario = response;
+        console.log(this.imagenUsuario);
+      }
+    );
   }
 
   irPerfil() { this.router.navigate(['/perfil']) }

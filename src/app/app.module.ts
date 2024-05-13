@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './Modules/dashboard/dashboard.component';
 import { RegisterComponent } from './Modules/register/register.component';
 import { PasswordForgetComponent } from './Modules/password-forget/password-forget.component';
-import { FormsModule } from "@angular/forms";
+import { FormGroup, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Loader1Component } from './shared/components/loader1/loader1.component';
 import { LoginComponent } from './Modules/login/login.component';
@@ -63,7 +63,8 @@ import { PopUpEditarEquipoComponent } from './Modules/dashboard-club-usuario/pop
     MatNativeDateModule,
     ToastrModule.forRoot(),
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideClientHydration(),

@@ -48,53 +48,51 @@
 
             <hr>
 
+            <form action="" [formGroup]="form" (ngSubmit)="onSubmit()">
             <div class="form">
                 <div class="input">
                     <h4>DNI</h4>
-                    <input type="text" id="dni" class="inputElement" placeholder="DNI" [(ngModel)]="dni">
+                    <input formControlName="dni" type="text" id="dni" class="inputElement" placeholder="DNI">
+                    <h4 *ngIf="form.get('dni')?.invalid" style="color: red;">Introduce dni correcto</h4>
                 </div>
                 <div class="input">
                     <h4>Nombre</h4>
-                    <input type="text" id="name" class="inputElement" placeholder="Nombre" [(ngModel)]="nombre">
+                    <input type="text" formControlName="nombre" id="name" class="inputElement" placeholder="Nombre">
+                    <h4 *ngIf="form.get('nombre')?.invalid" style="color: red;">Este campo es obligatorio</h4>
                 </div>
                 <div class="input">
                     <h4>Apellidos</h4>
-                    <input type="text" id="surname" class="inputElement" placeholder="Apellidos"
-                        [(ngModel)]="apellidos">
+                    <input type="text" formControlName="apellidos" id="surname" class="inputElement" placeholder="Apellidos">
+                    <h4 *ngIf="form.get('apellidos')?.invalid" style="color: red;">Este campo es obligatorio</h4>
                 </div>
                 <div class="input">
                     <h4>Fecha de nacimiento</h4>
-                    <input type="date" id="birthDate" class="inputElement" placeholder="Fecha de nacimiento"
-                        [(ngModel)]="fechaNacimiento">
+                    <input type="date" formControlName="fecha" id="birthDate" class="inputElement" placeholder="Fecha de nacimiento">
+                    <h4 *ngIf="form.get('fecha')?.invalid" style="color: red;">Introuce fecha correcta</h4> 
                 </div>
                 <div class="input">
                     <h4>Correo electrónico</h4>
-                    <input type="email" id="email" class="inputElement" placeholder="Correo electrónico"
-                        [(ngModel)]="email">
+                    <input type="email" formControlName="correo" id="email" class="inputElement" placeholder="Correo electrónico">
                     <h4 *ngIf="emailMal" class="warningMessage">{{mensajeErrorEmail}}</h4>
+                    <h4 *ngIf="form.get('correo')?.invalid" style="color: red;">Introduce un correo correcto</h4>
 
                 </div>
                 <div class="input">
                     <h4>Género</h4>
-                    <select name="genero" id="genero" [(ngModel)]="genero">
+                    <select name="genero" formControlName="genero" id="genero">
                         <option disabled selected>Selecciona tu género</option>
-                        <option value="Hombre">Hombre</option>
-                        <option value="Mujer">Mujer</option>
+                        <option value="Masculino">Hombre</option>
+                        <option value="Femenino">Mujer</option>
                     </select>
+                    <h4 *ngIf="form.get('genero')?.invalid" style="color: red;">Escoge un género</h4>
                 </div>
                 <br>
                 <div class="input" id="inputPassword">
                     <h4>Contraseña</h4>
-                    <input type="password" id="password" class="inputElement" placeholder="Contraseña"
-                        [(ngModel)]="contrasena">
+                    <input type="password" formControlName="contrasena" id="password" class="inputElement" placeholder="Contraseña">
+                    <h4 *ngIf="form.get('contrasena')?.invalid" style="color: red;">Introduce una contraseña correcta</h4>
                 </div>
-                <div class="input" id="inputPassword">
-                    <h4>Repetir contraseña</h4>
-                    <input type="password2" id="password2" class="inputElement" placeholder="Repetir contraseña"
-                        [(ngModel)]="contrasena2">
-                    <h4 *ngIf="contrasenaMal" class="warningMessage">{{mensajeErrorContrasena}}</h4>
-
-                </div>
+    
                 <br>
                 <div class="input" id="inputFile">
                     <h4>Imágen</h4>
@@ -102,13 +100,10 @@
                     <h4 *ngIf="contrasenaMal" class="warningMessage">{{mensajeErrorContrasena}}</h4>
 
                 </div>
-
-               
-
                 <br>
-                <button (click)="registrar()">REGISTRARSE</button>
+
                 <div class="loginButton">
-                    <button class="buttonLogin" (click)="registrarUsuario()">
+                    <button class="buttonLogin">
                         <h4 *ngIf="!comprobandoRegister">Registrarse</h4>
 
                         <div class="loader">
@@ -134,6 +129,7 @@
                 
 
             </div>
+            </form>
 
         </div>
     </div>
