@@ -34,11 +34,11 @@ export class RegisterComponent {
   //Form
   form: FormGroup;
   constructor(private authUsuario: AuthUsuarioService,
-              private dateAdapter: DateAdapter<Date>,
-              private router: Router, 
-              private http: HttpClient,
-              private formBuilder: FormBuilder,
-              private toastr: ToastrService) {
+    private dateAdapter: DateAdapter<Date>,
+    private router: Router,
+    private http: HttpClient,
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService) {
     this.dateAdapter.setLocale('es');
     //Form initialize
     this.form = this.formBuilder.group({
@@ -58,58 +58,54 @@ export class RegisterComponent {
   onFileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
-        const reader = new FileReader();
+      const reader = new FileReader();
 
-        reader.onloadend = () => {
-            const base64String = reader.result as string;
-            this.imagen = base64String;
-           
-        };
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        this.imagen = base64String;
 
-        reader.readAsDataURL(file);
+      };
+
+      reader.readAsDataURL(file);
     }
 
-}
+  }
 
-validarFormatoFecha(): Validators {
-  return (control: AbstractControl): {[key: string]: any} | null => {
-    const fechaRegex = /^\d{4}-\d{2}-\d{2}$/; // Expresión regular para el formato YYYY-MM-DD
+  validarFormatoFecha(): Validators {
+    return (control: AbstractControl): { [key: string]: any } | null => {
+      const fechaRegex = /^\d{4}-\d{2}-\d{2}$/; // Expresión regular para el formato YYYY-MM-DD
 
-    if (control.value && !fechaRegex.test(control.value)) {
-      return { 'formatoFechaInvalido': true };
-    }
-
-    return null;
-  };
-}
-
-reordenarFecha(){
-  this.form.value.fecha = this.form
-}
-
-
-
-onSubmit(){
-  console.log("hola");
-  if(this.form.valid){
-    this.form.value.imagen = this.imagen;
-    this.http.post<any>(environment.url + "/api/crear-usuario", this.form.value).subscribe(
-      () => {
-        this.toastr.success("Te registraste con éxito");
-        this.irALogin();
-      },
-      () => {
-        this.toastr.error("Asegurate de que el correo o el dni sean correctos");
+      if (control.value && !fechaRegex.test(control.value)) {
+        return { 'formatoFechaInvalido': true };
       }
-    );
-  }
-  else{
-    console.log(this.form.value);
-  }
-}
 
-  irALogin(){
+      return null;
+    };
+  }
+
+
+
+  onSubmit() {
+    if (this.form.valid) {
+      console.log(this.form.value);
+      this.authUsuario.registrarUsuario({ dni: this.form.value.dni, nombre: this.form.value.nombre, apellidos: this.form.value.apellidos, correo: this.form.value.correo, contrasena: this.form.value.contrasena, fechaNacimiento: this.form.value.fecha, genero: this.form.value.genero, imagen: this.imagen }).subscribe(
+        (result) => {
+          console.log(result);
+          this.toastr.success("Te registraste con éxito");
+          this.irALogin();
+        },
+        (error) => {
+          this.toastr.error("Asegurate de que el correo o el dni sean correctos");
+        }
+      );
+    }
+    else {
+      console.log("error en el formulario");
+    }
+  }
+
+  irALogin() {
     this.router.navigate([this.rutas.login]);
   }
-  
+
 }
