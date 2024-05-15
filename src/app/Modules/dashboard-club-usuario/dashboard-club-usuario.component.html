@@ -7,10 +7,13 @@
                 <h4 class="subtitulo">Bienvenido al dashboard del Club {{nombreClub}}</h4>
             </div>
             <div class="botones">
-                <button (click)="mostrarCalendario()"><i class="fa-solid fa-calendar-days"></i></button>
-                <button (click)="mostrarJugadores()"><i class="fa-solid fa-users"></i></button>
-                <button (click)="mostrarEquiposUnirse()"><i class="fa-solid fa-people-group"></i></button>
-                <button (click)="mostrarAjustes()"><i class="fa-solid fa-cog"></i></button>
+                <button (click)="mostrarCalendario()" [ngStyle]="{'color': calendario ? '#47A1F6' : '' }"><i class="fa-solid fa-calendar-days"></i></button>
+                <div class="separador"></div>
+                <button (click)="mostrarJugadores()"  [ngStyle]="{'color': jugadoresClub ? '#47A1F6' : '' }"><i class="fa-solid fa-users"></i></button>
+                <div class="separador"></div>
+                <button (click)="mostrarEquiposUnirse()"  [ngStyle]="{'color': equiposClub ? '#47A1F6' : '' }"><i class="fa-solid fa-people-group"></i></button>
+                <div class="separador"></div>
+                <button (click)="mostrarAjustes()" [ngStyle]="{'color': ajustesClub ? '#47A1F6' : '' }"><i class="fa-solid fa-cog"></i></button>
             </div>
 
         </div>
@@ -18,7 +21,7 @@
             <div class="calendario">
                 <div class="titulo">
                     <h1>Calendario:</h1>
-                    <select name="eventosTipo" id="eventosTipo" [(ngModel)]="tipoEventoSeleccionado"
+                    <select class="filtroCalendario" name="eventosTipo" id="eventosTipo" [(ngModel)]="tipoEventoSeleccionado"
                         (ngModelChange)="eventosDeClub()">
                         <option value="todos" selected>Todos</option>
                         <option value="entrenamiento">Entrenamiento</option>
