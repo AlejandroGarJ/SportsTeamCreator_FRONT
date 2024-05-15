@@ -82,7 +82,7 @@
         <div id="abajo" *ngIf="!mostrarEquipos && ajustesClub">
             <div class="ajustesclub">
                 <button (click)="seleccionar('ajustes')">AJUSTES</button>
-                <button (click)="seleccionar('gestionar')">GESTION EQUIPOS</button>
+                <button *ngIf="admin" (click)="seleccionar('gestionar')">GESTION EQUIPOS</button>
 
                 <div *ngIf="visible === 'ajustes'">
                     <div class="content">

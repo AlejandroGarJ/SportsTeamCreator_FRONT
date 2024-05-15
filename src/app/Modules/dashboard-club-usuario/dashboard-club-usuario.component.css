@@ -223,6 +223,10 @@ full-calendar {
     margin-bottom: 2%;
 }
 
+.nombreClub{
+    font-size: 25px;
+}
+
 .titulo i {
     font-size: larger;
     color: white;
