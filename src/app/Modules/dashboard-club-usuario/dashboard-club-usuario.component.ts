@@ -14,6 +14,8 @@ import { PopUpCrearEquipoComponent } from './pop-up-crear-equipo/pop-up-crear-eq
 import { Equipo } from '../../Core/Models/equipo.model'; // Import Equipo
 import { Observable, forkJoin } from 'rxjs';
 import { InfoUsuarioService } from '../../Core/Services/usuario/info-usuario.service';
+import { PopUpEditarEquipoComponent } from './pop-up-editar-equipo/pop-up-editar-equipo.component';
+
 
 
 
@@ -44,13 +46,14 @@ export class DashboardClubUsuarioComponent {
   tipoEventoSeleccionado: string = 'todos';
   visible: string = 'ajustes';
   equipos: Equipo[] = [];
+  showLoader: boolean = true;
 
-  constructor(private route: ActivatedRoute, 
-              private clubService: ClubControllerService, 
-              private compartido: CompartidoService, 
-              private dialog: MatDialog, 
-              private toastr: ToastrService,
-              private infoUsuario: InfoUsuarioService) {
+  constructor(private route: ActivatedRoute,
+    private clubService: ClubControllerService,
+    private compartido: CompartidoService,
+    private dialog: MatDialog,
+    private toastr: ToastrService,
+    private infoUsuario: InfoUsuarioService) {
     this.usuarioLogeado = obtenerSessionUsuario();
   }
 
@@ -84,14 +87,15 @@ export class DashboardClubUsuarioComponent {
       }
     });
 
-    
+
   }
 
 
   eventosDeClub() {
     this.compartido.obtenerEventosDeClub({ id_club: this.id_club, tipo: this.tipoEventoSeleccionado }).subscribe(
       (response) => {
-        this.calendarOptions.events = response.map((evento: { titulo: any; fechaInicio: any; fechaFin: any; descripcion: any; ubicacion: any; tipo: any }) => ({
+        this.calendarOptions.events = response.map((evento: { titulo: any; fechaInicio: any; fechaFin: any; descripcion: any; ubicacion: any; tipo: any; id: any }) => ({
+          id: evento.id,
           title: evento.titulo,
           start: evento.fechaInicio,
           end: evento.fechaFin,
@@ -133,16 +137,39 @@ export class DashboardClubUsuarioComponent {
       }
     },
 
-    eventClick: this.handleEventClick.bind(this)
+    eventClick: this.handleEventClick.bind(this),
+    eventBackgroundColor: '#3788d8',
+    eventBorderColor: '#3788d8',
+    eventTextColor: '#ffffff',
+    eventDisplay: 'block',
+    eventTimeFormat: { hour: 'numeric', minute: '2-digit', omitZeroMinute: false, meridiem: 'short' },
+    eventDidMount: function (info) {
+      if (info.event.extendedProps['type'] === 'entrenamiento') {
+        info.el.style.backgroundColor = '#3788d8';
+        info.el.style.borderColor = '#3788d8';
+      } else if (info.event.extendedProps['type'] === 'partido') {
+        info.el.style.backgroundColor = '#d83737';
+        info.el.style.borderColor = '#d83737';
+      } else if (info.event.extendedProps['type'] === 'reunion') {
+        info.el.style.backgroundColor = '#37d84b';
+        info.el.style.borderColor = '#37d84b';
+      } else {
+        info.el.style.backgroundColor = '#d8b837';
+        info.el.style.borderColor = '#d8b837';
+      }
+    }
 
   };
-
   handleEventClick(info: any) {
     const dialogRef = this.dialog.open(PopUpDetallesEventoComponent, {
       width: '50%',
       height: '50%',
-      data: { nombreEvento: info.event.title, fechaInicio: info.event.start, fechaFin: info.event.end, descripcionEvento: info.event.extendedProps.description, lugarEvento: info.event.extendedProps.location, tipoEventoSeleccionado: info.event.extendedProps.type }
+      data: { idEvento: info.event.id, nombreEvento: info.event.title, fechaInicio: info.event.start, fechaFin: info.event.end, descripcionEvento: info.event.extendedProps.description, lugarEvento: info.event.extendedProps.location, tipoEventoSeleccionado: info.event.extendedProps.type, esAdmin: this.admin }
     });
+    dialogRef.afterClosed().subscribe(() => {
+      this.eventosDeClub();
+    });
+
   }
 
   esAdmin() {
@@ -171,6 +198,7 @@ export class DashboardClubUsuarioComponent {
     this.jugadoresClub = false;
     this.equiposClub = true;
     this.ajustesClub = false;
+    this.showLoader = true;
     this.equiposDelClubNoEstaUser();
   }
   mostrarAjustes() {
@@ -204,13 +232,13 @@ export class DashboardClubUsuarioComponent {
     this.clubService.nombreJugador({ dni: jugador.dni }).subscribe({
       next: (res: any) => {
         jugador.nombre = res.nombre; // Guardar nombre directamente en el jugador
+        jugador.apellidos = res.apellidos;
       },
       error: (err) => {
         console.error('Error fetching player name:', err);
       }
     });
   }
-
   crearEvento(): void {
     const dialogRef = this.dialog.open(PopUpCrearEventoComponent, {
       width: '50%',
@@ -232,10 +260,21 @@ export class DashboardClubUsuarioComponent {
     });
 
     dialogRef.afterClosed().subscribe(() => {
-      this.equiposDelClub();
+      this.equiposDelClub2();
     });
   }
+  editarEquipoPopUp(id_eqipo: any): void {
+    const dialogRef = this.dialog.open(PopUpEditarEquipoComponent, {
+      width: '50%',
+      height: '50%',
+      data: { id_eqipo: id_eqipo }
+    });
 
+    dialogRef.afterClosed().subscribe(() => {
+      this.equiposDelClub2();
+    });
+
+  }
   obtenerDatosClub(): void {
     if (this.id_club !== null) {
       const payload = { id_club: this.id_club };
@@ -298,8 +337,10 @@ export class DashboardClubUsuarioComponent {
         this.equipos = todosEquipos.filter((equipoClub: Equipo) =>
           !equiposUsuario.some((equipoUsuario: Equipo) =>
             equipoUsuario.id_equipo === equipoClub.id_equipo));
-
-        // Aquí puedes procesar `this.equipos` como necesites
+        if (this.equipos.length === 0) {
+          this.toastr.info('No hay equipos disponibles para unirse');
+        }
+        this.showLoader = false;
       },
       error: (err) => {
         console.error('Error al obtener la información:', err);
@@ -312,7 +353,8 @@ export class DashboardClubUsuarioComponent {
       next: (res: any) => {
         if (res = true) {
           this.toastr.success('Te has unido al equipo correctamente');
-          this.equiposDelClub2();
+          this.equiposDelClubNoEstaUser();
+          window.location.reload();
         } else {
           this.toastr.error('Error al unirte al equipo');
         }

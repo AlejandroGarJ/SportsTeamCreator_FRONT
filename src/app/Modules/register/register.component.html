@@ -49,86 +49,92 @@
             <hr>
 
             <form action="" [formGroup]="form" (ngSubmit)="onSubmit()">
-            <div class="form">
-                <div class="input">
-                    <h4>DNI</h4>
-                    <input formControlName="dni" type="text" id="dni" class="inputElement" placeholder="DNI">
-                    <h4 *ngIf="form.get('dni')?.invalid" style="color: red;">Introduce dni correcto</h4>
-                </div>
-                <div class="input">
-                    <h4>Nombre</h4>
-                    <input type="text" formControlName="nombre" id="name" class="inputElement" placeholder="Nombre">
-                    <h4 *ngIf="form.get('nombre')?.invalid" style="color: red;">Este campo es obligatorio</h4>
-                </div>
-                <div class="input">
-                    <h4>Apellidos</h4>
-                    <input type="text" formControlName="apellidos" id="surname" class="inputElement" placeholder="Apellidos">
-                    <h4 *ngIf="form.get('apellidos')?.invalid" style="color: red;">Este campo es obligatorio</h4>
-                </div>
-                <div class="input">
-                    <h4>Fecha de nacimiento</h4>
-                    <input type="date" formControlName="fecha" id="birthDate" class="inputElement" placeholder="Fecha de nacimiento">
-                    <h4 *ngIf="form.get('fecha')?.invalid" style="color: red;">Introuce fecha correcta</h4> 
-                </div>
-                <div class="input">
-                    <h4>Correo electrónico</h4>
-                    <input type="email" formControlName="correo" id="email" class="inputElement" placeholder="Correo electrónico">
-                    <h4 *ngIf="emailMal" class="warningMessage">{{mensajeErrorEmail}}</h4>
-                    <h4 *ngIf="form.get('correo')?.invalid" style="color: red;">Introduce un correo correcto</h4>
-
-                </div>
-                <div class="input">
-                    <h4>Género</h4>
-                    <select name="genero" formControlName="genero" id="genero">
-                        <option disabled selected>Selecciona tu género</option>
-                        <option value="Masculino">Hombre</option>
-                        <option value="Femenino">Mujer</option>
-                    </select>
-                    <h4 *ngIf="form.get('genero')?.invalid" style="color: red;">Escoge un género</h4>
-                </div>
-                <br>
-                <div class="input" id="inputPassword">
-                    <h4>Contraseña</h4>
-                    <input type="password" formControlName="contrasena" id="password" class="inputElement" placeholder="Contraseña">
-                    <h4 *ngIf="form.get('contrasena')?.invalid" style="color: red;">Introduce una contraseña correcta</h4>
-                </div>
-    
-                <br>
-                <div class="input" id="inputFile">
-                    <h4>Imágen</h4>
-                    <input type="file" accept="image/*" (change)="onFileSelected($event)" name="imagen">
-                    <h4 *ngIf="contrasenaMal" class="warningMessage">{{mensajeErrorContrasena}}</h4>
-
-                </div>
-                <br>
-
-                <div class="loginButton">
-                    <button class="buttonLogin">
-                        <h4 *ngIf="!comprobandoRegister">Registrarse</h4>
-
-                        <div class="loader">
-                            <app-loader1 *ngIf="comprobandoRegister"></app-loader1>
-                        </div>
-
-                    </button>
-
-                </div>
-
-                <hr>
-
-                <div class="register">
-
-                    <div class="registerContainer">
-                        <h4 class="noAcc">¿Ya tienes cuenta?</h4>
-                        <a routerLink="/">
-                            <h4 class="subscribe">Inicia sesion en SportsTeamCreator</h4>
-                        </a>
+                <div class="form">
+                    <div class="input">
+                        <h4>DNI</h4>
+                        <input formControlName="dni" type="text" id="dni" class="inputElement" placeholder="DNI">
+                        <h4 *ngIf="form.get('dni')?.invalid" style="color: red;">Introduce dni correcto</h4>
                     </div>
+                    <div class="input">
+                        <h4>Nombre</h4>
+                        <input type="text" formControlName="nombre" id="name" class="inputElement" placeholder="Nombre">
+                        <h4 *ngIf="form.get('nombre')?.invalid" style="color: red;">Este campo es obligatorio</h4>
+                    </div>
+                    <div class="input">
+                        <h4>Apellidos</h4>
+                        <input type="text" formControlName="apellidos" id="surname" class="inputElement"
+                            placeholder="Apellidos">
+                        <h4 *ngIf="form.get('apellidos')?.invalid" style="color: red;">Este campo es obligatorio</h4>
+                    </div>
+                    <div class="input">
+                        <h4>Fecha de nacimiento</h4>
+                        <input type="date" formControlName="fecha" id="birthDate" class="inputElement"
+                            placeholder="Fecha de nacimiento">
+                        <h4 *ngIf="form.get('fecha')?.invalid" style="color: red;">Introuce fecha correcta</h4>
+                    </div>
+                    <div class="input">
+                        <h4>Correo electrónico</h4>
+                        <input type="email" formControlName="correo" id="email" class="inputElement"
+                            placeholder="Correo electrónico">
+                        <h4 *ngIf="emailMal" class="warningMessage">{{mensajeErrorEmail}}</h4>
+                        <h4 *ngIf="form.get('correo')?.invalid" style="color: red;">Introduce un correo correcto</h4>
+
+                    </div>
+                    <div class="input">
+                        <h4>Género</h4>
+                        <select name="genero" formControlName="genero" id="genero">
+                            <option disabled selected>Selecciona tu género</option>
+                            <option value="Masculino">Hombre</option>
+                            <option value="Femenino">Mujer</option>
+                        </select>
+                        <h4 *ngIf="form.get('genero')?.invalid" style="color: red;">Escoge un género</h4>
+                    </div>
+                    <br>
+                    <div class="input" id="inputPassword">
+                        <h4>Contraseña</h4>
+                        <input type="password" formControlName="contrasena" id="password" class="inputElement"
+                            placeholder="Contraseña">
+                        <h4 *ngIf="form.get('contrasena')?.invalid" style="color: red;">Introduce una contraseña
+                            correcta</h4>
+                    </div>
+
+                    <br>
+                    <div class="input" id="inputFile">
+                        <h4>Imágen</h4>
+
+                        <input type="file" accept=".jpg, .jpeg" (change)="onFileSelected($event)" name="imagen">
+                        <h4 *ngIf="contrasenaMal" class="warningMessage">{{mensajeErrorContrasena}}</h4>
+
+                    </div>
+                    <br>
+
+                    <div class="loginButton">
+                        <button class="buttonLogin">
+                            <h4 *ngIf="!comprobandoRegister">Registrarse</h4>
+
+                            <div class="loader">
+                                <app-loader1 *ngIf="comprobandoRegister"></app-loader1>
+                            </div>
+
+                        </button>
+
+                    </div>
+
+                    <hr>
+
+                    <div class="register">
+
+                        <div class="registerContainer">
+                            <h4 class="noAcc">¿Ya tienes cuenta?</h4>
+                            <a routerLink="/">
+                                <h4 class="subscribe">Inicia sesion en SportsTeamCreator</h4>
+                            </a>
+                        </div>
+                    </div>
+
+
+
                 </div>
-
-                
-
-            </div>
             </form>
 
         </div>

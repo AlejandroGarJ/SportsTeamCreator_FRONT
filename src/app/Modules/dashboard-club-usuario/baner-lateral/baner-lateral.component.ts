@@ -4,7 +4,6 @@ import { ClubControllerService } from '../../../Core/Services/club/club-controll
 import { obtenerSessionUsuario } from '../../../shared/guardarSessionUsuario/guardarSessionUsuario';
 import { SessionUsuario } from '../../../Core/Models/session.model';
 import { CompartidoService } from '../compartido.service';
-import { co } from '@fullcalendar/core/internal-common';
 import { InfoUsuarioService } from '../../../Core/Services/usuario/info-usuario.service';
 import { Router } from "@angular/router";
 
@@ -42,25 +41,26 @@ export class BanerLateralComponent implements OnInit {
       if (clubId) {
         this.id_club = Number(clubId); // Convert to a number and assign
         this.nombreClub = clubName;
-        this.obtenerClubesUsuario(); // Fetch club data after getting clubId
+        this.obtenerEquiposUsuario(); // Fetch club data after getting clubId
       }
     });
 
     this.infoUsuario.info(this.usuarioLogeado.token_session, this.usuarioLogeado.dni).subscribe(
       (info) => {
-         this.fotoPerfil = info.imagen;
-          this.apellidos = info.apellidos;
-          this.loadingUsuarioInfo = false;
-        }
+        this.fotoPerfil = info.imagen;
+        this.apellidos = info.apellidos;
+        this.loadingUsuarioInfo = false;
+      }
     );
   }
 
-  obtenerClubesUsuario(): void {
+  obtenerEquiposUsuario(): void {
     if (this.id_club !== null) {
       const payload = { dni: this.usuarioLogeado, id_club: this.id_club };
 
       this.clubService.obtenerEquiposUsuario(payload).subscribe({
         next: (res: any) => {
+          this.compartido.setEquiposUsuario(res);
           this.equipos = res;
           this.loadingEquipos = false;
         },
@@ -73,11 +73,12 @@ export class BanerLateralComponent implements OnInit {
     }
   }
 
-  irPerfil(){
+  irPerfil() {
     this.router.navigate(['/perfil']);
   }
-  irDashbordPrincipal(){
+  irDashbordPrincipal() {
     this.router.navigate(['/dashboard']);
+    this.compartido.setMostrarEquipos(false);
   }
 
   cambiarMostrarEquipos(idEquipo: any, nombreEquipo: any) {

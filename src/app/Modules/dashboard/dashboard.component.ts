@@ -7,11 +7,8 @@ import { Club } from '../../Core/Models/club.model';
 import { ClubControllerService } from '../../Core/Services/club/club-controller.service';
 import { SessionUsuario } from '../../Core/Models/session.model';
 import { obtenerSessionUsuario } from '../../shared/guardarSessionUsuario/guardarSessionUsuario';
-import { co } from '@fullcalendar/core/internal-common';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs';
 import { InfoUsuarioService } from '../../Core/Services/usuario/info-usuario.service';
 
 @Component({
@@ -46,27 +43,27 @@ export class DashboardComponent {
   }
 
   constructor(private router: Router,
-              private dashboardService: DashboardService,
-              private clubService: ClubControllerService, 
-              private toastr: ToastrService, 
-              private http: HttpClient,
-              private usuarioInfo: InfoUsuarioService
-            
-    ) {
+    private dashboardService: DashboardService,
+    private clubService: ClubControllerService,
+    private toastr: ToastrService,
+    private http: HttpClient,
+    private usuarioInfo: InfoUsuarioService
+
+  ) {
 
     this.usuarioLogeado = obtenerSessionUsuario();
     this.loadingInfoUsuario = true;
     this.usuarioInfo.info(this.usuarioLogeado.token_session, this.usuarioLogeado.dni).subscribe(
-    (infoUsuario) => {
-      this.imagenUsuario = infoUsuario.imagen;
-      this.loadingInfoUsuario = false;
-    }
+      (infoUsuario) => {
+        this.imagenUsuario = infoUsuario.imagen;
+        this.loadingInfoUsuario = false;
+      }
     );
 
   }
 
   irPerfil() {
-    this.router.navigate(['/perfil']) 
+    this.router.navigate(['/perfil'])
   }
 
   seeName() {
@@ -101,7 +98,10 @@ export class DashboardComponent {
     this.pagina = 1;
     this.searchClub(true);
   }
-
+  cerrarSesion() {
+    localStorage.removeItem('sessionUsuario');
+    this.router.navigate(['/login']);
+  }
   infiniteScroll(scroll: Event) {
     const target = scroll.target as HTMLElement;
     if (target.scrollTop == (target.scrollHeight - target.clientHeight)) {
@@ -159,9 +159,6 @@ export class DashboardComponent {
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     plugins: [dayGridPlugin],
-    events: [
-      { title: 'Cumple Ruben', date: '2024-04-14' }
-    ],
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',

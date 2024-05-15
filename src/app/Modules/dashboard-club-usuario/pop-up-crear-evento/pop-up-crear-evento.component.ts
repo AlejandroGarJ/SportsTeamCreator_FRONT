@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CompartidoService } from '../compartido.service';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -19,7 +20,7 @@ export class PopUpCrearEventoComponent {
   lugarEvento: string = "";
   id_club: number | null = null;
   tipoEventoSeleccionado: string = "";
-  constructor(public dialogRef: MatDialogRef<PopUpCrearEventoComponent>, @Inject(MAT_DIALOG_DATA) public datos: any, private compartido: CompartidoService) {
+  constructor(public dialogRef: MatDialogRef<PopUpCrearEventoComponent>, @Inject(MAT_DIALOG_DATA) public datos: any, private compartido: CompartidoService, private toastr: ToastrService) {
     this.id_club = datos.id_club;
   }
 
@@ -39,7 +40,7 @@ export class PopUpCrearEventoComponent {
     };
     this.compartido.crearEvento(payload).subscribe({
       next: (res: any) => {
-        console.log(res);
+        this.toastr.success('Evento creado correctamente');
         this.dialogRef.close();
       },
       error: (err) => {
