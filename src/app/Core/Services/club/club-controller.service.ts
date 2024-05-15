@@ -51,4 +51,9 @@ export class ClubControllerService {
   modificarEquipo(data: any): Observable<any> {
     return this.http.post<any>(environment.url + "/api/modificarEquipo", data);
   }
+
+  comprobarUsuarioPerteneceClub(dni: string, id_club: number | null){
+    const body = { dni, id_club };
+    return this.http.post<any>(environment.url + "/api/comprobarUsuarioPerteneceClub", body);
+  }
 }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router'; // Import ActivatedRoute
+import { ActivatedRoute, Router } from '@angular/router'; // Import ActivatedRoute
 import { obtenerSessionUsuario } from '../../shared/guardarSessionUsuario/guardarSessionUsuario';
 import { SessionUsuario } from '../../Core/Models/session.model';
 import { ClubControllerService } from '../../Core/Services/club/club-controller.service';
@@ -53,11 +53,9 @@ export class DashboardClubUsuarioComponent {
     private compartido: CompartidoService,
     private dialog: MatDialog,
     private toastr: ToastrService,
-    private infoUsuario: InfoUsuarioService) {
+    private infoUsuario: InfoUsuarioService,
+    private router: Router) {
     this.usuarioLogeado = obtenerSessionUsuario();
-  }
-
-  ngOnInit(): void {
     // Extract the clubId from the query parameters
     this.route.queryParams.subscribe(params => {
       const clubId = params['clubId'];
@@ -67,6 +65,21 @@ export class DashboardClubUsuarioComponent {
         this.nombreClub = clubName;
       }
     });
+  
+    this.comprobarClubYUsuario();
+    
+  }
+
+  private comprobarClubYUsuario(): void {
+
+    this.clubService.comprobarUsuarioPerteneceClub(this.usuarioLogeado.dni, this.id_club).subscribe(
+      (response) => {
+        if(!response) this.router.navigate(['/dashboard']);
+      }
+    );
+  }
+  ngOnInit(): void {
+    
     this.sacarRoles(); // Llama a sacarRoles() primero
     this.compartido.mostrarEquipos$.subscribe(value => {
       this.mostrarEquipos = value;

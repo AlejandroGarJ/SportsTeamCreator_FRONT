@@ -68,7 +68,7 @@
         </div>
         <div id="abajo" *ngIf="!mostrarEquipos && equiposClub">
             <div class="loader" id="loaderContainer" *ngIf="showLoader">
-                <app-loader1></app-loader1>
+                <app-loader-minimalista *ngIf="showLoader"></app-loader-minimalista>
             </div>
             <div class="calendario" *ngIf="!showLoader">
                 <h1>Equipos a los que puedes unirte del Club:</h1>
