@@ -4,22 +4,60 @@
 
 body,
 html {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 
 @font-face {
-    font-family: 'Gotham';
-    src: url("./assets/fonts/gotham/GothamMedium.ttf")
-  
-  }
+  font-family: 'Gotham';
+  src: url("./assets/fonts/gotham/GothamMedium.ttf")
+}
 
 
-  :root {
-    --hover-color: #47A1F6;
+:root {
+  --hover-color: #47A1F6;
+}
+
+html,
+body {
+  height: 100%;
+  background-color: #081B26;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.nextLevel {
+  display: none;
+  background-color: #081B26;
+  margin: auto;
+}
+
+.nextLevel h1 {
+  color: white;
+  font-size: 2.7rem;
+  text-align: center;
+}
+
+.nextLevel img {
+  width: 80%;
+  height: 80%;
+}
+
+@media (max-width: 1000px) {
+  app-root {
+    display: none;
   }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+  .nextLevel {
+    display: block;
+    text-align: center;
+    /* Centra el contenido del div */
+
+  }
+}
