@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
+import { InfoUsuarioService } from '../../Core/Services/usuario/info-usuario.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -35,25 +36,33 @@ export class DashboardComponent {
   ciudadCrear: string = "";
   usuarioLogeado: SessionUsuario;
   imagenUsuario: any;
+
   ngOnInit() {
     console.log(this.usuarioLogeado.token_session);
     this.eventosUsuario();
     this.clubesUsuario();
-
+   
     
 
   }
 
-  constructor(private router: Router, private dashboardService: DashboardService, private clubService: ClubControllerService, private toastr: ToastrService, private http: HttpClient) {
+  constructor(private router: Router,
+              private dashboardService: DashboardService,
+              private clubService: ClubControllerService, 
+              private toastr: ToastrService, 
+              private http: HttpClient,
+              private usuarioInfo: InfoUsuarioService
+            
+    ) {
 
     this.usuarioLogeado = obtenerSessionUsuario();
 
-    this.http.post<any>(environment.url + "/api/obtenerImagenPerfil", this.usuarioLogeado).subscribe(
-      (response) => {
-        this.imagenUsuario = response;
-        console.log(this.imagenUsuario);
-      }
+    this.usuarioInfo.info(this.usuarioLogeado.token_session, this.usuarioLogeado.dni).subscribe(
+    (infoUsuario) => {
+      this.imagenUsuario = infoUsuario.imagen;
+    }
     );
+
   }
 
   irPerfil() { this.router.navigate(['/perfil']) }
