@@ -5,7 +5,8 @@
             <li>
                 <h4><i class="fa-solid fa-user"></i> Mis Clubes</h4>
             </li>
-            <ul>
+            <app-loader-minimalista *ngIf="loadingClubs"></app-loader-minimalista>
+            <ul *ngIf="!loadingClubs">
                 <li *ngFor="let club of clubes">
                     <a [routerLink]="['/dashboard/club']"
                         [queryParams]="{clubId: club.id_club, nombreClub: club.nombre}">
@@ -38,10 +39,11 @@
                         <app-loader1 *ngIf="showLoader"></app-loader1>
                     </div>
                 </div>
-                <div class="imagen">
+                <div *ngIf="!loadingInfoUsuario" class="imagen">
                     <img (click)="irPerfil()" class="perfil"
                         src="{{ imagenUsuario }}" alt="Foto de perfil">
                 </div>
+                <app-loader-minimalista *ngIf="loadingInfoUsuario"></app-loader-minimalista>
 
             </div>
         </div>

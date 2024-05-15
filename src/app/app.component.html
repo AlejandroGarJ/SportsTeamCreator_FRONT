@@ -1,1 +1,5 @@
-<router-outlet></router-outlet> 
+<router-outlet>
+    <div *ngIf="mostrarLoader" class="loader">
+        <img src="ruta/a/la/imagen-de-carga.gif" alt="Cargando...">
+    </div>
+</router-outlet> 

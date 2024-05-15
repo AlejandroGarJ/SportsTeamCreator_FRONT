@@ -12,6 +12,7 @@ button {
     margin-bottom: 6%;
 }
 
+
 button:hover {
     background-color: #47A1F6;
     transition: all 0.3s;
@@ -37,28 +38,26 @@ ul {
 
 .infoUsuario{
     display: flex;
-    gap: 20px;
+    gap: 50px;
     align-items: center;
 }
 
-.contenedor-perfil {
-    width: 80px; /* Ancho fijo del contenedor */
-    height: 80px; /* Alto fijo del contenedor */
-    max-width: 100%; /* Evita que el contenedor se desborde del contenedor padre */
-    border-radius: 50%; /* Hace que el contenedor sea redondo */
-    overflow: hidden; /* Oculta cualquier parte de la imagen que se extienda más allá del contenedor */
-    position: relative; /* Se necesita para el truco de la proporción de aspecto */
-  }
-  
-  .contenedor-perfil img {
-    width: 100%; /* Para que la imagen llene completamente el contenedor */
-    height: auto; /* Para mantener la proporción de la imagen */
-    display: block; /* Para evitar espacios en blanco debajo de la imagen */
-    position: absolute; /* Posición absoluta para permitir el truco de la proporción de aspecto */
-    top: 50%; /* Centra verticalmente la imagen */
-    left: 50%; /* Centra horizontalmente la imagen */
-    transform: translate(-50%, -50%); /* Centra la imagen en el medio del contenedor */
-  }
+.circuloImagen{
+    width: 70px;
+    height: 70px;
+    background-color: red;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.circuloImagen img{
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+.circuloImagen img:hover{
+    cursor: pointer;
+}
+
   
 
   .contenedor-perfil img:hover{

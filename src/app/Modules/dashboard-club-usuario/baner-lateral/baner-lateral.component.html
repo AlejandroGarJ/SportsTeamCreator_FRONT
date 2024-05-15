@@ -1,13 +1,17 @@
-<div class="infoUsuario">
-    <div class="contenedor-perfil">
-        <img *ngIf="!loadingUsuarioInfo" (click)="irPerfil()" src="{{fotoPerfil}}" alt="Foto de perfil">
-        <app-loader-minimalista *ngIf="loadingUsuarioInfo"></app-loader-minimalista>
-      </div>
-     
+<div *ngIf="!loadingUsuarioInfo" class="infoUsuario">
+    <!-- <div class="contenedor-perfil">
+        <img (click)="irPerfil()" src="{{fotoPerfil}}" alt="Foto de perfil">
+       
+      </div> -->
+    <div class="contenedorImagen">
+        <div class="circuloImagen">
+            <img (click)="irPerfil()" src="{{fotoPerfil}}" alt="Foto de perfil">
+        </div>
+    </div>
      
     <div  class="infoDeUsuario">
-        <app-loader-minimalista *ngIf="loadingUsuarioInfo"></app-loader-minimalista>
-        <ng-container *ngIf="!loadingUsuarioInfo">
+        
+        <ng-container>
             {{usuarioLogeado.nombre}}
             {{apellidos}}
             {{usuarioLogeado.dni}}
@@ -15,6 +19,9 @@
        
     </div>
 </div>
+
+    <app-loader-minimalista *ngIf="loadingUsuarioInfo"></app-loader-minimalista>
+
 <div class="opciones">
     <button class="button-ir-dashboard" (click)="irDashbordPrincipal()">
         <i class="fa-solid fa-house"></i>

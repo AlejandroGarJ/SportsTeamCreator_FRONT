@@ -36,14 +36,13 @@ export class DashboardComponent {
   ciudadCrear: string = "";
   usuarioLogeado: SessionUsuario;
   imagenUsuario: any;
+  loadingClubs: boolean = false;
+  loadingInfoUsuario: boolean = false;
 
   ngOnInit() {
     console.log(this.usuarioLogeado.token_session);
     this.eventosUsuario();
     this.clubesUsuario();
-   
-    
-
   }
 
   constructor(private router: Router,
@@ -56,22 +55,23 @@ export class DashboardComponent {
     ) {
 
     this.usuarioLogeado = obtenerSessionUsuario();
-
+    this.loadingInfoUsuario = true;
     this.usuarioInfo.info(this.usuarioLogeado.token_session, this.usuarioLogeado.dni).subscribe(
     (infoUsuario) => {
       this.imagenUsuario = infoUsuario.imagen;
+      this.loadingInfoUsuario = false;
     }
     );
 
   }
 
-  irPerfil() { this.router.navigate(['/perfil']) }
-
-  seeName() {
-
-    console.log(this.usuarioLogeado.nombre);
+  irPerfil() {
+    this.router.navigate(['/perfil']) 
   }
 
+  seeName() {
+    console.log(this.usuarioLogeado.nombre);
+  }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -278,12 +278,13 @@ export class DashboardComponent {
       })
   }
   clubesUsuario() {
-    console.log(this.usuarioLogeado.dni);
+    this.loadingClubs = true;
     this.clubService.obtenerClubes({ dni: this.usuarioLogeado.dni }).subscribe(
       (response) => {
         console.log(response);
         this.clubes = response;
         console.log(this.clubes);
+        this.loadingClubs = false;
       },
       (error) => {
         console.error("Hubo un error al intentar obtener los clubes del usuario:", error);
