@@ -7,11 +7,8 @@ import { Club } from '../../Core/Models/club.model';
 import { ClubControllerService } from '../../Core/Services/club/club-controller.service';
 import { SessionUsuario } from '../../Core/Models/session.model';
 import { obtenerSessionUsuario } from '../../shared/guardarSessionUsuario/guardarSessionUsuario';
-import { co } from '@fullcalendar/core/internal-common';
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../environments/environment';
-import { Observable } from 'rxjs';
 import { InfoUsuarioService } from '../../Core/Services/usuario/info-usuario.service';
 
 @Component({
@@ -162,9 +159,6 @@ export class DashboardComponent {
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     plugins: [dayGridPlugin],
-    events: [
-      { title: 'Cumple Ruben', date: '2024-04-14' }
-    ],
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',

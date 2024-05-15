@@ -6,4 +6,5 @@
     <h4>Inicio: {{fechaInicio}}</h4>
     <h4>Fin: {{fechaFin}}</h4>
     <h4>Tipo de Evento: {{tipoEventoSeleccionado}}</h4>
+    <a *ngIf="esAdmin" (click)="borrarEvento()"><i class="fa-solid fa-trash"></i></a>
 </div>

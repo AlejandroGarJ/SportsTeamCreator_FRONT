@@ -30,3 +30,13 @@
     color: #47A1F6;
     cursor: pointer;
 }
+
+button {
+    background-color: transparent;
+    color: white;
+    border: none;
+    margin: 10px;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: bold;
+}

@@ -7,13 +7,17 @@
                 <h4 class="subtitulo">Bienvenido al dashboard del Club {{nombreClub}}</h4>
             </div>
             <div class="botones">
-                <button (click)="mostrarCalendario()" [ngStyle]="{'color': calendario ? '#47A1F6' : '' }"><i class="fa-solid fa-calendar-days"></i></button>
+                <button (click)="mostrarCalendario()" [ngStyle]="{'color': calendario ? '#47A1F6' : '' }"><i
+                        class="fa-solid fa-calendar-days"></i></button>
                 <div class="separador"></div>
-                <button (click)="mostrarJugadores()"  [ngStyle]="{'color': jugadoresClub ? '#47A1F6' : '' }"><i class="fa-solid fa-users"></i></button>
+                <button (click)="mostrarJugadores()" [ngStyle]="{'color': jugadoresClub ? '#47A1F6' : '' }"><i
+                        class="fa-solid fa-users"></i></button>
                 <div class="separador"></div>
-                <button (click)="mostrarEquiposUnirse()"  [ngStyle]="{'color': equiposClub ? '#47A1F6' : '' }"><i class="fa-solid fa-people-group"></i></button>
-                <div class="separador"></div>
-                <button (click)="mostrarAjustes()" [ngStyle]="{'color': ajustesClub ? '#47A1F6' : '' }"><i class="fa-solid fa-cog"></i></button>
+                <button (click)="mostrarEquiposUnirse()" [ngStyle]="{'color': equiposClub ? '#47A1F6' : '' }"><i
+                        class="fa-solid fa-people-group"></i></button>
+                <div *ngIf="admin" class="separador"></div>
+                <button *ngIf="admin" (click)="mostrarAjustes()" [ngStyle]="{'color': ajustesClub ? '#47A1F6' : '' }"><i
+                        class="fa-solid fa-cog"></i></button>
             </div>
 
         </div>
@@ -21,8 +25,8 @@
             <div class="calendario">
                 <div class="titulo">
                     <h1>Calendario:</h1>
-                    <select class="filtroCalendario" name="eventosTipo" id="eventosTipo" [(ngModel)]="tipoEventoSeleccionado"
-                        (ngModelChange)="eventosDeClub()">
+                    <select class="filtroCalendario" name="eventosTipo" id="eventosTipo"
+                        [(ngModel)]="tipoEventoSeleccionado" (ngModelChange)="eventosDeClub()">
                         <option value="todos" selected>Todos</option>
                         <option value="entrenamiento">Entrenamiento</option>
                         <option value="partido">Partido</option>
@@ -46,6 +50,7 @@
                         <tr>
                             <th>DNI</th>
                             <th>Nombre</th>
+                            <th>Apellidos</th>
                             <th>Rol</th>
                             <th *ngIf="admin">Expulsar</th>
                         </tr>
@@ -54,6 +59,7 @@
                         <tr *ngFor="let jugador of jugadores">
                             <td>{{jugador.dni}}</td>
                             <td>{{jugador.nombre}}</td>
+                            <td>{{jugador.apellidos}}</td>
                             <td>{{jugador.rolClub}}</td>
                             <td *ngIf="admin"><button class="buttonTabla">Expulsar</button></td>
                         </tr>
@@ -61,18 +67,25 @@
             </div>
         </div>
         <div id="abajo" *ngIf="!mostrarEquipos && equiposClub">
-            <div class="calendario">
+            <div class="loader" id="loaderContainer">
+                <app-loader1 *ngIf="showLoader"></app-loader1>
+            </div>
+            <div class="calendario" *ngIf="!showLoader">
                 <h1>Equipos a los que puedes unirte del Club:</h1>
                 <table>
                     <thead>
                         <tr>
                             <th>Nombre</th>
+                            <th>Categoria</th>
+                            <th>Genero</th>
                             <th>Unirme</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let equipo of equipos">
                             <td>{{equipo.nombre}}</td>
+                            <td>{{equipo.categoria}}</td>
+                            <td>{{equipo.genero}}</td>
                             <td><button class="buttonTabla" (click)="unirmeAEquipo(equipo.id_equipo)">Unirme</button>
                             </td>
                         </tr>
@@ -104,7 +117,7 @@
                         </div>
 
                         <div *ngIf="admin" class="loginButton">
-                            <button  class="buttonLogin" (click)="modificarClub()">
+                            <button class="buttonLogin" (click)="modificarClub()">
                                 Guardar
                             </button>
 
@@ -121,6 +134,8 @@
                         <thead>
                             <tr>
                                 <th>Nombre</th>
+                                <th>Categorio</th>
+                                <th>Genero</th>
                                 <th>Editar</th>
                                 <th>Eliminar</th>
                             </tr>
@@ -128,9 +143,13 @@
                         <tbody>
                             <tr *ngFor="let equipo of equipos">
                                 <td>{{equipo.nombre}}</td>
-                                <td><button class="buttonTabla">Editar</button></td>
+                                <td>{{equipo.categoria}}</td>
+                                <td>{{equipo.genero}}</td>
                                 <td><button class="buttonTabla"
-                                (click)="borrarEquipo(equipo.id_equipo)">Eliminar</button></td>
+                                        (click)="editarEquipoPopUp(equipo.id_equipo)">Editar</button>
+                                </td>
+                                <td><button class="buttonTabla"
+                                        (click)="borrarEquipo(equipo.id_equipo)">Eliminar</button></td>
                             </tr>
                     </table>
                 </div>

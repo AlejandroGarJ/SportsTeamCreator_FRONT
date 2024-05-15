@@ -57,7 +57,7 @@ app-baner-lateral {
     height: 79%;
 }
 
-.filtroCalendario{
+.filtroCalendario {
     background-color: #303c54;
     color: white;
     font-family: "Gotham";
@@ -191,27 +191,30 @@ full-calendar {
     height: 92%;
 }
 
-.botones{
+.botones {
     display: flex;
     gap: 30px;
     height: 100%;
 }
-.separador{
+
+.separador {
     height: 100%;
     width: 1px;
     background-color: grey;
 }
 
 .botones button i {
-    font-size: 50px; /* Ajusta el tamaño según tus necesidades */
+    font-size: 50px;
+    /* Ajusta el tamaño según tus necesidades */
 }
 
 @media only screen and (max-width: 768px) {
     .botones button i {
-        font-size: 16px; /* Ajusta el tamaño según tus necesidades para dispositivos móviles */
+        font-size: 16px;
+        /* Ajusta el tamaño según tus necesidades para dispositivos móviles */
     }
 
-    .botones{
+    .botones {
         gap: 10px;
     }
 }
@@ -321,4 +324,16 @@ full-calendar {
 
 .guardar-info {
     display: flex;
+}
+
+.loader {
+    height: 50px;
+    padding: 18px;
+    display: flex;
+    margin-left: auto;
+    /* Utiliza un contenedor flex */
+    justify-content: center;
+    /* Centra horizontalmente el contenido */
+    align-items: center;
+    /* Centra verticalmente el contenido */
 }
