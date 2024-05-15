@@ -8,19 +8,19 @@
             <img (click)="irPerfil()" src="{{fotoPerfil}}" alt="Foto de perfil">
         </div>
     </div>
-     
-    <div  class="infoDeUsuario">
-        
+
+    <div class="infoDeUsuario">
+
         <ng-container>
             {{usuarioLogeado.nombre}}
             {{apellidos}}
             {{usuarioLogeado.dni}}
         </ng-container>
-       
+
     </div>
 </div>
 
-    <app-loader-minimalista *ngIf="loadingUsuarioInfo"></app-loader-minimalista>
+<app-loader-minimalista *ngIf="loadingUsuarioInfo"></app-loader-minimalista>
 
 <div class="opciones">
     <button class="button-ir-dashboard" (click)="irDashbordPrincipal()">
@@ -29,7 +29,7 @@
     </button>
 </div>
 <br><br>
-<a href="/dashboard"><img src="./../../assets/img/logo.jpeg" alt="Logo del Usuario" width="70%"></a>
+<a href="/dashboard"><img src="./../../assets/img/logo.jpg" alt="Logo del Usuario" width="70%"></a>
 <ul>
     <li>
         <h4><i class="fa-solid fa-user"></i> Mis Equipos</h4>
@@ -43,8 +43,9 @@
             </a>
 
         </li>
-        <h4 *ngIf="!loadingEquipos && equipos.length === 0" style="text-align: center; color: grey;">No hay ningún equipo disponible</h4>
-        
+        <h4 *ngIf="!loadingEquipos && equipos.length === 0" style="text-align: center; color: grey;">No hay ningún
+            equipo disponible</h4>
+
     </ul>
 
 </ul>
