@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { File } from 'buffer';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { el } from '@fullcalendar/core/internal-common';
 
 @Component({
   selector: 'app-register',
@@ -90,9 +91,17 @@ export class RegisterComponent {
       console.log(this.form.value);
       this.authUsuario.registrarUsuario({ dni: this.form.value.dni, nombre: this.form.value.nombre, apellidos: this.form.value.apellidos, correo: this.form.value.correo, contrasena: this.form.value.contrasena, fechaNacimiento: this.form.value.fecha, genero: this.form.value.genero, imagen: this.imagen }).subscribe(
         (result) => {
-          console.log(result);
-          this.toastr.success("Te registraste con éxito");
-          this.irALogin();
+          if (result == "correoExiste") {
+            this.toastr.error("El correo ya está registrado");
+            return;
+          }
+          if (result == "dniExiste") {
+            this.toastr.error("El dni ya está registrado");
+            return;
+          } else {
+            this.toastr.success("Te registraste con éxito");
+            this.irALogin();
+          }
         },
         (error) => {
           this.toastr.error("Asegurate de que el correo o el dni sean correctos");

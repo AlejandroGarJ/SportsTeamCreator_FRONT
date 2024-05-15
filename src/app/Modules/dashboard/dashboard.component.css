@@ -197,24 +197,38 @@ p {
     /* Cambia el cursor al pasar sobre el icono */
 }
 
+.imagen {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    color: white;
+}
 
 .imagen img {
     border-radius: 100%;
-    margin-right: 2%;
     width: 20%;
     height: auto;
+}
+
+.imagen a {
+    margin-top: 5%;
     margin-left: 10%;
+    margin-right: 2%;
+    font-size: 150%;
+    color: white;
 }
-.perfil{
-   
- 
+
+.imagen a:hover {
+    color: #47A1F6;
 }
-.imagen{
+
+.imagen {
     max-width: 200px;
     max-height: 200px;
     display: flex;
     justify-content: end;
 }
+
 .clubWrapper {
     position: absolute;
     display: none;

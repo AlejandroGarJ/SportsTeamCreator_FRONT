@@ -46,27 +46,27 @@ export class DashboardComponent {
   }
 
   constructor(private router: Router,
-              private dashboardService: DashboardService,
-              private clubService: ClubControllerService, 
-              private toastr: ToastrService, 
-              private http: HttpClient,
-              private usuarioInfo: InfoUsuarioService
-            
-    ) {
+    private dashboardService: DashboardService,
+    private clubService: ClubControllerService,
+    private toastr: ToastrService,
+    private http: HttpClient,
+    private usuarioInfo: InfoUsuarioService
+
+  ) {
 
     this.usuarioLogeado = obtenerSessionUsuario();
     this.loadingInfoUsuario = true;
     this.usuarioInfo.info(this.usuarioLogeado.token_session, this.usuarioLogeado.dni).subscribe(
-    (infoUsuario) => {
-      this.imagenUsuario = infoUsuario.imagen;
-      this.loadingInfoUsuario = false;
-    }
+      (infoUsuario) => {
+        this.imagenUsuario = infoUsuario.imagen;
+        this.loadingInfoUsuario = false;
+      }
     );
 
   }
 
   irPerfil() {
-    this.router.navigate(['/perfil']) 
+    this.router.navigate(['/perfil'])
   }
 
   seeName() {
@@ -101,7 +101,10 @@ export class DashboardComponent {
     this.pagina = 1;
     this.searchClub(true);
   }
-
+  cerrarSesion() {
+    localStorage.removeItem('sessionUsuario');
+    this.router.navigate(['/login']);
+  }
   infiniteScroll(scroll: Event) {
     const target = scroll.target as HTMLElement;
     if (target.scrollTop == (target.scrollHeight - target.clientHeight)) {

@@ -40,8 +40,9 @@
                     </div>
                 </div>
                 <div *ngIf="!loadingInfoUsuario" class="imagen">
-                    <img (click)="irPerfil()" class="perfil"
-                        src="{{ imagenUsuario }}" alt="Foto de perfil">
+                    <img (click)="irPerfil()" class="perfil" src="{{ imagenUsuario }}" alt="Foto de perfil">
+                    <a (click)="cerrarSesion()"><i class="fa-solid fa-right-from-bracket"></i></a>
+
                 </div>
                 <app-loader-minimalista *ngIf="loadingInfoUsuario"></app-loader-minimalista>
 
