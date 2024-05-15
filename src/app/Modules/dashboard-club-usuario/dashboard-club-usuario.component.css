@@ -337,3 +337,19 @@ full-calendar {
     align-items: center;
     /* Centra verticalmente el contenido */
 }
+
+.entrenamiento {
+    color: #3788d8;
+}
+
+.partido {
+    color: #d83737;
+}
+
+.reunion {
+    color: #37d84b;
+}
+
+.otro {
+    color: #d8b837;
+}

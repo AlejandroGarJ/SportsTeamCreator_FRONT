@@ -137,10 +137,29 @@ export class DashboardClubUsuarioComponent {
       }
     },
 
-    eventClick: this.handleEventClick.bind(this)
+    eventClick: this.handleEventClick.bind(this),
+    eventBackgroundColor: '#3788d8',
+    eventBorderColor: '#3788d8',
+    eventTextColor: '#ffffff',
+    eventDisplay: 'block',
+    eventTimeFormat: { hour: 'numeric', minute: '2-digit', omitZeroMinute: false, meridiem: 'short' },
+    eventDidMount: function (info) {
+      if (info.event.extendedProps['type'] === 'entrenamiento') {
+        info.el.style.backgroundColor = '#3788d8';
+        info.el.style.borderColor = '#3788d8';
+      } else if (info.event.extendedProps['type'] === 'partido') {
+        info.el.style.backgroundColor = '#d83737';
+        info.el.style.borderColor = '#d83737';
+      } else if (info.event.extendedProps['type'] === 'reunion') {
+        info.el.style.backgroundColor = '#37d84b';
+        info.el.style.borderColor = '#37d84b';
+      } else {
+        info.el.style.backgroundColor = '#d8b837';
+        info.el.style.borderColor = '#d8b837';
+      }
+    }
 
   };
-
   handleEventClick(info: any) {
     const dialogRef = this.dialog.open(PopUpDetallesEventoComponent, {
       width: '50%',

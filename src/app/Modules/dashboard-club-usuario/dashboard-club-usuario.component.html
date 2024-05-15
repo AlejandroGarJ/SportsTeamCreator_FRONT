@@ -28,10 +28,10 @@
                     <select class="filtroCalendario" name="eventosTipo" id="eventosTipo"
                         [(ngModel)]="tipoEventoSeleccionado" (ngModelChange)="eventosDeClub()">
                         <option value="todos" selected>Todos</option>
-                        <option value="entrenamiento">Entrenamiento</option>
-                        <option value="partido">Partido</option>
-                        <option value="reunion">Reunion</option>
-                        <option value="otro">Otro</option>
+                        <option value="entrenamiento" class="entrenamiento">Entrenamiento</option>
+                        <option value="partido" class="partido">Partido</option>
+                        <option value="reunion" class="reunion">Reunion</option>
+                        <option value="otro" class="otro">Otro</option>
                     </select>
 
                     <button *ngIf="admin" (click)="crearEvento()"><i class="fa-solid fa-plus"></i></button>
@@ -67,8 +67,8 @@
             </div>
         </div>
         <div id="abajo" *ngIf="!mostrarEquipos && equiposClub">
-            <div class="loader" id="loaderContainer">
-                <app-loader1 *ngIf="showLoader"></app-loader1>
+            <div class="loader" id="loaderContainer" *ngIf="showLoader">
+                <app-loader1></app-loader1>
             </div>
             <div class="calendario" *ngIf="!showLoader">
                 <h1>Equipos a los que puedes unirte del Club:</h1>
