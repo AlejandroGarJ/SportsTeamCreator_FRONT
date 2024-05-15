@@ -8,6 +8,7 @@ import { Usuario, UsuarioInit } from '../../../Core/Models/usuario.model';
 import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-perfil',
@@ -20,7 +21,7 @@ export class PerfilComponent {
   usuario: Usuario = UsuarioInit;
   modificando: boolean = false;
   imagen: any ="";
-  constructor(private router: Router, private infoUsuario: InfoUsuarioService, private http: HttpClient, private toastr: ToastrService) {
+  constructor(private router: Router, private infoUsuario: InfoUsuarioService, private http: HttpClient, private toastr: ToastrService, private location: Location) {
     this.usuarioLogeado = obtenerSessionUsuario();
 
     this.obtenerInfoUsuario();
@@ -33,7 +34,7 @@ export class PerfilComponent {
     this.router.navigate(['correo-cambio-contrasena']);
   }
   irAtras() {
-    this.router.navigate(['dashboard']);
+    this.location.back();
   }
 
 

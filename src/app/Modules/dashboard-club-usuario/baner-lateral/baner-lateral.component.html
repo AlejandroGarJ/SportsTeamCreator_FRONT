@@ -1,7 +1,32 @@
+<div class="infoUsuario">
+    <div class="contenedor-perfil">
+        <img *ngIf="!loadingUsuarioInfo" (click)="irPerfil()" src="{{fotoPerfil}}" alt="Foto de perfil">
+        <app-loader-minimalista *ngIf="loadingUsuarioInfo"></app-loader-minimalista>
+      </div>
+     
+     
+    <div  class="infoDeUsuario">
+        <app-loader-minimalista *ngIf="loadingUsuarioInfo"></app-loader-minimalista>
+        <ng-container *ngIf="!loadingUsuarioInfo">
+            {{usuarioLogeado.nombre}}
+            {{apellidos}}
+            {{usuarioLogeado.dni}}
+        </ng-container>
+       
+    </div>
+</div>
+<div class="opciones">
+    <button class="button-ir-dashboard" (click)="irDashbordPrincipal()">
+        <i class="fa-solid fa-house"></i>
+        <h4>Ir al dashboard principal</h4>
+    </button>
+</div>
+<br><br>
 <a href="/dashboard"><img src="./../../assets/img/logo.jpeg" alt="Logo del Usuario" width="70%"></a>
 <ul>
     <li>
         <h4><i class="fa-solid fa-user"></i> Mis Equipos</h4>
+        <app-loader-minimalista *ngIf="loadingEquipos"></app-loader-minimalista>
     </li>
     <ul>
         <li *ngFor="let equipo of equipos">
@@ -11,6 +36,7 @@
             </a>
 
         </li>
+        
     </ul>
 
 </ul>

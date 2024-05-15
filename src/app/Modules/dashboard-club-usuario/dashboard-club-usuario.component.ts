@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 import { PopUpCrearEquipoComponent } from './pop-up-crear-equipo/pop-up-crear-equipo.component';
 import { Equipo } from '../../Core/Models/equipo.model'; // Import Equipo
 import { Observable, forkJoin } from 'rxjs';
+import { InfoUsuarioService } from '../../Core/Services/usuario/info-usuario.service';
 
 
 
@@ -44,7 +45,12 @@ export class DashboardClubUsuarioComponent {
   visible: string = 'ajustes';
   equipos: Equipo[] = [];
 
-  constructor(private route: ActivatedRoute, private clubService: ClubControllerService, private compartido: CompartidoService, private dialog: MatDialog, private toastr: ToastrService) {
+  constructor(private route: ActivatedRoute, 
+              private clubService: ClubControllerService, 
+              private compartido: CompartidoService, 
+              private dialog: MatDialog, 
+              private toastr: ToastrService,
+              private infoUsuario: InfoUsuarioService) {
     this.usuarioLogeado = obtenerSessionUsuario();
   }
 
@@ -63,6 +69,7 @@ export class DashboardClubUsuarioComponent {
       this.mostrarEquipos = value;
     });
     this.eventosDeClub();
+
   }
   sacarRoles() {
     this.clubService.obtenerRolesUsuario({ dni: this.usuarioLogeado, id_club: this.id_club }).subscribe({
@@ -76,6 +83,8 @@ export class DashboardClubUsuarioComponent {
         console.error('Error fetching clubs:', err);
       }
     });
+
+    
   }
 
 
@@ -299,7 +308,7 @@ export class DashboardClubUsuarioComponent {
   }
 
   unirmeAEquipo(id_equipo: any) {
-    this.compartido.unirseEquipo({ dni: this.usuarioLogeado, id_equipo: id_equipo }).subscribe({
+    this.compartido.unirseEquipo({ dni_usuario: this.usuarioLogeado.dni, id_equipo: id_equipo }).subscribe({
       next: (res: any) => {
         if (res = true) {
           this.toastr.success('Te has unido al equipo correctamente');

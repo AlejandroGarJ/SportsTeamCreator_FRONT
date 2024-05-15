@@ -13,4 +13,5 @@ export class InfoUsuarioService {
     const body = { token_session, dni };
     return this.http.post<any>(environment.url + "/api/infoUsuario", body);
   }
+
 }

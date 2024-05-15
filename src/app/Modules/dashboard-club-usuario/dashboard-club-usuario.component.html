@@ -30,7 +30,7 @@
                         <option value="otro">Otro</option>
                     </select>
 
-                    <button (click)="crearEvento()"><i class="fa-solid fa-plus"></i></button>
+                    <button *ngIf="admin" (click)="crearEvento()"><i class="fa-solid fa-plus"></i></button>
                 </div>
 
 
@@ -47,7 +47,7 @@
                             <th>DNI</th>
                             <th>Nombre</th>
                             <th>Rol</th>
-                            <th>Expulsar</th>
+                            <th *ngIf="admin">Expulsar</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -55,7 +55,7 @@
                             <td>{{jugador.dni}}</td>
                             <td>{{jugador.nombre}}</td>
                             <td>{{jugador.rolClub}}</td>
-                            <td><button class="buttonTabla">Expulsar</button></td>
+                            <td *ngIf="admin"><button class="buttonTabla">Expulsar</button></td>
                         </tr>
                 </table>
             </div>
@@ -103,8 +103,8 @@
                                 [(ngModel)]="localizacion">
                         </div>
 
-                        <div class="loginButton">
-                            <button class="buttonLogin" (click)="modificarClub()">
+                        <div *ngIf="admin" class="loginButton">
+                            <button  class="buttonLogin" (click)="modificarClub()">
                                 Guardar
                             </button>
 
@@ -130,7 +130,7 @@
                                 <td>{{equipo.nombre}}</td>
                                 <td><button class="buttonTabla">Editar</button></td>
                                 <td><button class="buttonTabla"
-                                        (click)="borrarEquipo(equipo.id_equipo)">Eliminar</button></td>
+                                (click)="borrarEquipo(equipo.id_equipo)">Eliminar</button></td>
                             </tr>
                     </table>
                 </div>
