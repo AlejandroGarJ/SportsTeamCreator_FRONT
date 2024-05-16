@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { PopUpCrearEventoComponent } from '../pop-up-crear-evento/pop-up-crear-evento.component';
 import { ClubControllerService } from '../../../Core/Services/club/club-controller.service';
 import { ToastrService } from 'ngx-toastr';
+import { co } from '@fullcalendar/core/internal-common';
 
 @Component({
   selector: 'app-equipo',
@@ -56,22 +57,11 @@ export class EquipoComponent {
     this.compartido.categoriaEquipo$.subscribe(value => {
       this.categoria = value;
     });
-    this.compartido.RecargarEquipos$.subscribe(value => {
-      if (value) {
-        this.eventosDeEquipo();
-        this.compartido.setRecargarEquipos(false);
-      }
-    });
-    this.compartido.RecargarUsuarios$.subscribe(value => {
+    this.compartido.RecargarFrontEquipos$.subscribe(value => {
       if (value) {
         this.obtenerJugadores();
-        this.compartido.setRecargarUsuarios(false);
-      }
-    });
-    this.compartido.EsAdminEquipo$.subscribe(value => {
-      if (value) {
-        this.esAdminEquipo();
-        this.compartido.setEsAdminEquipo(false);
+        this.eventosDeEquipo();
+        this.compartido.setRecargarFrontEquipos(false);
       }
     });
   }
@@ -189,15 +179,20 @@ export class EquipoComponent {
           nombre: null, // Preparar para almacenar el nombre
           apellidos: null // Preparar para almacenar los apellidos
         }));
+        this.esAdminEquipo();
         this.jugadores.forEach(jugador => this.nombreJugador(jugador));
       },
+
       error: (err) => {
         console.error('Error fetching clubs:', err);
       }
     });
+
+    console.log(this.admin);
   }
 
   nombreJugador(jugador: any): void {
+    console.log("entro");
     this.clubService.nombreJugador({ dni: jugador.dni_usuario }).subscribe({
       next: (res: any) => {
         jugador.nombre = res.nombre; // Guardar nombre directamente en el jugador
@@ -224,22 +219,13 @@ export class EquipoComponent {
     }
   }
   esAdminEquipo() {
-    this.compartido.jugadoresEquipo({ id_equipo: this.idEquipo }).subscribe({
-      next: (res: any) => {
-        for (let i = 0; i < res.length; i++) {
-          if (res[i].dni_usuario === this.usuarioLogeado.dni) {
-            if (res[i].rol === "Admin") {
-              this.admin = true;
-            } else {
-              this.admin = false;
-            }
-          }
-        }
-      },
-      error: (err) => {
-        console.error('Error fetching clubs:', err);
+    for (let i = 0; i < this.jugadores.length; i++) {
+      console.log(this.jugadores[i].rol);
+      if (this.jugadores[i].dni_usuario === this.usuarioLogeado.dni && this.jugadores[i].rol === "Admin") {
+        this.admin = true;
+        break;
       }
-    });
+    }
   }
   modificarEquipo() {
   }
