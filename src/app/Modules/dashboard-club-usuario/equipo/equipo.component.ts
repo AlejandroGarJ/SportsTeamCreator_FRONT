@@ -20,6 +20,8 @@ export class EquipoComponent {
   usuarioLogeado: SessionUsuario;
   idEquipo: number | null = null;
   nombreEquipo: string = "";
+  categoria: string = "";
+  genero: string = "";
   id_club: number | null = null;
   nombreClub: string = "";
   jugadores: any[] = [];
@@ -47,6 +49,12 @@ export class EquipoComponent {
     });
     this.compartido.nombreEquipo$.subscribe(value => {
       this.nombreEquipo = value;
+    });
+    this.compartido.generoEquipo$.subscribe(value => {
+      this.genero = value;
+    });
+    this.compartido.categoriaEquipo$.subscribe(value => {
+      this.categoria = value;
     });
     this.compartido.RecargarEquipos$.subscribe(value => {
       if (value) {
@@ -232,6 +240,8 @@ export class EquipoComponent {
         console.error('Error fetching clubs:', err);
       }
     });
+  }
+  modificarEquipo() {
   }
   mostrarCalendario() {
     this.calendario = true;

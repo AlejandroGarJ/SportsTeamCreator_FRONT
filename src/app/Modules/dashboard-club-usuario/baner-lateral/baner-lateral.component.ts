@@ -87,10 +87,12 @@ export class BanerLateralComponent implements OnInit {
     this.compartido.setMostrarEquipos(false);
   }
 
-  cambiarMostrarEquipos(idEquipo: any, nombreEquipo: any) {
+  cambiarMostrarEquipos(idEquipo: any, nombreEquipo: any, genero: any, categoria: any) {
     this.compartido.setMostrarEquipos(true);
     this.compartido.setIdEquipo(idEquipo);
     this.compartido.setNombreEquipo(nombreEquipo);
+    this.compartido.setGenero(genero);
+    this.compartido.setCategoria(categoria);
     this.compartido.setRecargarEquipos(true);
     this.compartido.setRecargarUsuarios(true);
     this.compartido.setEsAdminEquipo(true);

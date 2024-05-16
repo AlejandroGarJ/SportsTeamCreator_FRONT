@@ -190,3 +190,58 @@ th {
     width: 100%;
     height: 50%;
 }
+
+.inputElement,
+.input select {
+    width: 100%;
+    height: 40px;
+    background-color: transparent;
+    border: 1px solid grey;
+    border-radius: 4px;
+    outline: none;
+    margin-bottom: 10px;
+    color: #E0E0E0;
+    font-family: "Gotham";
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.input select {
+    background-color: #081B26;
+    color: white;
+    font-family: "Gotham";
+    font-weight: bold;
+    padding: 10px 5px;
+}
+
+.ajustesclub {
+    width: 100%;
+    height: 83%;
+    padding: 2%;
+}
+
+.loginButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-family: "Gotham";
+}
+
+.loginButton button {
+    margin-top: 2%;
+    width: 220px;
+    height: 48px;
+    border-radius: 9999px;
+    background-color: #264F73;
+    border: none;
+    text-align: center;
+}
+
+.loginButton button:hover {
+    cursor: pointer;
+    background-color: #47A1F6;
+    scale: 1.1;
+    color: white;
+}

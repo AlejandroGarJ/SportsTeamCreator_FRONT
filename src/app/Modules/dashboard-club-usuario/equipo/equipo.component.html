@@ -63,3 +63,34 @@
         </table>
     </div>
 </div>
+<div id="abajo" *ngIf="ajustesEquipo && admin">
+    <div class="ajustesclub">
+        <div class="content">
+            <h1>Editar Equipo</h1>
+
+            <div class="input">
+                <h4>Nombre</h4>
+                <input type="text" class="inputElement" placeholder="Nombre" [(ngModel)]="nombreEquipo">
+            </div>
+            <div class="input">
+                <h4>Categoria</h4>
+                <input type="text" class="inputElement" placeholder="Categoria" [(ngModel)]="categoria">
+            </div>
+            <div class="input">
+                <h4>Genero</h4>
+                <select name="genero" id="genero" [(ngModel)]="genero">
+                    <option disabled selected>Selecciona un genero</option>
+                    <option value="masculino">Masculino</option>
+                    <option value="femenino">Femenino</option>
+                    <option value="mixto">Mixto</option>
+                </select>
+            </div>
+
+            <div *ngIf="admin" class="loginButton">
+                <button class="buttonLogin" (click)="modificarEquipo()">
+                    Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
