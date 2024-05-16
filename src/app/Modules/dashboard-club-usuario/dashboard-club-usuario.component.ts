@@ -65,21 +65,21 @@ export class DashboardClubUsuarioComponent {
         this.nombreClub = clubName;
       }
     });
-  
+
     this.comprobarClubYUsuario();
-    
+
   }
 
   private comprobarClubYUsuario(): void {
 
     this.clubService.comprobarUsuarioPerteneceClub(this.usuarioLogeado.dni, this.id_club).subscribe(
       (response) => {
-        if(!response) this.router.navigate(['/dashboard']);
+        if (!response) this.router.navigate(['/dashboard']);
       }
     );
   }
   ngOnInit(): void {
-    
+
     this.sacarRoles(); // Llama a sacarRoles() primero
     this.compartido.mostrarEquipos$.subscribe(value => {
       this.mostrarEquipos = value;
@@ -367,7 +367,7 @@ export class DashboardClubUsuarioComponent {
         if (res = true) {
           this.toastr.success('Te has unido al equipo correctamente');
           this.equiposDelClubNoEstaUser();
-          window.location.reload();
+          this.compartido.setEquiposUsuario(true);
         } else {
           this.toastr.error('Error al unirte al equipo');
         }

@@ -52,6 +52,12 @@ export class BanerLateralComponent implements OnInit {
         this.loadingUsuarioInfo = false;
       }
     );
+    this.compartido.EquiposUsuario$.subscribe(value => {
+      if (value) {
+        this.obtenerEquiposUsuario();
+        this.compartido.setEquiposUsuario(false);
+      }
+    });
   }
 
   obtenerEquiposUsuario(): void {
@@ -85,5 +91,8 @@ export class BanerLateralComponent implements OnInit {
     this.compartido.setMostrarEquipos(true);
     this.compartido.setIdEquipo(idEquipo);
     this.compartido.setNombreEquipo(nombreEquipo);
+    this.compartido.setRecargarEquipos(true);
+    this.compartido.setRecargarUsuarios(true);
+    this.compartido.setEsAdminEquipo(true);
   }
 }
