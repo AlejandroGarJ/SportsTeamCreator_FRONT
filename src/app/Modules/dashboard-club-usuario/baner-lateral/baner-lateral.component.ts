@@ -52,12 +52,12 @@ export class BanerLateralComponent implements OnInit {
         this.loadingUsuarioInfo = false;
       }
     );
-    this.compartido.EquiposUsuario$.subscribe(value => {
+ /*   this.compartido.EquiposUsuario$.subscribe(value => {
       if (value) {
         this.obtenerEquiposUsuario();
         this.compartido.setEquiposUsuario(false);
       }
-    });
+    });*/
   }
 
   obtenerEquiposUsuario(): void {
@@ -75,7 +75,7 @@ export class BanerLateralComponent implements OnInit {
         }
       });
     } else {
-      console.error('Club ID is not available');
+      this.router.navigate(['/dashboard']);
     }
   }
 

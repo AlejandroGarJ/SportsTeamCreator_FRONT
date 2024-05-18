@@ -15,6 +15,8 @@ import { Equipo } from '../../Core/Models/equipo.model'; // Import Equipo
 import { Observable, forkJoin } from 'rxjs';
 import { InfoUsuarioService } from '../../Core/Services/usuario/info-usuario.service';
 import { PopUpEditarEquipoComponent } from './pop-up-editar-equipo/pop-up-editar-equipo.component';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
 
 
 
@@ -54,7 +56,8 @@ export class DashboardClubUsuarioComponent {
     private dialog: MatDialog,
     private toastr: ToastrService,
     private infoUsuario: InfoUsuarioService,
-    private router: Router) {
+    private router: Router,
+    private http: HttpClient) {
     this.usuarioLogeado = obtenerSessionUsuario();
     // Extract the clubId from the query parameters
     this.route.queryParams.subscribe(params => {
@@ -336,6 +339,15 @@ export class DashboardClubUsuarioComponent {
         console.error('Error al obtener la información:', err);
       }
     });
+  }
+
+  cambiarRolClub(dni: string, rolClub: string){
+    console.log(rolClub);
+      const body = { dni, rolClub: rolClub, id_club: this.id_club };
+      this.http.post<any>(environment.url + "/api/cambiarRolClub", body).subscribe(
+        () => this.toastr.success("Rol cambiado con éxito")
+      );
+    
   }
 
   equiposDelClub(): Observable<Equipo[]> {

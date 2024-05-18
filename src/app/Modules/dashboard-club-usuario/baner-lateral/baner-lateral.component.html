@@ -36,7 +36,7 @@
         <app-loader-minimalista *ngIf="loadingEquipos"></app-loader-minimalista>
     </li>
     <ul>
-        <li *ngFor="let equipo of equipos">
+        <li *ngFor="let equipo of equipos | async">
             <a [routerLink]="['/dashboard/club']" [queryParams]="{clubId: id_club, nombreClub: nombreClub}"
                 (click)="cambiarMostrarEquipos(equipo.id_equipo, equipo.nombre, equipo.genero, equipo.categoria)">
                 <button>{{ equipo.nombre }}</button>
