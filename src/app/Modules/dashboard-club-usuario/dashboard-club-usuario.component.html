@@ -62,13 +62,13 @@
                             <td>{{jugador.nombre}}</td>
                             <td>{{jugador.apellidos}}</td>
                             <td>
-                                <div class="selectRol" *ngIf="admin">
+                                <div class="selectRol" *ngIf="admin && jugador.dni != usuarioLogeado.dni">
                                 <select name="rol" id="rol" (change)="cambiarRolClub(jugador.dni, jugador.rolClub === 'plebeyo' ? 'administrador' : 'plebeyo')">
                                     <option [selected]="jugador.rolClub === 'plebeyo'" value="plebeyo">Plebeyo</option>
                                     <option [selected]="jugador.rolClub === 'administrador'" value="administrador">Administrador</option>          
                                 </select>
                                 </div>
-                                <div class="rol" *ngIf="!admin">{{jugador.rolClub}}</div>
+                                <div class="rol" *ngIf="!admin || (admin && usuarioLogeado.dni === jugador.dni)">{{jugador.rolClub}}</div>
                             </td>
                             <td *ngIf="admin"><button class="buttonTabla">Expulsar</button></td>
                         </tr>
