@@ -5,29 +5,29 @@ img {
 button {
     background-color: #264F73;
     color: white;
+    font-weight: bold;
     border: none;
     padding: 10px;
     width: 100%;
     border-radius: 10px;
     margin-bottom: 6%;
+    transition: all 0.3s;
 }
 
 
 button:hover {
     background-color: #47A1F6;
-    transition: all 0.3s;
-    color: #264F73;
     cursor: pointer;
-    font-weight: bold;
 }
 
-.button-ir-dashboard{
+.button-ir-dashboard {
     padding: 10px !important;
     display: flex;
     gap: 20px;
-   
+
 }
-.button-ir-dashboard h4{
+
+.button-ir-dashboard h4 {
     margin: 0px;
 }
 
@@ -36,45 +36,47 @@ ul {
     padding: 0;
 }
 
-.infoUsuario{
+.infoUsuario {
     display: flex;
     gap: 50px;
     align-items: center;
 }
 
-.circuloImagen{
+.circuloImagen {
     width: 70px;
     height: 70px;
     background-color: red;
     border-radius: 50%;
     overflow: hidden;
 }
-.circuloImagen img{
+
+.circuloImagen img {
     object-fit: cover;
     height: 100%;
     width: 100%;
 }
-.circuloImagen img:hover{
+
+.circuloImagen img:hover {
     cursor: pointer;
 }
 
-  
 
-  .contenedor-perfil img:hover{
+
+.contenedor-perfil img:hover {
     cursor: pointer;
-  }
-  
-  @media (max-width: 1200px) {
-   
+}
+
+@media (max-width: 1200px) {
+
     .contenedor-perfil {
         display: none !important;
     }
 
-    h4{
+    h4 {
         font-size: smaller;
     }
 }
 
-.opciones{
+.opciones {
     padding-top: 30px;
 }

@@ -21,6 +21,7 @@ export class BanerLateralComponent implements OnInit {
   apellidos: string = "";
   loadingUsuarioInfo: boolean = false;
   loadingEquipos: boolean = false;
+  idEquipo: number | null = null;
 
   constructor(
     private clubService: ClubControllerService,
@@ -44,6 +45,9 @@ export class BanerLateralComponent implements OnInit {
         this.obtenerEquiposUsuario(); // Fetch club data after getting clubId
       }
     });
+    this.compartido.idEquipo$.subscribe(value => {
+      this.idEquipo = value;
+    });
 
     this.infoUsuario.info(this.usuarioLogeado.token_session, this.usuarioLogeado.dni).subscribe(
       (info) => {
@@ -52,12 +56,6 @@ export class BanerLateralComponent implements OnInit {
         this.loadingUsuarioInfo = false;
       }
     );
-
-    /*   this.compartido.EquiposUsuario$.subscribe(value => {
-         if (value) {
-           this.compartido.setEquiposUsuario(false);
-         }
-       });*/
   }
 
   obtenerEquiposUsuario(): void {
@@ -82,7 +80,10 @@ export class BanerLateralComponent implements OnInit {
     this.router.navigate(['/perfil']);
   }
   irDashbordPrincipal() {
+    this.compartido.setIdEquipo(0);
+    this.obtenerEquiposUsuario();
     this.router.navigate(['/dashboard']);
+    this.obtenerEquiposUsuario();
     this.compartido.setMostrarEquipos(false);
   }
 
@@ -93,5 +94,6 @@ export class BanerLateralComponent implements OnInit {
     this.compartido.setGenero(genero);
     this.compartido.setCategoria(categoria);
     this.compartido.setRecargarFrontEquipos(true);
+
   }
 }
