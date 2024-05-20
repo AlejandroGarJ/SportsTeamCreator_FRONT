@@ -55,7 +55,6 @@ export class DashboardClubUsuarioComponent {
     private compartido: CompartidoService,
     private dialog: MatDialog,
     private toastr: ToastrService,
-    private infoUsuario: InfoUsuarioService,
     private router: Router,
     private http: HttpClient) {
     this.usuarioLogeado = obtenerSessionUsuario();
