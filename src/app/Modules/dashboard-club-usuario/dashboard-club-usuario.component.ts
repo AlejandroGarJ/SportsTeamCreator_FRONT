@@ -249,6 +249,7 @@ export class DashboardClubUsuarioComponent {
       next: (res: any) => {
         jugador.nombre = res.nombre; // Guardar nombre directamente en el jugador
         jugador.apellidos = res.apellidos;
+        jugador.imagen = res.imagen;
       },
       error: (err) => {
         console.error('Error fetching player name:', err);
