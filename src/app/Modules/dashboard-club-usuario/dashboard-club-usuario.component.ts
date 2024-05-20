@@ -404,4 +404,19 @@ export class DashboardClubUsuarioComponent {
       }
     });
   }
+  expulsarJugador(dni: any) {
+    this.compartido.expulsarUsuario({ dni: dni, id_club: this.id_club }).subscribe({
+      next: (res: any) => {
+        if (res = true) {
+          this.toastr.success('Jugador expulsado correctamente');
+          this.obtenerJugadores();
+        } else {
+          this.toastr.error('Error al expulsar al jugador');
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching clubs:', err);
+      }
+    });
+  }
 }

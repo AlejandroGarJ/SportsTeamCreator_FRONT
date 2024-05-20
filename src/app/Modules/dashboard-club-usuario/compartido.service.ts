@@ -67,6 +67,9 @@ export class CompartidoService {
   infoEquipo(data: any): Observable<any> {
     return this.http.post<any>(environment.url + "/api/infoEquipo", data);
   }
+  expulsarUsuario(data: any): Observable<any> {
+    return this.http.post<any>(environment.url + "/api/expulsarUsuario", data);
+  }
   setMostrarEquipos(valor: boolean): void {
     this.mostrarEquipos.next(valor);
   }

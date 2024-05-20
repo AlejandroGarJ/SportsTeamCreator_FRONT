@@ -74,7 +74,9 @@
                                 <div class="rol" *ngIf="!admin || (admin && usuarioLogeado.dni === jugador.dni)">
                                     {{jugador.rolClub}}</div>
                             </td>
-                            <td *ngIf="admin"><button class="buttonTabla">Expulsar</button></td>
+                            <td *ngIf="admin"><button (click)="expulsarJugador(jugador.dni)"
+                                    class="buttonTabla">Expulsar</button>
+                            </td>
                         </tr>
                 </table>
             </div>
