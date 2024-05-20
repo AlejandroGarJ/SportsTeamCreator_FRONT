@@ -94,9 +94,7 @@ export class DashboardClubUsuarioComponent {
     this.clubService.obtenerRolesUsuario({ dni: this.usuarioLogeado, id_club: this.id_club }).subscribe({
       next: (res: any) => {
         this.rol = res;
-        console.log(this.rol);
-        this.esAdmin(); // Llama a esAdmin() después de obtener los roles
-        console.log(this.admin);
+        this.esAdmin();
       },
       error: (err) => {
         console.error('Error fetching clubs:', err);
@@ -298,7 +296,6 @@ export class DashboardClubUsuarioComponent {
 
       this.clubService.obtenerDatosClub(payload).subscribe({
         next: (res: any) => {
-          console.log(res);
           this.nombreClub = res.nombre;
           this.codigoAcceso = res.codigoAcceso;
           this.localizacion = res.localizacion;
@@ -343,7 +340,6 @@ export class DashboardClubUsuarioComponent {
   }
 
   cambiarRolClub(dni: string, rolClub: string) {
-    console.log(rolClub);
     const body = { dni, rolClub: rolClub, id_club: this.id_club };
     this.http.post<any>(environment.url + "/api/cambiarRolClub", body).subscribe(
       () => this.toastr.success("Rol cambiado con éxito")

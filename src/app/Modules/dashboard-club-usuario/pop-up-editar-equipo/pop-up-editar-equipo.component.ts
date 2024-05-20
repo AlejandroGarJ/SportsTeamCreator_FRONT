@@ -19,7 +19,6 @@ export class PopUpEditarEquipoComponent {
   ngOnInit(): void {
     this.compartido.equipoPorId({ id_equipo: this.id_eqipo }).subscribe({
       next: (res: any) => {
-        console.log(res);
         this.genero = res.genero;
         this.nombreEquipo = res.nombre;
         this.categoria = res.categoria;
@@ -32,7 +31,6 @@ export class PopUpEditarEquipoComponent {
   guardarEquipo() {
     this.compartido.editarEquipo({ id_equipo: this.id_eqipo, nombre: this.nombreEquipo, categoria: this.categoria, genero: this.genero }).subscribe({
       next: (res: any) => {
-        console.log(res);
         this.toastr.success('Equipo editado correctamente', 'Correcto');
         this.dialogRef.close();
       },

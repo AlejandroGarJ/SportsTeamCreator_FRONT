@@ -37,7 +37,6 @@ export class DashboardComponent {
   loadingInfoUsuario: boolean = false;
 
   ngOnInit() {
-    console.log(this.usuarioLogeado.token_session);
     this.eventosUsuario();
     this.clubesUsuario();
   }
@@ -64,10 +63,6 @@ export class DashboardComponent {
 
   irPerfil() {
     this.router.navigate(['/perfil'])
-  }
-
-  seeName() {
-    console.log(this.usuarioLogeado.nombre);
   }
 
   @HostListener('window:resize', ['$event'])
@@ -183,7 +178,6 @@ export class DashboardComponent {
   unirseAClub() {
     this.clubService.unirseClub({ nombre: this.nombreClub, codigoAcceso: this.claveClub, dni: this.usuarioLogeado.dni, token_session: this.usuarioLogeado.token_session }).subscribe(
       (response) => {
-        console.log(response);
         if (response["unirseExito"] === true) {
           this.toastr.success('Se ha unido al club exitosamente');
           this.nombreClub = "";
@@ -202,7 +196,6 @@ export class DashboardComponent {
   crearClub() {
     this.clubService.crearClub({ nombre: this.nombreClubCrear, codigoAcceso: this.codigoAccesoCrear, localizacion: (this.ciudadCrear + ", " + this.paisCrear), dni: this.usuarioLogeado.dni }).subscribe(
       (response: any) => {
-        console.log(response);
         if (response === true) {
           this.toastr.success('Club creado exitosamente');
           this.nombreClubCrear = "";
@@ -251,8 +244,6 @@ export class DashboardComponent {
         } else {
           this.pagina = 1000;
         }
-        console.log(response);
-        console.log(this.pagina);
         if (this.pagina >= response.last_page) {
           this.showLoader = false;
 
@@ -278,9 +269,7 @@ export class DashboardComponent {
     this.loadingClubs = true;
     this.clubService.obtenerClubes({ dni: this.usuarioLogeado.dni }).subscribe(
       (response) => {
-        console.log(response);
         this.clubes = response;
-        console.log(this.clubes);
         this.loadingClubs = false;
       },
       (error) => {

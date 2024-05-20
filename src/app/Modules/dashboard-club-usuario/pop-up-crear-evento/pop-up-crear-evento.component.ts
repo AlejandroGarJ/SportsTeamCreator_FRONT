@@ -29,7 +29,6 @@ export class PopUpCrearEventoComponent {
   }
 
   ngOnInit(): void {
-    console.log(this.id_club);
   }
 
   crearEvento() {

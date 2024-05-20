@@ -17,7 +17,10 @@
     </div>
 
 </div>
-<div id="abajo" *ngIf="calendario">
+<div class="loader" id="loaderContainer" *ngIf="showLoaderCalendario">
+    <app-loader-minimalista *ngIf="showLoaderCalendario"></app-loader-minimalista>
+</div>
+<div id="abajo" *ngIf="calendario && !showLoaderCalendario">
     <div class="calendario">
         <div class="titulo">
             <h1>Calendario:</h1>
@@ -34,7 +37,10 @@
         <full-calendar [options]="calendarOptions"></full-calendar>
     </div>
 </div>
-<div id="abajo" *ngIf="jugadoresEquipo">
+<div class="loader" id="loaderContainer" *ngIf="showLoaderJugadores">
+    <app-loader-minimalista *ngIf="showLoaderJugadores"></app-loader-minimalista>
+</div>
+<div id="abajo" *ngIf="jugadoresEquipo && !showLoaderJugadores">
     <div class="jugadores">
         <h1>Jugadores del Equipo:</h1>
         <table>
@@ -56,7 +62,14 @@
                     <td>{{jugador.dni_usuario}}</td>
                     <td>{{jugador.nombre}}</td>
                     <td>{{jugador.apellidos}}</td>
-                    <td>{{jugador.dorsal}}</td>
+                    <td>
+                        <div class="selectRol" *ngIf="admin && jugador.dni_usuario != usuarioLogeado.dni">
+                            <input type="number" [value]="jugador.dorsal"
+                                (change)="cambiarDorsalEquipo(jugador.dni_usuario, $event)">
+                        </div>
+                        <div class="rol" *ngIf="!admin || jugador.dni_usuario == usuarioLogeado.dni">
+                            {{jugador.dorsal}}</div>
+                    </td>
                     <td>
                         <div class="selectRol" *ngIf="admin && jugador.dni_usuario != usuarioLogeado.dni">
                             <select name="funcion" id="funcion"
@@ -74,8 +87,7 @@
                     </td>
                     <td>
                         <div class="selectRol" *ngIf="admin && jugador.dni_usuario != usuarioLogeado.dni">
-                            <select name="rol" id="rol"
-                                (change)="cambiarRolEquipo(jugador.dni_usuario, jugador.rol === 'Usuario' ? 'Admin' : 'Admin')">
+                            <select name="rol" id="rol" (change)="cambiarRolEquipo(jugador.dni_usuario, $event)">
                                 <option [selected]="jugador.rol === 'Usuario'" value="Usuario">Usuario
                                 </option>
                                 <option [selected]="jugador.rol === 'Admin'" value="Admin">

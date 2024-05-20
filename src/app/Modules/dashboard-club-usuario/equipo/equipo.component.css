@@ -176,8 +176,11 @@ td img {
     border-radius: 50%;
 }
 
-td select {
+td select,
+td input {
     background-color: transparent;
+    border: 1px solid grey;
+    text-align: center;
     color: white;
     padding: 2%;
     border-radius: 20px;

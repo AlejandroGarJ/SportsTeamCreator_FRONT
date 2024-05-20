@@ -12,7 +12,6 @@ import { ClubControllerService } from '../../../Core/Services/club/club-controll
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
-import { co } from '@fullcalendar/core/internal-common';
 
 @Component({
   selector: 'app-equipo',
@@ -34,7 +33,9 @@ export class EquipoComponent {
   admin: boolean = true;
   comprobacionAdmin: boolean = false;
   tipoEventoSeleccionado: string = "todos";
-
+  showLoaderCalendario: boolean = true;
+  showLoaderJugadores: boolean = true;
+  showLoaderAjustes: boolean = true;
   constructor(private route: ActivatedRoute, private compartido: CompartidoService, private dialog: MatDialog, private clubService: ClubControllerService, private toastr: ToastrService, private http: HttpClient) {
     this.usuarioLogeado = obtenerSessionUsuario();
 
@@ -85,7 +86,7 @@ export class EquipoComponent {
           location: evento.ubicacion,
           type: evento.tipo
         }));
-
+        this.showLoaderCalendario = false;
       },
       (error) => {
         console.error("Hubo un error al intentar obtener los eventos del usuario:", error);
@@ -169,26 +170,24 @@ export class EquipoComponent {
   obtenerJugadores(): void {
     this.compartido.jugadoresEquipo({ id_equipo: this.idEquipo }).subscribe({
       next: (jugadores: any[]) => {
-        console.log(jugadores);
         this.jugadores = jugadores.map(jugador => ({
           ...jugador,
           nombre: null, // Preparar para almacenar el nombre
-          apellidos: null // Preparar para almacenar los apellidos
+          apellidos: null, // Preparar para almacenar los apellidos
+          imagen: null // Preparar para almacenar la imagen
         }));
         this.esAdminEquipo();
         this.jugadores.forEach(jugador => this.nombreJugador(jugador));
+        this.showLoaderJugadores = false;
       },
 
       error: (err) => {
         console.error('Error fetching clubs:', err);
       }
     });
-
-    console.log(this.admin);
   }
 
   nombreJugador(jugador: any): void {
-    console.log("entro");
     this.clubService.nombreJugador({ dni: jugador.dni_usuario }).subscribe({
       next: (res: any) => {
         jugador.nombre = res.nombre; // Guardar nombre directamente en el jugador
@@ -217,7 +216,6 @@ export class EquipoComponent {
   }
   esAdminEquipo() {
     for (let i = 0; i < this.jugadores.length; i++) {
-      console.log(this.jugadores[i].rol);
       if (this.jugadores[i].dni_usuario === this.usuarioLogeado.dni && this.jugadores[i].rol === "Admin") {
         this.admin = true;
         this.comprobacionAdmin = true;
@@ -229,9 +227,10 @@ export class EquipoComponent {
       }
     }
   }
-  cambiarRolEquipo(dni: any, rol: any) {
-    console.log(rol);
-    const body = { dni: dni, rol: rol, id_equipo: this.idEquipo };
+  cambiarRolEquipo(dni_usuario: any, event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    const selectedValue = selectElement.value;
+    const body = { dni_usuario: dni_usuario, rol: selectedValue, id_equipo: this.idEquipo };
     this.http.post<any>(environment.url + "/api/cambiarRolEquipo", body).subscribe(
       () => this.toastr.success("Rol cambiado con éxito")
     );
@@ -239,18 +238,18 @@ export class EquipoComponent {
   cambiarFuncionEquipo(dni_usuario: string, event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     const selectedValue = selectElement.value;
-    console.log(selectedValue);
     const body2 = { dni_usuario: dni_usuario, funcion: selectedValue, id_equipo: this.idEquipo };
     this.http.post<any>(environment.url + "/api/cambiarFuncionEquipo", body2).subscribe(
       (response) => {
-        if (response = "Ok") { this.toastr.success("Rol cambiado con éxito") } else { this.toastr.error("Error al cambiar la función del jugador") }
+        if (response = "Ok") { this.toastr.success("Funcion cambiada con éxito") } else { this.toastr.error("Error al cambiar la función del jugador") }
       }
     );
   }
-  cambiarDorsalEquipo(dni: any, dorsal: any) {
-    console.log(dorsal);
-    const body = { dni_usario: dni, dorsal: dorsal, id_equipo: this.id_club };
-    this.http.post<any>(environment.url + "/api/cambiarDorsalEquipo", body).subscribe(
+  cambiarDorsalEquipo(dni_usuario: any, event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const dorsal = inputElement.value;
+    const body3 = { dni_usuario: dni_usuario, dorsal: dorsal, id_equipo: this.idEquipo };
+    this.http.post<any>(environment.url + "/api/cambiarDorsalEquipo", body3).subscribe(
       () => this.toastr.success("Dorsal cambiado con éxito")
     );
   }
