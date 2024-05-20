@@ -341,13 +341,13 @@ export class DashboardClubUsuarioComponent {
     });
   }
 
-  cambiarRolClub(dni: string, rolClub: string){
+  cambiarRolClub(dni: string, rolClub: string) {
     console.log(rolClub);
-      const body = { dni, rolClub: rolClub, id_club: this.id_club };
-      this.http.post<any>(environment.url + "/api/cambiarRolClub", body).subscribe(
-        () => this.toastr.success("Rol cambiado con éxito")
-      );
-    
+    const body = { dni, rolClub: rolClub, id_club: this.id_club };
+    this.http.post<any>(environment.url + "/api/cambiarRolClub", body).subscribe(
+      () => this.toastr.success("Rol cambiado con éxito")
+    );
+
   }
 
   equiposDelClub(): Observable<Equipo[]> {
@@ -379,7 +379,6 @@ export class DashboardClubUsuarioComponent {
         if (res = true) {
           this.toastr.success('Te has unido al equipo correctamente');
           this.equiposDelClubNoEstaUser();
-          this.compartido.setEquiposUsuario(true);
         } else {
           this.toastr.error('Error al unirte al equipo');
         }

@@ -13,7 +13,6 @@ export class CompartidoService {
   private nombreEquipo = new BehaviorSubject<string>('');
   private generoEquipo = new BehaviorSubject<string>('');
   private categoriaEquipo = new BehaviorSubject<string>('');
-  private EquiposUsuario = new BehaviorSubject<boolean>(false);
   private RecargarFrontEquipos = new BehaviorSubject<boolean>(false);
 
   // Observable que los componentes pueden suscribirse
@@ -22,7 +21,6 @@ export class CompartidoService {
   public nombreEquipo$ = this.nombreEquipo.asObservable();
   public generoEquipo$ = this.generoEquipo.asObservable();
   public categoriaEquipo$ = this.categoriaEquipo.asObservable();
-  public EquiposUsuario$ = this.EquiposUsuario.asObservable();
   public RecargarFrontEquipos$ = this.RecargarFrontEquipos.asObservable();
 
   constructor(private http: HttpClient) { }
@@ -83,9 +81,6 @@ export class CompartidoService {
   }
   setCategoria(valor: string): void {
     this.categoriaEquipo.next(valor);
-  }
-  setEquiposUsuario(valor: boolean): void {
-    this.EquiposUsuario.next(valor);
   }
   setRecargarFrontEquipos(valor: boolean): void {
     this.RecargarFrontEquipos.next(valor);

@@ -52,12 +52,12 @@ export class BanerLateralComponent implements OnInit {
         this.loadingUsuarioInfo = false;
       }
     );
- /*   this.compartido.EquiposUsuario$.subscribe(value => {
-      if (value) {
-        this.obtenerEquiposUsuario();
-        this.compartido.setEquiposUsuario(false);
-      }
-    });*/
+
+    /*   this.compartido.EquiposUsuario$.subscribe(value => {
+         if (value) {
+           this.compartido.setEquiposUsuario(false);
+         }
+       });*/
   }
 
   obtenerEquiposUsuario(): void {
@@ -66,7 +66,6 @@ export class BanerLateralComponent implements OnInit {
 
       this.clubService.obtenerEquiposUsuario(payload).subscribe({
         next: (res: any) => {
-          this.compartido.setEquiposUsuario(res);
           this.equipos = res;
           this.loadingEquipos = false;
         },
