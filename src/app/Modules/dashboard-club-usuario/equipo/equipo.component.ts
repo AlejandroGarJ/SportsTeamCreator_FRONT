@@ -10,7 +10,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { PopUpCrearEventoComponent } from '../pop-up-crear-evento/pop-up-crear-evento.component';
 import { ClubControllerService } from '../../../Core/Services/club/club-controller.service';
 import { ToastrService } from 'ngx-toastr';
-import { co } from '@fullcalendar/core/internal-common';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-equipo',
@@ -29,10 +30,13 @@ export class EquipoComponent {
   calendario: boolean = true;
   jugadoresEquipo: boolean = false;
   ajustesEquipo: boolean = false;
-  admin: boolean = false;
+  admin: boolean = true;
+  comprobacionAdmin: boolean = false;
   tipoEventoSeleccionado: string = "todos";
-
-  constructor(private route: ActivatedRoute, private compartido: CompartidoService, private dialog: MatDialog, private clubService: ClubControllerService, private toastr: ToastrService) {
+  showLoaderCalendario: boolean = true;
+  showLoaderJugadores: boolean = true;
+  showLoaderAjustes: boolean = true;
+  constructor(private route: ActivatedRoute, private compartido: CompartidoService, private dialog: MatDialog, private clubService: ClubControllerService, private toastr: ToastrService, private http: HttpClient) {
     this.usuarioLogeado = obtenerSessionUsuario();
 
   }
@@ -59,6 +63,7 @@ export class EquipoComponent {
     });
     this.compartido.RecargarFrontEquipos$.subscribe(value => {
       if (value) {
+        this.comprobacionAdmin = false;
         this.obtenerJugadores();
         this.eventosDeEquipo();
         this.compartido.setRecargarFrontEquipos(false);
@@ -81,7 +86,7 @@ export class EquipoComponent {
           location: evento.ubicacion,
           type: evento.tipo
         }));
-
+        this.showLoaderCalendario = false;
       },
       (error) => {
         console.error("Hubo un error al intentar obtener los eventos del usuario:", error);
@@ -159,44 +164,35 @@ export class EquipoComponent {
       this.eventosDeEquipo();
     });
   }
-  obtenerEquipo() {
-    this.compartido.equipoPorId({ id_equipo: this.idEquipo }).subscribe(
-      (response) => {
+  modificarEquipo() {
 
-      },
-      (error) => {
-        console.error("Hubo un error al intentar obtener los eventos del usuario:", error);
-      }
-    );
   }
-
   obtenerJugadores(): void {
     this.compartido.jugadoresEquipo({ id_equipo: this.idEquipo }).subscribe({
       next: (jugadores: any[]) => {
-        console.log(jugadores);
         this.jugadores = jugadores.map(jugador => ({
           ...jugador,
           nombre: null, // Preparar para almacenar el nombre
-          apellidos: null // Preparar para almacenar los apellidos
+          apellidos: null, // Preparar para almacenar los apellidos
+          imagen: null // Preparar para almacenar la imagen
         }));
         this.esAdminEquipo();
         this.jugadores.forEach(jugador => this.nombreJugador(jugador));
+        this.showLoaderJugadores = false;
       },
 
       error: (err) => {
         console.error('Error fetching clubs:', err);
       }
     });
-
-    console.log(this.admin);
   }
 
   nombreJugador(jugador: any): void {
-    console.log("entro");
     this.clubService.nombreJugador({ dni: jugador.dni_usuario }).subscribe({
       next: (res: any) => {
         jugador.nombre = res.nombre; // Guardar nombre directamente en el jugador
         jugador.apellidos = res.apellidos;
+        jugador.imagen = res.imagen;
       },
       error: (err) => {
         console.error('Error fetching player name:', err);
@@ -220,14 +216,42 @@ export class EquipoComponent {
   }
   esAdminEquipo() {
     for (let i = 0; i < this.jugadores.length; i++) {
-      console.log(this.jugadores[i].rol);
       if (this.jugadores[i].dni_usuario === this.usuarioLogeado.dni && this.jugadores[i].rol === "Admin") {
         this.admin = true;
+        this.comprobacionAdmin = true;
+        break;
+      } else if (this.jugadores[i].dni_usuario === this.usuarioLogeado.dni && this.jugadores[i].rol === "Usuario") {
+        this.admin = false;
+        this.comprobacionAdmin = true;
         break;
       }
     }
   }
-  modificarEquipo() {
+  cambiarRolEquipo(dni_usuario: any, event: Event) {
+    const selectElement = event.target as HTMLSelectElement;
+    const selectedValue = selectElement.value;
+    const body = { dni_usuario: dni_usuario, rol: selectedValue, id_equipo: this.idEquipo };
+    this.http.post<any>(environment.url + "/api/cambiarRolEquipo", body).subscribe(
+      () => this.toastr.success("Rol cambiado con éxito")
+    );
+  }
+  cambiarFuncionEquipo(dni_usuario: string, event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const selectedValue = selectElement.value;
+    const body2 = { dni_usuario: dni_usuario, funcion: selectedValue, id_equipo: this.idEquipo };
+    this.http.post<any>(environment.url + "/api/cambiarFuncionEquipo", body2).subscribe(
+      (response) => {
+        if (response = "Ok") { this.toastr.success("Funcion cambiada con éxito") } else { this.toastr.error("Error al cambiar la función del jugador") }
+      }
+    );
+  }
+  cambiarDorsalEquipo(dni_usuario: any, event: Event) {
+    const inputElement = event.target as HTMLInputElement;
+    const dorsal = inputElement.value;
+    const body3 = { dni_usuario: dni_usuario, dorsal: dorsal, id_equipo: this.idEquipo };
+    this.http.post<any>(environment.url + "/api/cambiarDorsalEquipo", body3).subscribe(
+      () => this.toastr.success("Dorsal cambiado con éxito")
+    );
   }
   mostrarCalendario() {
     this.calendario = true;
@@ -240,6 +264,7 @@ export class EquipoComponent {
     this.ajustesEquipo = false;
   }
   volverClub() {
+    this.compartido.setIdEquipo(0);
     this.compartido.setMostrarEquipos(false);
     this.calendario = true;
     this.jugadoresEquipo = false;

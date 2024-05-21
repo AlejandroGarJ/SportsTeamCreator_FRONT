@@ -10,6 +10,9 @@ import { obtenerSessionUsuario } from '../../shared/guardarSessionUsuario/guarda
 import { ToastrService } from 'ngx-toastr';
 import { HttpClient } from '@angular/common/http';
 import { InfoUsuarioService } from '../../Core/Services/usuario/info-usuario.service';
+import { PopUpCrearEventoComponent } from '../dashboard-club-usuario/pop-up-crear-evento/pop-up-crear-evento.component';
+import { MatDialog } from '@angular/material/dialog';
+import { PopUpDetallesEventoComponent } from '../dashboard-club-usuario/pop-up-detalles-evento/pop-up-detalles-evento.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -35,10 +38,10 @@ export class DashboardComponent {
   imagenUsuario: any;
   loadingClubs: boolean = false;
   loadingInfoUsuario: boolean = false;
+  tipoEventoSeleccionado: string = "todos";
 
   ngOnInit() {
-    console.log(this.usuarioLogeado.token_session);
-    this.eventosUsuario();
+    this.eventosDeUsuario();
     this.clubesUsuario();
   }
 
@@ -47,7 +50,8 @@ export class DashboardComponent {
     private clubService: ClubControllerService,
     private toastr: ToastrService,
     private http: HttpClient,
-    private usuarioInfo: InfoUsuarioService
+    private usuarioInfo: InfoUsuarioService,
+    public dialog: MatDialog
 
   ) {
 
@@ -64,10 +68,6 @@ export class DashboardComponent {
 
   irPerfil() {
     this.router.navigate(['/perfil'])
-  }
-
-  seeName() {
-    console.log(this.usuarioLogeado.nombre);
   }
 
   @HostListener('window:resize', ['$event'])
@@ -140,13 +140,17 @@ export class DashboardComponent {
   }
 
 
-  eventosUsuario() {
-    this.clubService.obtenerEventosUsuario({ dni: this.usuarioLogeado.dni }).subscribe(
+  eventosDeUsuario() {
+    this.clubService.obtenerEventosUsuario({ dni: this.usuarioLogeado.dni, tipo: this.tipoEventoSeleccionado }).subscribe(
       (response) => {
-        this.calendarOptions.events = response.map((evento: { titulo: any; fechaInicio: any; fechaFin: any; }) => ({
+        this.calendarOptions.events = response.map((evento: { titulo: any; fechaInicio: any; fechaFin: any; descripcion: any; ubicacion: any; tipo: any; id: any }) => ({
+          id: evento.id,
           title: evento.titulo,
           start: evento.fechaInicio,
-          end: evento.fechaFin
+          end: evento.fechaFin,
+          description: evento.descripcion,
+          location: evento.ubicacion,
+          type: evento.tipo
         }));
 
       },
@@ -155,10 +159,24 @@ export class DashboardComponent {
       }
     );
   }
+  crearEvento() {
+    const dialogRef = this.dialog.open(PopUpCrearEventoComponent, {
+      width: '50%',
+      height: '50%',
+      data: { dni: this.usuarioLogeado.dni }
+    });
 
+    dialogRef.afterClosed().subscribe(() => {
+      this.eventosDeUsuario();
+    });
+  }
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     plugins: [dayGridPlugin],
+    firstDay: 1,
+    events: [
+      { title: 'Cumple Ruben', date: '2024-04-14' }
+    ],
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
@@ -176,14 +194,47 @@ export class DashboardComponent {
       } else {
         arg.view.calendar.changeView('dayGridMonth');
       }
-    }
-  };
+    },
 
+
+    eventClick: this.handleEventClick.bind(this),
+    eventBackgroundColor: '#3788d8',
+    eventBorderColor: '#3788d8',
+    eventTextColor: '#ffffff',
+    eventDisplay: 'block',
+    eventTimeFormat: { hour: 'numeric', minute: '2-digit', omitZeroMinute: false, meridiem: 'short' },
+    eventDidMount: function (info) {
+      if (info.event.extendedProps['type'] === 'entrenamiento') {
+        info.el.style.backgroundColor = '#3788d8';
+        info.el.style.borderColor = '#3788d8';
+      } else if (info.event.extendedProps['type'] === 'partido') {
+        info.el.style.backgroundColor = '#d83737';
+        info.el.style.borderColor = '#d83737';
+      } else if (info.event.extendedProps['type'] === 'reunion') {
+        info.el.style.backgroundColor = '#37d84b';
+        info.el.style.borderColor = '#37d84b';
+      } else {
+        info.el.style.backgroundColor = '#d8b837';
+        info.el.style.borderColor = '#d8b837';
+      }
+    }
+
+  };
+  handleEventClick(info: any) {
+    const dialogRef = this.dialog.open(PopUpDetallesEventoComponent, {
+      width: '50%',
+      height: '50%',
+      data: { idEvento: info.event.id, nombreEvento: info.event.title, fechaInicio: info.event.start, fechaFin: info.event.end, descripcionEvento: info.event.extendedProps.description, lugarEvento: info.event.extendedProps.location, tipoEventoSeleccionado: info.event.extendedProps.type }
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.eventosDeUsuario();
+    });
+
+  }
 
   unirseAClub() {
     this.clubService.unirseClub({ nombre: this.nombreClub, codigoAcceso: this.claveClub, dni: this.usuarioLogeado.dni, token_session: this.usuarioLogeado.token_session }).subscribe(
       (response) => {
-        console.log(response);
         if (response["unirseExito"] === true) {
           this.toastr.success('Se ha unido al club exitosamente');
           this.nombreClub = "";
@@ -202,7 +253,6 @@ export class DashboardComponent {
   crearClub() {
     this.clubService.crearClub({ nombre: this.nombreClubCrear, codigoAcceso: this.codigoAccesoCrear, localizacion: (this.ciudadCrear + ", " + this.paisCrear), dni: this.usuarioLogeado.dni }).subscribe(
       (response: any) => {
-        console.log(response);
         if (response === true) {
           this.toastr.success('Club creado exitosamente');
           this.nombreClubCrear = "";
@@ -251,8 +301,6 @@ export class DashboardComponent {
         } else {
           this.pagina = 1000;
         }
-        console.log(response);
-        console.log(this.pagina);
         if (this.pagina >= response.last_page) {
           this.showLoader = false;
 
@@ -278,9 +326,7 @@ export class DashboardComponent {
     this.loadingClubs = true;
     this.clubService.obtenerClubes({ dni: this.usuarioLogeado.dni }).subscribe(
       (response) => {
-        console.log(response);
         this.clubes = response;
-        console.log(this.clubes);
         this.loadingClubs = false;
       },
       (error) => {

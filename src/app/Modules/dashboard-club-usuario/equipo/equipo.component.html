@@ -3,7 +3,7 @@
         <h1>{{nombreEquipo}}</h1>
         <h4 class="subtitulo">Bienvenido al dashboard del Equipo {{nombreEquipo}}</h4>
     </div>
-    <div class="botones">
+    <div class="botones" *ngIf="comprobacionAdmin">
         <button (click)="volverClub()"><i class="fa-solid fa-house"></i></button>
         <div class="separador"></div>
         <button (click)="mostrarCalendario()" [ngStyle]="{'color': calendario ? '#47A1F6' : '' }"><i
@@ -17,10 +17,13 @@
     </div>
 
 </div>
-<div id="abajo" *ngIf="calendario">
+<div class="loader" id="loaderContainer" *ngIf="showLoaderCalendario">
+    <app-loader-minimalista *ngIf="showLoaderCalendario"></app-loader-minimalista>
+</div>
+<div id="abajo" *ngIf="calendario && !showLoaderCalendario">
     <div class="calendario">
         <div class="titulo">
-            <h1>Calendario:</h1>
+            <h1>Calendario Equipo:</h1>
             <select class="filtroCalendario" name="eventosTipo" id="eventosTipo" [(ngModel)]="tipoEventoSeleccionado"
                 (ngModelChange)="eventosDeEquipo()">
                 <option value="todos" selected>Todos</option>
@@ -34,12 +37,16 @@
         <full-calendar [options]="calendarOptions"></full-calendar>
     </div>
 </div>
-<div id="abajo" *ngIf="jugadoresEquipo">
+<div class="loader" id="loaderContainer" *ngIf="showLoaderJugadores">
+    <app-loader-minimalista *ngIf="showLoaderJugadores"></app-loader-minimalista>
+</div>
+<div id="abajo" *ngIf="jugadoresEquipo && !showLoaderJugadores">
     <div class="jugadores">
         <h1>Jugadores del Equipo:</h1>
         <table>
             <thead>
                 <tr>
+                    <th>Foto de perfil</th>
                     <th>DNI</th>
                     <th>Nombre</th>
                     <th>Apellidos</th>
@@ -51,12 +58,45 @@
             </thead>
             <tbody>
                 <tr *ngFor="let jugador of jugadores">
+                    <td><img src="{{jugador.imagen}}" alt=""></td>
                     <td>{{jugador.dni_usuario}}</td>
                     <td>{{jugador.nombre}}</td>
                     <td>{{jugador.apellidos}}</td>
-                    <td>{{jugador.dorsal}}</td>
-                    <td>{{jugador.funcion}}</td>
-                    <td>{{jugador.rol}}</td>
+                    <td>
+                        <div class="selectRol" *ngIf="admin && jugador.dni_usuario != usuarioLogeado.dni">
+                            <input type="number" [value]="jugador.dorsal"
+                                (change)="cambiarDorsalEquipo(jugador.dni_usuario, $event)">
+                        </div>
+                        <div class="rol" *ngIf="!admin || jugador.dni_usuario == usuarioLogeado.dni">
+                            {{jugador.dorsal}}</div>
+                    </td>
+                    <td>
+                        <div class="selectRol" *ngIf="admin && jugador.dni_usuario != usuarioLogeado.dni">
+                            <select name="funcion" id="funcion"
+                                (change)="cambiarFuncionEquipo(jugador.dni_usuario, $event)">
+                                <option [selected]="jugador.funcion === 'jugador'" value="jugador">Jugador</option>
+                                <option [selected]="jugador.funcion === 'entrenador'" value="entrenador">Entrenador
+                                </option>
+                                <option [selected]="jugador.funcion === 'sanitario'" value="sanitario">Sanitario
+                                </option>
+                            </select>
+
+                        </div>
+                        <div class="rol" *ngIf="!admin || jugador.dni_usuario == usuarioLogeado.dni">
+                            {{jugador.funcion}}</div>
+                    </td>
+                    <td>
+                        <div class="selectRol" *ngIf="admin && jugador.dni_usuario != usuarioLogeado.dni">
+                            <select name="rol" id="rol" (change)="cambiarRolEquipo(jugador.dni_usuario, $event)">
+                                <option [selected]="jugador.rol === 'Usuario'" value="Usuario">Usuario
+                                </option>
+                                <option [selected]="jugador.rol === 'Admin'" value="Admin">
+                                    Admin</option>
+                            </select>
+                        </div>
+                        <div class="rol" *ngIf="!admin || jugador.dni_usuario == usuarioLogeado.dni">
+                            {{jugador.rol}}</div>
+                    </td>
                     <td *ngIf="admin"><button class="buttonTabla"
                             (click)="ExpulsarJugador(jugador.dni_usuario)">Expulsar</button></td>
                 </tr>

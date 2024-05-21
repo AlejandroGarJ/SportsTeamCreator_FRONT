@@ -39,11 +39,17 @@
         <li *ngFor="let equipo of equipos">
             <a [routerLink]="['/dashboard/club']" [queryParams]="{clubId: id_club, nombreClub: nombreClub}"
                 (click)="cambiarMostrarEquipos(equipo.id_equipo, equipo.nombre, equipo.genero, equipo.categoria)">
+<<<<<<< HEAD
                 <button [ngStyle]="compartido.idEquipo == equipo.id ? {'background-color': 'red'} : {}">{{ equipo.nombre }}</button>
 
+=======
+                <button [ngStyle]="{'background-color': idEquipo == equipo.id_equipo ? '#47A1F6' : '' }">{{
+                    equipo.nombre
+                    }}</button>
+>>>>>>> b35e0d43717229412702511d9cdf4243eb161c8d
             </a>
-
         </li>
+
         <h4 *ngIf="!loadingEquipos && equipos.length === 0" style="text-align: center; color: grey;">No hay ningún
             equipo disponible</h4>
 
