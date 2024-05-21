@@ -1,11 +1,11 @@
 export const environment = {
-  production: false,
+  production: true,
   url: 'http://127.0.0.1:8000'
 }
 
 
-export enum rutas  {
+export enum rutas {
 
   login = '/login'
-  
+
 }
