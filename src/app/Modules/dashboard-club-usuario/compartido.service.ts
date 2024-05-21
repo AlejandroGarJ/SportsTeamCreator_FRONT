@@ -9,7 +9,7 @@ import { environment } from '../../../environments/environment';
 export class CompartidoService {
 
   private mostrarEquipos = new BehaviorSubject<boolean>(false);
-  private idEquipo = new BehaviorSubject<number>(0);
+  public idEquipo = new BehaviorSubject<number>(0);
   private nombreEquipo = new BehaviorSubject<string>('');
   private generoEquipo = new BehaviorSubject<string>('');
   private categoriaEquipo = new BehaviorSubject<string>('');

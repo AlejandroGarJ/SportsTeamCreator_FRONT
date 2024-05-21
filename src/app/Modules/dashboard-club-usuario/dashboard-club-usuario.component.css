@@ -309,7 +309,9 @@ full-calendar {
     font-size: 1rem;
     font-weight: 400;
 }
-
+select #rol:hover{
+    cursor: pointer;
+}
 
 /* Button */
 

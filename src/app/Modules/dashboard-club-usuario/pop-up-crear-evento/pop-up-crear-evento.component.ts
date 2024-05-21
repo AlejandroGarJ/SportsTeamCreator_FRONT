@@ -21,6 +21,7 @@ export class PopUpCrearEventoComponent {
   id_club: number | null = null;
   id_equipo: number | null = null;
   dni: string = "";
+  creando: boolean = false;
   tipoEventoSeleccionado: string = "";
   constructor(public dialogRef: MatDialogRef<PopUpCrearEventoComponent>, @Inject(MAT_DIALOG_DATA) public datos: any, private compartido: CompartidoService, private toastr: ToastrService) {
     this.id_club = datos.id_club;
@@ -33,6 +34,7 @@ export class PopUpCrearEventoComponent {
   }
 
   crearEvento() {
+    this.creando = true;
     const payload: any = {
       titulo: this.nombreEvento,
       fechaInicio: this.fechaInicio + ' ' + this.horaInicio + ':00',
@@ -51,14 +53,17 @@ export class PopUpCrearEventoComponent {
     if (this.dni !== null) {
       payload.dni = this.dni;
     }
-
+   
     this.compartido.crearEvento(payload).subscribe({
       next: (res: any) => {
         this.toastr.success('Evento creado correctamente');
+        this.creando = false;
         this.dialogRef.close();
       },
       error: (err) => {
         console.error('Error al crear el evento:', err);
+        this.creando = false;
+        this.dialogRef.close();
       }
     });
   }

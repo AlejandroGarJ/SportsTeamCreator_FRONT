@@ -32,6 +32,7 @@ import { PopUpDetallesEventoComponent } from './Modules/dashboard-club-usuario/p
 import { PopUpCrearEquipoComponent } from './Modules/dashboard-club-usuario/pop-up-crear-equipo/pop-up-crear-equipo.component';
 import { PopUpEditarEquipoComponent } from './Modules/dashboard-club-usuario/pop-up-editar-equipo/pop-up-editar-equipo.component';
 import { LoaderMinimalistaComponent } from './shared/loader-minimalista/loader-minimalista.component';
+import { LandingPageComponent } from './Modules/landing-page/landing-page.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { LoaderMinimalistaComponent } from './shared/loader-minimalista/loader-m
     PopUpDetallesEventoComponent,
     PopUpCrearEquipoComponent,
     PopUpEditarEquipoComponent,
-    LoaderMinimalistaComponent
+    LoaderMinimalistaComponent,
+    LandingPageComponent
   ],
   imports: [
     BrowserModule,

@@ -24,7 +24,8 @@ export class BanerLateralComponent implements OnInit {
 
   constructor(
     private clubService: ClubControllerService,
-    private route: ActivatedRoute, private compartido: CompartidoService,
+    private route: ActivatedRoute, 
+    public compartido: CompartidoService,
     private infoUsuario: InfoUsuarioService,
     private router: Router
   ) {

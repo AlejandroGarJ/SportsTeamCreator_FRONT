@@ -29,7 +29,9 @@
                 <option value="reunion">reunion</option>
                 <option value="otro">otro</option>
             </select>
-            <button (click)="crearEvento()">Crear</button>
+            <button *ngIf="!creando" (click)="crearEvento()">Crear</button>
+            
+
         </form>
     </div>
 </div>
