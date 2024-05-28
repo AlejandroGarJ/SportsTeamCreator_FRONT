@@ -1,8 +1,37 @@
 <div class="main">
+    <header>
+        <div class="logo">
+            <img src="../../../assets/img/logo.jpg" alt="Sports Team Creator Logo">
+        </div>
+        <div class="auth-buttons">
+            <a [routerLink]="['/register']"><button>Registrarse</button></a>
+            <a [routerLink]="['/login']"><button>Iniciar Sesion</button></a>
+        </div>
+    </header>
 
+    <section class="main-banner">
+        <div class="text">
+            <h1 class="title">¿Quieres llevar a tu club al maximo nivel?</h1>
+            <p>No lo dudes mas y prueba nuestra aplicacion con la cual podras hacer todo lo que quieras con tu club.
+            </p>
+        </div>
 
+        <div class="cta-buttons">
+            <a [routerLink]="['/register']"><button>Unirse ahora</button></a>
+        </div>
+    </section>
 
-
-
-    
+    <section class="learn-more">
+        <img src="../../../assets/img/893shots_so.png" alt="Training">
+        <div class="learn-more-div">
+            <h2>Organiza tus clubes y equipos de una manera totalmente diferente:</h2>
+            <p>Con nuestra aplicación, podrás gestionar tus clubes y equipos de manera sencilla a través de un completo
+                dashboard. Este te permitirá organizar un calendario para gestionar actividades, partidos y
+                entrenamientos. También podrás manejar tus plantillas, asignar dorsales, y designar al entrenador, quien
+                podrá planificar los entrenamientos semanales. Además, podrás gestionar el rol del sanitario/fisio,
+                quien ofrecerá citas para atender a tus jugadores en caso de lesiones. En resumen, con Sports Team
+                Creator, tu club dará un salto de calidad que otros no tienen.</p>
+            <a [routerLink]="['/register']"><button>Empezar</button></a>
+        </div>
+    </section>
 </div>

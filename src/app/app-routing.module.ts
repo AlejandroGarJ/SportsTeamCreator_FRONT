@@ -9,12 +9,13 @@ import { NotFoundComponent } from './Core/Pages/not-found/not-found.component';
 import { CorreoCambioContrasenaComponent } from './Core/Pages/correo-cambio-contrasena/correo-cambio-contrasena.component';
 import { PerfilComponent } from './Modules/Usuario/perfil/perfil.component';
 import { DashboardClubUsuarioComponent } from './Modules/dashboard-club-usuario/dashboard-club-usuario.component';
+import { LandingPageComponent } from './Modules/landing-page/landing-page.component';
 
 const routes: Routes = [
 
   { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
   { path: 'dashboard/club', component: DashboardClubUsuarioComponent, canActivate: [authGuard] },
-  { path: '', component: LoginComponent },
+  { path: '', component: LandingPageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'cambiarContrasena', component: CambiarContrasenaComponent },

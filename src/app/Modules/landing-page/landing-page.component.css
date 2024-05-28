@@ -1,0 +1,209 @@
+.main {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #081B26;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header .logo {
+    display: flex;
+    align-items: center;
+}
+
+header .logo img {
+    height: 80px;
+    margin-right: 10px;
+}
+
+header nav {
+    display: flex;
+    justify-content: space-around;
+}
+
+header nav a {
+    margin: 0 15px;
+    text-decoration: none;
+    color: white;
+}
+
+header nav a:hover {
+    color: #47A1F6;
+}
+
+header .auth-buttons button {
+    margin-left: 10px;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    background-color: #264F73;
+    color: white;
+    cursor: pointer;
+}
+
+header .auth-buttons button:hover {
+    background-color: #47A1F6;
+}
+
+.main-banner {
+    background: url('../../../assets/img/athlete-1840437\ 2.png') no-repeat center center/cover;
+    opacity: 0.7;
+    color: white;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 100px 20px;
+    position: relative;
+}
+
+.main-banner h1 {
+    font-size: 46px;
+    font-weight: 900;
+    margin-bottom: 20px;
+}
+
+.main-banner .text {
+    background-color: rgb(0, 0, 0, 0.2);
+    border-radius: 40px;
+    box-shadow: inset 0px 40px rgb(0, 0, 0, 0.0);
+    width: 45%;
+}
+
+.main-banner .text p {
+    font-weight: 700;
+    font-size: 24px;
+}
+
+.main-banner .cta-buttons {
+    margin-top: 20px;
+}
+
+.main-banner .cta-buttons button {
+    margin: 0 10px;
+    padding: 15px 30px;
+    border-radius: 10px;
+    border: none;
+    background-color: #264F73;
+    color: white;
+    cursor: pointer;
+}
+
+.main-banner .cta-buttons button:hover {
+    background-color: #47A1F6;
+}
+
+.statistics {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background-color: #264F73;
+    color: white;
+    padding: 40px 20px;
+}
+
+.statistics div {
+    text-align: center;
+    flex: 1 1 200px;
+    margin: 10px;
+}
+
+.statistics div h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.statistics div p {
+    font-size: 18px;
+}
+
+.learn-more {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.learn-more-div {
+    width: 50%;
+    text-align: center;
+}
+
+.learn-more img {
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 20px;
+}
+
+.learn-more h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.learn-more p {
+    font-size: 18px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.learn-more button {
+    padding: 15px 30px;
+    border-radius: 10px;
+    border: none;
+    background-color: #264F73;
+    color: white;
+    cursor: pointer;
+}
+
+.learn-more button:hover {
+    background-color: #47A1F6;
+}
+
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    header nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    header nav a {
+        margin: 10px 0;
+    }
+
+    header .auth-buttons {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    header .auth-buttons button {
+        margin: 10px 0;
+    }
+
+    .main-banner h1 {
+        font-size: 28px;
+    }
+
+    .main-banner .cta-buttons button {
+        margin: 10px 0;
+        width: 100%;
+    }
+
+    .statistics {
+        flex-direction: column;
+        align-items: center;
+    }
+}

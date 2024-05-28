@@ -1,7 +1,7 @@
 <div class="all">
     <div class="header">
         <div class="spotifyWhiteLogo">
-            <img (click)="irALogin()" src="./../../../assets/img/logo.jpg" alt="">
+            <a [routerLink]="['/']"><img src="./../../../assets/img/logo.jpg" alt=""></a>
         </div>
 
     </div>
@@ -126,7 +126,7 @@
 
                         <div class="registerContainer">
                             <h4 class="noAcc">¿Ya tienes cuenta?</h4>
-                            <a routerLink="/">
+                            <a routerLink="/login">
                                 <h4 class="subscribe">Inicia sesion en SportsTeamCreator</h4>
                             </a>
                         </div>
