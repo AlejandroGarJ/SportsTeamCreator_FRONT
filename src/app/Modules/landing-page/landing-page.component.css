@@ -54,7 +54,7 @@ header .auth-buttons button:hover {
 
 .main-banner {
     background: url('../../../assets/img/athlete-1840437\ 2.png') no-repeat center center/cover;
-    opacity: 0.7;
+    opacity: 0.9;
     color: white;
     text-align: center;
     display: flex;
@@ -71,7 +71,7 @@ header .auth-buttons button:hover {
 }
 
 .main-banner .text {
-    background-color: rgb(0, 0, 0, 0.2);
+    background-color: rgb(0, 0, 0, 0.7);
     border-radius: 40px;
     box-shadow: inset 0px 40px rgb(0, 0, 0, 0.0);
     width: 45%;
