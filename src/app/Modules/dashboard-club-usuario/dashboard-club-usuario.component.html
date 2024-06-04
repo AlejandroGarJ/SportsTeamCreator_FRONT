@@ -11,10 +11,10 @@
                         class="fa-solid fa-calendar-days"></i></button>
                 <div class="separador"></div>
                 <button (click)="mostrarJugadores()" [ngStyle]="{'color': jugadoresClub ? '#47A1F6' : '' }"><i
-                        class="fa-solid fa-users"></i></button>
+                        class="fa-solid fa-users"></i><br>Jugadores</button>
                 <div class="separador"></div>
                 <button (click)="mostrarEquiposUnirse()" [ngStyle]="{'color': equiposClub ? '#47A1F6' : '' }"><i
-                        class="fa-solid fa-people-group"></i></button>
+                        class="fa-solid fa-people-group"></i><br>Unirme a un equipo</button>
                 <div *ngIf="admin" class="separador"></div>
                 <button *ngIf="admin" (click)="mostrarAjustes()" [ngStyle]="{'color': ajustesClub ? '#47A1F6' : '' }"><i
                         class="fa-solid fa-cog"></i></button>
