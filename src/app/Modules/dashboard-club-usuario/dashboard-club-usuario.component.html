@@ -65,7 +65,7 @@
                                 <div class="selectRol" *ngIf="admin && jugador.dni != usuarioLogeado.dni">
                                     <select name="rol" id="rol"
                                         (change)="cambiarRolClub(jugador.dni, jugador.rolClub === 'plebeyo' ? 'administrador' : 'plebeyo')">
-                                        <option [selected]="jugador.rolClub === 'plebeyo'" value="plebeyo">Plebeyo
+                                        <option [selected]="jugador.rolClub === 'plebeyo'" value="plebeyo">Usuario
                                         </option>
                                         <option [selected]="jugador.rolClub === 'administrador'" value="administrador">
                                             Administrador</option>
