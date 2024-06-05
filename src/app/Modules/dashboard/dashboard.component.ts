@@ -224,7 +224,7 @@ export class DashboardComponent {
     const dialogRef = this.dialog.open(PopUpDetallesEventoComponent, {
       width: '50%',
       height: '50%',
-      data: { idEvento: info.event.id, nombreEvento: info.event.title, fechaInicio: info.event.start, fechaFin: info.event.end, descripcionEvento: info.event.extendedProps.description, lugarEvento: info.event.extendedProps.location, tipoEventoSeleccionado: info.event.extendedProps.type }
+      data: { idEvento: info.event.id, nombreEvento: info.event.title, fechaInicio: info.event.start, fechaFin: info.event.end, descripcionEvento: info.event.extendedProps.description, lugarEvento: info.event.extendedProps.location, tipoEventoSeleccionado: info.event.extendedProps.type, esAdmin: true }
     });
     dialogRef.afterClosed().subscribe(() => {
       this.eventosDeUsuario();
