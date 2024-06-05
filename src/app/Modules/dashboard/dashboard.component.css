@@ -20,6 +20,25 @@
 
 }
 
+.flexWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+
+}
+
+.mostrarCrearClub {
+    height: 70%;
+    display: flex;
+    align-items: center;
+}
+
+.fa-xmark:hover {
+    color: red;
+    cursor: pointer;
+}
+
 
 .sidebar {
     padding: 1%;
@@ -89,6 +108,18 @@ img:hover {
     margin-right: 2%;
 }
 
+
+#crearClubMas {
+    font-size: 100px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+#crearClubMas:hover {
+    cursor: pointer;
+    color: grey;
+}
+
 .container1 .subcontainer1 {
     background-color: #081B26;
     color: white;
@@ -97,9 +128,11 @@ img:hover {
     padding-right: 3%;
     padding-top: 1%;
     width: 96%;
-    height: 56%;
+    height: 55%;
+    padding-bottom: 20px;
     margin-bottom: 2%;
 }
+
 
 .container1 .subcontainer2 {
     padding-left: 3%;

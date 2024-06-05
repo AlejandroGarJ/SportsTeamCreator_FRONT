@@ -52,8 +52,12 @@
             <!-- Contenido del container inferior -->
             <div class="container1">
                 <div class="subcontainer1">
-                    <h1>Crear un Club</h1>
-                    <form action="">
+                    <div class="flexWrapper">
+                        <h1>Crear un Club</h1>
+                        <i class="fa-solid fa-xmark" *ngIf="mostrarCrearClub" (click)="showCrearClub()"></i>
+
+                    </div>
+                    <form action="" *ngIf="mostrarCrearClub" id="crearClubForm">
                         <input type="text" placeholder="Nombre del Club" [(ngModel)]="nombreClubCrear"
                             name="nombreClubCrear">
                         <input type="text" placeholder="Codigo de Acceso" [(ngModel)]="codigoAccesoCrear"
@@ -62,7 +66,12 @@
                         <input type="text" placeholder="Ciudad" [(ngModel)]="ciudadCrear" name="ciudadCrear">
                         <button (click)="crearClub()">Crear</button>
                     </form>
+                    <div class="mostrarCrearClub" id="crearClubButton" *ngIf="!mostrarCrearClub"
+                        (click)="showCrearClub()">
+                        <i class="fa-solid fa-plus" id="crearClubMas"></i>
+                    </div>
                 </div>
+
                 <div class="subcontainer2">
                     <h1>Unirse a un Club</h1>
                     <form action="">

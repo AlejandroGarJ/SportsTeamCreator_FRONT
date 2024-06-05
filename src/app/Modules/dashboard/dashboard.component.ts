@@ -39,6 +39,7 @@ export class DashboardComponent {
   loadingClubs: boolean = false;
   loadingInfoUsuario: boolean = false;
   tipoEventoSeleccionado: string = "todos";
+  mostrarCrearClub: boolean = false;
 
   ngOnInit() {
     this.eventosDeUsuario();
@@ -92,6 +93,11 @@ export class DashboardComponent {
       this.pagina = 1;
 
     }
+  }
+
+
+  showCrearClub() {
+    this.mostrarCrearClub = !this.mostrarCrearClub;
   }
 
   changeNameClub() {
