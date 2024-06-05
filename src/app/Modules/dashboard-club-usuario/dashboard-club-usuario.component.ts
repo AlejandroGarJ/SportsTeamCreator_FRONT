@@ -17,6 +17,7 @@ import { InfoUsuarioService } from '../../Core/Services/usuario/info-usuario.ser
 import { PopUpEditarEquipoComponent } from './pop-up-editar-equipo/pop-up-editar-equipo.component';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
+import { co } from '@fullcalendar/core/internal-common';
 
 
 
@@ -415,6 +416,7 @@ export class DashboardClubUsuarioComponent {
     });
   }
   borrarClub() {
+    console.log(this.id_club);
     this.compartido.borrarClub({ id_club: this.id_club }).subscribe({
       next: (res: any) => {
         if (res = true) {
