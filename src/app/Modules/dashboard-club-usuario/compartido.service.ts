@@ -70,9 +70,6 @@ export class CompartidoService {
   expulsarUsuario(data: any): Observable<any> {
     return this.http.post<any>(environment.url + "/api/expulsarUsuario", data);
   }
-  borrarClub(data: any): Observable<any> {
-    return this.http.post<any>(environment.url + "/api/borrarClub", data);
-  }
   setMostrarEquipos(valor: boolean): void {
     this.mostrarEquipos.next(valor);
   }
