@@ -1,3 +1,4 @@
+/* Componente TS con todas las funcionalidades para la gestión del usuario */
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router'; // Import ActivatedRoute
 import { obtenerSessionUsuario } from '../../shared/guardarSessionUsuario/guardarSessionUsuario';
@@ -85,7 +86,10 @@ export class DashboardClubUsuarioComponent {
 
     this.sacarRoles(); // Llama a sacarRoles() primero
     this.compartido.mostrarEquipos$.subscribe(value => {
+
       this.mostrarEquipos = value;
+      console.log(this.mostrarEquipos);
+
     });
     this.eventosDeClub();
 

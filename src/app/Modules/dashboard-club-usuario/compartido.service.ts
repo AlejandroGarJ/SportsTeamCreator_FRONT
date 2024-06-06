@@ -1,3 +1,4 @@
+
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -75,6 +76,7 @@ export class CompartidoService {
   }
   setMostrarEquipos(valor: boolean): void {
     this.mostrarEquipos.next(valor);
+
   }
   setIdEquipo(valor: number): void {
     this.idEquipo.next(valor);

@@ -55,7 +55,7 @@ export class RegisterComponent {
     });
   }
 
-
+  /* Cuando selecciona una foto de su ordenador */
   onFileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
@@ -85,7 +85,7 @@ export class RegisterComponent {
   }
 
 
-
+  /* Cuando se envia el formulario de registro */
   onSubmit() {
     if (this.form.valid) {
       console.log(this.form.value);

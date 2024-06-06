@@ -20,7 +20,7 @@ export class PerfilComponent {
   usuarioLogeado: SessionUsuario;
   usuario: Usuario = UsuarioInit;
   modificando: boolean = false;
-  imagen: any ="";
+  imagen: any = "";
   constructor(private router: Router, private infoUsuario: InfoUsuarioService, private http: HttpClient, private toastr: ToastrService, private location: Location) {
     this.usuarioLogeado = obtenerSessionUsuario();
 
@@ -37,7 +37,7 @@ export class PerfilComponent {
     this.location.back();
   }
 
-
+  /* Obtiene la informacion que se ha guardado en local storage mediante una funcion compartida */
   obtenerInfoUsuario() {
     this.infoUsuario.info(this.usuarioLogeado.token_session, this.usuarioLogeado.dni).subscribe(
       (response) => {
@@ -48,17 +48,20 @@ export class PerfilComponent {
     );
   }
 
+  /* Confirmar los cambios y los guarda en la base de datos, si no se ha modificado nada salta toaster de error */
   guardar() {
     this.modificando = true;
     if (this.usuario.nombre != "" && this.usuario.apellidos != "" && this.usuario.correo != "") {
       if (this.usuario.correo.indexOf('@') != -1) {
         console.log(this.imagen);
-        this.http.post<any>(environment.url + "/api/modificarUsuario", { token_session: this.usuarioLogeado.token_session,
-                                                                         nombre: this.usuario.nombre, 
-                                                                         apellidos: this.usuario.apellidos, 
-                                                                         correo: this.usuario.correo, 
-                                                                         dni: this.usuarioLogeado.dni, 
-                                                                         imagen: this.imagen }).subscribe(
+        this.http.post<any>(environment.url + "/api/modificarUsuario", {
+          token_session: this.usuarioLogeado.token_session,
+          nombre: this.usuario.nombre,
+          apellidos: this.usuario.apellidos,
+          correo: this.usuario.correo,
+          dni: this.usuarioLogeado.dni,
+          imagen: this.imagen
+        }).subscribe(
           (response) => {
             console.log(response);
             if (response === "ok") {
@@ -85,17 +88,17 @@ export class PerfilComponent {
   onFileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
-        const reader = new FileReader();
+      const reader = new FileReader();
 
-        reader.onloadend = () => {
-            const base64String = reader.result as string;
-            this.imagen = base64String;
-           
-        };
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        this.imagen = base64String;
 
-        reader.readAsDataURL(file);
+      };
+
+      reader.readAsDataURL(file);
     }
 
-}
+  }
 
 }

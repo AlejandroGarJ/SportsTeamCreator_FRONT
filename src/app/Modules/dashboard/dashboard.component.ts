@@ -1,3 +1,6 @@
+/* La clase `DashboardComponent` en TypeScript es responsable de administrar la funcionalidad del 
+panel de usuario, incluida la visualización de eventos, clubes, la creación y adhesión a clubes y
+ el manejo de las interacciones del usuario. */
 import { AfterViewInit, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -76,6 +79,12 @@ export class DashboardComponent {
     this.reajustarClubWrapper();
   }
 
+  /* El código TypeScript anterior utiliza un decorador HostListener para escuchar un evento de clic en el
+documento. Cuando se produce un evento de clic, se activa el método onClick. Dentro del método, verifica
+si el objetivo del evento de clic no está dentro del elemento searchInput o del elemento clubWrapper. Si se cumplen las
+condiciones, establece la propiedad mostrarClubes en falso, actualiza el radio del borde del
+elemento searchInput, borra la matriz clubs y restablece la propiedad pagina a 1. Este código
+se utiliza para controlar eventos de clic fuera de elementos específicos y realizar ciertas acciones en consecuencia. */
   @HostListener('document:click', ['$event'])
   onClick(event: MouseEvent) {
 
@@ -100,14 +109,29 @@ export class DashboardComponent {
     this.mostrarCrearClub = !this.mostrarCrearClub;
   }
 
+  /**
+* La función `changeNameClub` restablece la variable `pagina` a 1 y llama a la función `searchClub`
+* con un parámetro `true`.
+*/
   changeNameClub() {
     this.pagina = 1;
     this.searchClub(true);
   }
+  /**
+ * La función "cerrarSesion" elimina el elemento 'sessionUsuario' de localStorage y navega a
+ * la ruta '/login'.
+ */
   cerrarSesion() {
     localStorage.removeItem('sessionUsuario');
     this.router.navigate(['/login']);
   }
+  /**
+* La función `infiniteScroll` verifica si el usuario se ha desplazado hasta el final de la página y activa
+* una búsqueda de más contenido si el número de página actual es menor que 1000.
+* @param {Event} scroll - El parámetro `scroll` es un objeto Event que se pasa a la
+* función `infiniteScroll`. Representa el evento de desplazamiento que se activa cuando el usuario se desplaza
+* dentro de un elemento especificado. El evento `scroll` proporciona información sobre el desplazamiento
+*/
   infiniteScroll(scroll: Event) {
     const target = scroll.target as HTMLElement;
     if (target.scrollTop == (target.scrollHeight - target.clientHeight)) {
@@ -122,6 +146,9 @@ export class DashboardComponent {
 
 
 
+  /**
+* La función reajustarClubWrapper posiciona un elemento contenedor del club debajo de un elemento de entrada de búsqueda.
+*/
   reajustarClubWrapper(): void {
     const searchInput = document.getElementById("searchInput");
     const clubWrapper = document.getElementById("clubWrapper");
@@ -138,14 +165,13 @@ export class DashboardComponent {
       searchInput.style.borderBottomLeftRadius = 0 + "px";
 
       clubWrapper.style.display = "block";
-
-
     }
-
-
   }
 
-
+  /**
+  * La función "eventosDeUsuario" recupera eventos de un usuario de un servicio y mapea los datos de respuesta
+  * para actualizar las opciones del calendario.
+  */
   eventosDeUsuario() {
     this.clubService.obtenerEventosUsuario({ dni: this.usuarioLogeado.dni, tipo: this.tipoEventoSeleccionado }).subscribe(
       (response) => {
@@ -165,6 +191,10 @@ export class DashboardComponent {
       }
     );
   }
+  /**
+ * La función "crearEvento" abre una ventana de diálogo para crear un nuevo evento y actualiza la
+ * lista de eventos del usuario después de cerrar el diálogo.
+ */
   crearEvento() {
     const dialogRef = this.dialog.open(PopUpCrearEventoComponent, {
       width: '50%',
@@ -176,6 +206,10 @@ export class DashboardComponent {
       this.eventosDeUsuario();
     });
   }
+
+  /* El código anterior configura las opciones de configuración para un calendario usando la biblioteca FullCalendar
+en TypeScript. Define varias propiedades como la vista inicial, los complementos, los eventos, el diseño de la barra
+ de herramientas del encabezado, la configuración regional, el texto de los botones y las funciones de manejo de eventos. */
   calendarOptions: CalendarOptions = {
     initialView: 'dayGridMonth',
     plugins: [dayGridPlugin],
@@ -202,7 +236,7 @@ export class DashboardComponent {
       }
     },
 
-
+    //Gestionar estilos en funcion de la opcion
     eventClick: this.handleEventClick.bind(this),
     eventBackgroundColor: '#3788d8',
     eventBorderColor: '#3788d8',
@@ -225,7 +259,8 @@ export class DashboardComponent {
       }
     }
 
-  };
+  }
+
   handleEventClick(info: any) {
     const dialogRef = this.dialog.open(PopUpDetallesEventoComponent, {
       width: '50%',
@@ -238,6 +273,9 @@ export class DashboardComponent {
 
   }
 
+  /**
+  * La función `unirseAClub` envía una solicitud para unirse a un club y maneja la respuesta en consecuencia.
+  */
   unirseAClub() {
     this.clubService.unirseClub({ nombre: this.nombreClub, codigoAcceso: this.claveClub, dni: this.usuarioLogeado.dni, token_session: this.usuarioLogeado.token_session }).subscribe(
       (response) => {
@@ -256,6 +294,10 @@ export class DashboardComponent {
     );
   }
 
+  /**
+* La función `crearClub` crea un nuevo club enviando una solicitud al servicio del club con
+* parámetros específicos y maneja la respuesta en consecuencia.
+*/
   crearClub() {
     this.clubService.crearClub({ nombre: this.nombreClubCrear, codigoAcceso: this.codigoAccesoCrear, localizacion: (this.ciudadCrear + ", " + this.paisCrear), dni: this.usuarioLogeado.dni }).subscribe(
       (response: any) => {
@@ -276,8 +318,10 @@ export class DashboardComponent {
     );
   }
 
-
-
+  /**
+ * La función `showWrapperClub` ajusta el estilo de un elemento de entrada de búsqueda y establece un indicador booleano
+ * en verdadero antes de llamar a otra función después de una breve demora.
+ */
   showWrapperClub() {
     const searchInput = document.getElementById("searchInput");
     if (searchInput != null) searchInput.style.borderBottomRightRadius = 0 + "px";
@@ -290,6 +334,14 @@ export class DashboardComponent {
     ;
   }
 
+  /**
+  * La función `searchClub` en TypeScript busca clubes y maneja la paginación y carga de
+  * indicadores.
+  * @param {boolean} [overrideClub=false] - El parámetro `overrideClub` en la función `searchClub`
+  * es un parámetro booleano que determina si se debe reemplazar la lista existente de clubes con los nuevos
+  * datos o concatenar los nuevos datos con la lista existente. Si `overrideClub` está configurado como `true`, la
+  * propiedad `clubs` será
+  */
   searchClub(overrideClub: boolean = false) {
 
     this.dashboardService.searchClub(this.clubName, this.pagina).subscribe(
@@ -328,6 +380,10 @@ export class DashboardComponent {
 
       })
   }
+  /**
+ * La función `clubesUsuario` recupera los clubes asociados a un usuario y gestiona la carga y los
+ * estados de error.
+ */
   clubesUsuario() {
     this.loadingClubs = true;
     this.clubService.obtenerClubes({ dni: this.usuarioLogeado.dni }).subscribe(

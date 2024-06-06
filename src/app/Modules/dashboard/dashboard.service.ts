@@ -1,7 +1,9 @@
+/* La clase DashboardService en TypeScript es un servicio Angular que proporciona un método para buscar
+clubes mediante solicitudes HTTP POST. */
 import { Injectable } from '@angular/core';
-import { environment} from "../../../environments/environment";
-import {Observable} from "rxjs";
-import {HttpClient} from "@angular/common/http";
+import { environment } from "../../../environments/environment";
+import { Observable } from "rxjs";
+import { HttpClient } from "@angular/common/http";
 import { AuthUsuarioService } from '../../Core/Services/usuario/auth-usuario.service';
 
 @Injectable({
@@ -15,7 +17,7 @@ export class DashboardService {
   searchClub(name: string, page: number): Observable<any> {
 
     const body = { nombre: name, page: page };
-    
-    return this.http.post<any>(environment.url+"/api/searchClub", body);
+
+    return this.http.post<any>(environment.url + "/api/searchClub", body);
   }
 }

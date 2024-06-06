@@ -1,3 +1,5 @@
+/* La clase ClubControllerService en TypeScript contiene métodos
+ para interactuar con las API relacionadas con el club. */
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../../../environments/environment';
@@ -52,7 +54,7 @@ export class ClubControllerService {
     return this.http.post<any>(environment.url + "/api/modificarEquipo", data);
   }
 
-  comprobarUsuarioPerteneceClub(dni: string, id_club: number | null){
+  comprobarUsuarioPerteneceClub(dni: string, id_club: number | null) {
     const body = { dni, id_club };
     return this.http.post<any>(environment.url + "/api/comprobarUsuarioPerteneceClub", body);
   }

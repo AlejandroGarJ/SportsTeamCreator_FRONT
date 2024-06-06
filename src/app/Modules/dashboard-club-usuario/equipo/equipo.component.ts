@@ -1,3 +1,6 @@
+/* La clase EquipoComponent en TypeScript es responsable de administrar las funcionalidades relacionadas con el equipo
+como mostrar eventos en un calendario, manejar información de los jugadores y permitir que los administradores del equipo
+realicen ajustes. */
 import { Component } from '@angular/core';
 import { obtenerSessionUsuario } from '../../../shared/guardarSessionUsuario/guardarSessionUsuario';
 import { SessionUsuario } from '../../../Core/Models/session.model';
@@ -40,6 +43,11 @@ export class EquipoComponent {
     this.usuarioLogeado = obtenerSessionUsuario();
 
   }
+
+  /**
+ * La función `ngOnInit` en TypeScript inicializa las propiedades de los componentes en función de los parámetros de consulta
+ * y se suscribe a los observables para actualizar la información del equipo.
+ */
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
       const clubId = params['clubId'];
@@ -70,10 +78,15 @@ export class EquipoComponent {
       }
     });
   }
+
   mostrarEquipos() {
     this.compartido.setMostrarEquipos(false);
   }
 
+  /**
+ * La función `eventosDeEquipo` recupera los eventos del equipo según el ID del equipo y el tipo de evento, y llena un
+ * calendario con los datos recuperados.
+ */
   eventosDeEquipo() {
     this.compartido.obtenerEventosDeEquipo({ id_equipo: this.idEquipo, tipo: this.tipoEventoSeleccionado }).subscribe(
       (response) => {
@@ -143,6 +156,15 @@ export class EquipoComponent {
     }
 
   };
+
+  /**
+* La función `handleEventClick` abre una ventana de diálogo con detalles de un evento en el que se hizo clic y
+* actualiza la lista de eventos del equipo después de cerrar el diálogo.
+* @param {any} info - El parámetro `info` en la función `handleEventClick` parece contener
+* información sobre el evento en el que se hizo clic. Probablemente incluya detalles como el ID del evento,
+* título, fechas de inicio y finalización, descripción, ubicación, tipo y si el usuario es administrador. Esta
+* información es entonces
+*/
   handleEventClick(info: any) {
     const dialogRef = this.dialog.open(PopUpDetallesEventoComponent, {
       width: '50%',
@@ -153,6 +175,11 @@ export class EquipoComponent {
       this.eventosDeEquipo();
     });
   }
+
+  /**
+* La función "crearEvento" abre una ventana de diálogo para crear un nuevo evento y actualiza la lista de
+* eventos de un equipo después de cerrar el diálogo.
+*/
   crearEvento(): void {
     const dialogRef = this.dialog.open(PopUpCrearEventoComponent, {
       width: '50%',
@@ -164,9 +191,12 @@ export class EquipoComponent {
       this.eventosDeEquipo();
     });
   }
-  modificarEquipo() {
 
-  }
+  /**
+* La función "obtenerJugadores" obtiene jugadores para un equipo, prepara su estructura de datos, verifica
+* si el usuario es administrador del equipo, recupera el nombre del jugador y oculta el cargador una vez que la
+* operación se completa.
+*/
   obtenerJugadores(): void {
     this.compartido.jugadoresEquipo({ id_equipo: this.idEquipo }).subscribe({
       next: (jugadores: any[]) => {
@@ -187,6 +217,13 @@ export class EquipoComponent {
     });
   }
 
+  /**
+ * La función `nombreJugador` obtiene el nombre, apellido e imagen de un jugador de un servicio basado en
+ * el ID del jugador y los asigna al objeto jugador.
+ * @param {any} jugador - El parámetro `jugador` en la función `nombreJugador` representa
+ * un objeto jugador. Contiene información sobre un jugador, como su ID (`dni_usuario`),
+ * nombre, apellidos e imagen.
+ */
   nombreJugador(jugador: any): void {
     this.clubService.nombreJugador({ dni: jugador.dni_usuario }).subscribe({
       next: (res: any) => {
@@ -199,6 +236,14 @@ export class EquipoComponent {
       }
     });
   }
+
+  /**
+* La función ExpulsarJugador verifica si el ID del jugador proporcionado coincide con el ID del usuario conectado,
+* y si no, procede a expulsar al jugador del equipo y muestra los mensajes correspondientes.
+* @param {any} dni - El parámetro `dni` en la función `ExpulsarJugador`significa
+* "Documento Nacional de Identidad", que es un número de identificación único utilizado en algunos países.
+* Se utiliza para identificar a un jugador específico en este contexto.
+*/
   ExpulsarJugador(dni: any) {
     if (dni === this.usuarioLogeado.dni) {
       this.toastr.error('No puedes expulsarte a ti mismo');
@@ -214,6 +259,11 @@ export class EquipoComponent {
       });
     }
   }
+
+  /**
+* La función `esAdminEquipo` verifica si el usuario conectado es un administrador o un usuario regular de un equipo
+* según su rol y establece las propiedades `admin` y `comprobacionAdmin` según corresponda.
+*/
   esAdminEquipo() {
     for (let i = 0; i < this.jugadores.length; i++) {
       if (this.jugadores[i].dni_usuario === this.usuarioLogeado.dni && this.jugadores[i].rol === "Admin") {
@@ -227,6 +277,16 @@ export class EquipoComponent {
       }
     }
   }
+
+  /**
+* La función `cambiarRolEquipo` cambia el rol de un usuario en un equipo mediante una petición HTTP POST.
+* @param {any} dni_usuario - El parámetro `dni_usuario` en la función `cambiarRolEquipo` 
+* representa el número de identificación del usuario. Este parámetro se utiliza para identificar al usuario cuyo
+* rol en un equipo se está cambiando.
+* @param {Event} event - El parámetro `event` en la función `cambiarRolEquipo` es de tipo
+* `Event`. Se utiliza para capturar el evento que dispara la función, como un evento de cambio en un
+* elemento select. En esta función, se utiliza para acceder al elemento de destino (elemento select
+*/
   cambiarRolEquipo(dni_usuario: any, event: Event) {
     const selectElement = event.target as HTMLSelectElement;
     const selectedValue = selectElement.value;
@@ -235,6 +295,18 @@ export class EquipoComponent {
       () => this.toastr.success("Rol cambiado con éxito")
     );
   }
+
+  /**
+* La función `cambiarFuncionEquipo` toma el ID de un usuario, un evento y cambia la función de un
+* jugador en un equipo según el valor seleccionado en un menú desplegable.
+* @param {string} dni_usuario - El parámetro `dni_usuario` en la función `cambiarFuncionEquipo`
+* representa el número de identificación del usuario. Es probable que sea un identificador único para el usuario
+* dentro del sistema. Este parámetro se utiliza para identificar al usuario cuya función de equipo se está
+* cambiando en la función.
+* @param {Event} event - El parámetro `event` en la función `cambiarFuncionEquipo` es de tipo
+* `Event`. Es un objeto de evento que representa un evento que ocurre en el DOM, como un clic,
+* una pulsación de tecla o un evento de cambio. En esta función, se utiliza para obtener el
+*/
   cambiarFuncionEquipo(dni_usuario: string, event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     const selectedValue = selectElement.value;
@@ -245,6 +317,17 @@ export class EquipoComponent {
       }
     );
   }
+
+  /**
+* La función `cambiarDorsalEquipo` toma el ID de un usuario y el evento de entrada, recupera el valor dorsal
+* del elemento de entrada, envía una solicitud POST para cambiar el dorsal de un miembro del equipo y muestra un
+* mensaje de éxito usando Toastr.
+* @param {any} dni_usuario - El parámetro `dni_usuario` es el número de identificación del usuario
+* al que se le va a cambiar el dorsal en un equipo.
+* @param {Event} event - El parámetro `event` en la función `cambiarDorsalEquipo` es de tipo
+* `Event`. Normalmente es un objeto de evento que representa un evento que ocurre en el DOM, como
+* un evento de clic o un evento de entrada. En esta función, se utiliza para acceder al
+*/
   cambiarDorsalEquipo(dni_usuario: any, event: Event) {
     const inputElement = event.target as HTMLInputElement;
     const dorsal = inputElement.value;
@@ -253,16 +336,19 @@ export class EquipoComponent {
       () => this.toastr.success("Dorsal cambiado con éxito")
     );
   }
+
   mostrarCalendario() {
     this.calendario = true;
     this.jugadoresEquipo = false;
     this.ajustesEquipo = false;
   }
+
   mostrarJugadores() {
     this.calendario = false;
     this.jugadoresEquipo = true;
     this.ajustesEquipo = false;
   }
+
   volverClub() {
     this.compartido.setIdEquipo(0);
     this.compartido.setMostrarEquipos(false);

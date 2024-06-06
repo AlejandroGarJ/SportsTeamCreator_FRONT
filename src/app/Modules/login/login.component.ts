@@ -2,8 +2,6 @@ import { Component, input } from '@angular/core';
 import { AuthUsuarioService } from '../../Core/Services/usuario/auth-usuario.service';
 import { SessionUsuario } from "../../Core/Models/session.model";
 import { Router } from '@angular/router';
-// Ahora puedes usar la interfaz SessionUsuario en este archivo
-
 
 @Component({
   selector: 'app-login',
@@ -12,13 +10,13 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
 
-  email:string = "";
-  contrasena:string = "";
-  contrasenaMal:boolean = false;
-  emailMal:boolean = false;
-  mensajeErrorEmail:string = "";
-  mensajeErrorContrasena:string = "";
-  formatoCorrecto:boolean = true;
+  email: string = "";
+  contrasena: string = "";
+  contrasenaMal: boolean = false;
+  emailMal: boolean = false;
+  mensajeErrorEmail: string = "";
+  mensajeErrorContrasena: string = "";
+  formatoCorrecto: boolean = true;
   sessionUsuario: SessionUsuario = {
 
     dni: "",
@@ -27,35 +25,36 @@ export class LoginComponent {
 
   };
 
-  comprobandoLogin:boolean = false;
-  constructor(private authUsuario: AuthUsuarioService, private router: Router){}
+  comprobandoLogin: boolean = false;
+  constructor(private authUsuario: AuthUsuarioService, private router: Router) { }
 
-  iniciarSesion(){
-    
+  /* Funcion para iniciar sesion, gestiona el formato y si es correcto guarda en local storage información del usuario */
+  iniciarSesion() {
+
     this.resetearEstilos();
     this.comprobarFormatoLogin();
-    if(this.formatoCorrecto){
+    if (this.formatoCorrecto) {
       this.comprobandoLogin = true;
       this.authUsuario.iniciarSesion(this.email, this.contrasena).subscribe(
         (response) => {
-         
-          if(response['ok'] === 'ok'){
-          
+
+          if (response['ok'] === 'ok') {
+
             this.sessionUsuario.dni = response['dni'];
             this.sessionUsuario.nombre = response['nombre'];
             this.sessionUsuario.token_session = response['token'];
 
             localStorage.setItem('sessionUsuario', JSON.stringify(this.sessionUsuario));
             this.router.navigate(['/dashboard']);
-            
+
           }
-          else{
-            if(response['correo'] == 'correoIncorrecto'){
+          else {
+            if (response['correo'] == 'correoIncorrecto') {
               this.emailIncorrecto();
               this.formatoCorrecto = false;
               this.mensajeErrorEmail = 'Correo incorrecto';
             }
-            if(response['contrasena'] == 'contrasenaIncorrecta'){
+            if (response['contrasena'] == 'contrasenaIncorrecta') {
               this.contrasenaIncorrecta();
               this.formatoCorrecto = false;
               this.mensajeErrorContrasena = 'Contraseña incorrecta';
@@ -64,69 +63,69 @@ export class LoginComponent {
 
           this.comprobandoLogin = false;
         }
-        
+
       );
     }
-      
+
   }
 
-  
 
+  /* Funciones para gestionar los estilos de html en función de si el formato es correcto y de si coinciden con la BD */
   contrasenaIncorrecta() {
 
     let inputContrasena = document.getElementById("password");
-    if(inputContrasena != null) inputContrasena.style.border = "1px solid red";
+    if (inputContrasena != null) inputContrasena.style.border = "1px solid red";
 
     this.contrasenaMal = true;
-    
+
   }
 
-  emailIncorrecto(){
+  emailIncorrecto() {
 
     let inputEmail = document.getElementById("email");
-    if(inputEmail!= null) inputEmail.style.border = "1px solid red";
+    if (inputEmail != null) inputEmail.style.border = "1px solid red";
     this.emailMal = true;
 
   }
 
-  resetearEstilos(){
-    
+  resetearEstilos() {
+
     let inputContrasena = document.getElementById("password");
-    if(inputContrasena != null) inputContrasena.style.border = "1px solid grey";
+    if (inputContrasena != null) inputContrasena.style.border = "1px solid grey";
     let inputEmail = document.getElementById("email");
-    if(inputEmail!= null) inputEmail.style.border = "1px solid grey";
+    if (inputEmail != null) inputEmail.style.border = "1px solid grey";
     this.emailMal = false;
     this.contrasenaMal = false;
     this.formatoCorrecto = true;
   }
 
-  comprobarFormatoLogin(){
-   
-    if(this.contrasena == ""){
+  comprobarFormatoLogin() {
+
+    if (this.contrasena == "") {
       this.contrasenaIncorrecta();
       this.formatoCorrecto = false;
       this.mensajeErrorContrasena = "Introduzca una contraseña";
     }
-    if(this.contrasena.length < 7){
+    if (this.contrasena.length < 7) {
       this.contrasenaIncorrecta();
       this.formatoCorrecto = false;
       this.mensajeErrorContrasena = "Introduzca una contraseña válida";
     }
-    if(this.email == ""){
+    if (this.email == "") {
       this.emailIncorrecto();
       this.formatoCorrecto = false;
-      this.mensajeErrorEmail= "Introduzca un email";
+      this.mensajeErrorEmail = "Introduzca un email";
     }
     if (this.email.indexOf('@') == -1) {
       this.emailIncorrecto();
       this.formatoCorrecto = false;
-      this.mensajeErrorEmail= "Introduzca un email correcto";
+      this.mensajeErrorEmail = "Introduzca un email correcto";
     }
 
-    
+
   }
 
-  irACorreoCambioContrasena(){
+  irACorreoCambioContrasena() {
     this.router.navigate(['correo-cambio-contrasena']);
   }
 }

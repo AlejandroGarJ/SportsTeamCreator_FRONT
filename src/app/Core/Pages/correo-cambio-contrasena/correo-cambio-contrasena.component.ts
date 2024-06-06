@@ -1,3 +1,5 @@
+/* La clase `CorreoCambioContrasenaComponent` es un componente Angular que maneja el envío de un correo
+para cambiar contraseña con manejo de errores y funcionalidad de navegación. */
 import { Component } from '@angular/core';
 import { AuthUsuarioService } from '../../Services/usuario/auth-usuario.service';
 import { Router } from '@angular/router';
@@ -15,26 +17,31 @@ export class CorreoCambioContrasenaComponent {
   loading: boolean = false;
   correoEnviadoCorrectamente: boolean = false;
   rutas = rutas;
-  constructor(private usuarioAuth: AuthUsuarioService, private router: Router){
+  constructor(private usuarioAuth: AuthUsuarioService, private router: Router) {
 
   }
-  enviarCorreo(){
+
+  /**
+* La función `enviarCorreo` comprueba si una dirección de correo electrónico es válida y envía un correo electrónico de restablecimiento de contraseña
+* si la dirección es válida.
+*/
+  enviarCorreo() {
     this.correoCorrecto = true;
     this.loading = true;
     if (this.correo.indexOf('@') == -1 || this.correo == "" || this.correo.indexOf('.') == -1) this.correoCorrecto = false;
-    else{
-      
+    else {
+
       this.usuarioAuth.enviarCorreoCambioContrasena(this.correo).subscribe(
         (response) => {
-          if(response == 'No existe el correo'){
+          if (response == 'No existe el correo') {
             this.correoCorrecto = false;
           }
-          else{
+          else {
             this.correoEnviadoCorrectamente = true;
-            
+
           }
-          this.loading= false;
-        
+          this.loading = false;
+
         },
         (error) => {
           console.log(error);
@@ -43,7 +50,7 @@ export class CorreoCambioContrasenaComponent {
     }
   }
 
-  volver(){
+  volver() {
     this.router.navigate([this.rutas.login]);
   }
 }

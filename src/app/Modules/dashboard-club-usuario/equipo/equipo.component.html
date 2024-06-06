@@ -3,7 +3,7 @@
         <h1>{{nombreEquipo}}</h1>
         <h4 class="subtitulo">Bienvenido al dashboard del Equipo {{nombreEquipo}}</h4>
     </div>
-    <div class="botones" *ngIf="comprobacionAdmin">
+    <div class="botones" *ngIf="admin">
         <button (click)="volverClub()"><i class="fa-solid fa-house"></i></button>
         <div class="separador"></div>
         <button (click)="mostrarCalendario()" [ngStyle]="{'color': calendario ? '#47A1F6' : '' }"><i
@@ -127,7 +127,7 @@
             </div>
 
             <div *ngIf="admin" class="loginButton">
-                <button class="buttonLogin" (click)="modificarEquipo()">
+                <button class="buttonLogin">
                     Guardar
                 </button>
             </div>

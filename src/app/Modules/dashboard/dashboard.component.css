@@ -113,11 +113,13 @@ img:hover {
     font-size: 100px;
     text-align: center;
     margin: 0 auto;
+    transition: transform 0.3s ease;
 }
 
 #crearClubMas:hover {
     cursor: pointer;
-    color: grey;
+
+    transform: scale(2);
 }
 
 .container1 .subcontainer1 {

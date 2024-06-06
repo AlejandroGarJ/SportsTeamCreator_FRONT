@@ -266,6 +266,11 @@ full-calendar {
     width: 10%;
     border-radius: 5px;
     border: none;
+
+}
+
+option {
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 .content {
@@ -309,7 +314,8 @@ full-calendar {
     font-size: 1rem;
     font-weight: 400;
 }
-select #rol:hover{
+
+select #rol:hover {
     cursor: pointer;
 }
 
