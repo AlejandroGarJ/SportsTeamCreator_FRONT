@@ -275,11 +275,11 @@ export class DashboardClubUsuarioComponent {
     const dialogRef = this.dialog.open(PopUpCrearEquipoComponent, {
       width: '50%',
       height: '50%',
-      data: { id_club: this.id_club }
+      data: { id_club: this.id_club, dni: this.usuarioLogeado.dni }
     });
 
     dialogRef.afterClosed().subscribe(() => {
-      this.equiposDelClub2();
+      window.location.reload();
     });
   }
   editarEquipoPopUp(id_eqipo: any): void {
@@ -380,6 +380,7 @@ export class DashboardClubUsuarioComponent {
         if (res = true) {
           this.toastr.success('Te has unido al equipo correctamente');
           this.equiposDelClubNoEstaUser();
+          window.location.reload();
         } else {
           this.toastr.error('Error al unirte al equipo');
         }

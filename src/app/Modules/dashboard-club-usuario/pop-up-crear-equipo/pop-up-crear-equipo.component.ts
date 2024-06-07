@@ -13,12 +13,14 @@ export class PopUpCrearEquipoComponent {
   nombreEquipo: string = "";
   categoria: string = "";
   id_club: number | null = null;
+  dni: string = "";
 
   constructor(public dialogRef: MatDialogRef<PopUpCrearEquipoComponent>, @Inject(MAT_DIALOG_DATA) public datos: any, private compartido: CompartidoService, private toastr: ToastrService) {
     this.id_club = datos.id_club;
+    this.dni = datos.dni;
   }
   crearEquipo() {
-    this.compartido.crearEquipo({ id_club: this.id_club, nombre: this.nombreEquipo, categoria: this.categoria, genero: this.genero }).subscribe({
+    this.compartido.crearEquipo({ id_club: this.id_club, nombre: this.nombreEquipo, categoria: this.categoria, genero: this.genero, dni_usuario: this.dni }).subscribe({
       next: (res: any) => {
         this.toastr.success('Equipo creado correctamente', 'Correcto');
         this.dialogRef.close();

@@ -34,7 +34,6 @@ export class EquipoComponent {
   jugadoresEquipo: boolean = false;
   ajustesEquipo: boolean = false;
   admin: boolean = true;
-  comprobacionAdmin: boolean = false;
   tipoEventoSeleccionado: string = "todos";
   showLoaderCalendario: boolean = true;
   showLoaderJugadores: boolean = true;
@@ -71,7 +70,6 @@ export class EquipoComponent {
     });
     this.compartido.RecargarFrontEquipos$.subscribe(value => {
       if (value) {
-        this.comprobacionAdmin = false;
         this.obtenerJugadores();
         this.eventosDeEquipo();
         this.compartido.setRecargarFrontEquipos(false);
@@ -111,9 +109,6 @@ export class EquipoComponent {
     initialView: 'dayGridMonth',
     plugins: [dayGridPlugin],
     firstDay: 1,
-    events: [
-      { title: 'Cumple Ruben', date: '2024-04-14' }
-    ],
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
@@ -268,11 +263,9 @@ export class EquipoComponent {
     for (let i = 0; i < this.jugadores.length; i++) {
       if (this.jugadores[i].dni_usuario === this.usuarioLogeado.dni && this.jugadores[i].rol === "Admin") {
         this.admin = true;
-        this.comprobacionAdmin = true;
         break;
       } else if (this.jugadores[i].dni_usuario === this.usuarioLogeado.dni && this.jugadores[i].rol === "Usuario") {
         this.admin = false;
-        this.comprobacionAdmin = true;
         break;
       }
     }
