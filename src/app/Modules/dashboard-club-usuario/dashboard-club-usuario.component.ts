@@ -419,4 +419,19 @@ export class DashboardClubUsuarioComponent {
       }
     });
   }
+  borrarClub() {
+    this.compartido.borrarClub({ id_club: this.id_club }).subscribe({
+      next: (res: any) => {
+        if (res = true) {
+          this.toastr.success('Club borrado correctamente');
+          this.router.navigate(['/dashboard']);
+        } else {
+          this.toastr.error('Error al borrar el club');
+        }
+      },
+      error: (err) => {
+        console.error('Error fetching clubs:', err);
+      }
+    });
+  }
 }
