@@ -63,15 +63,15 @@
                     <td>{{jugador.nombre}}</td>
                     <td>{{jugador.apellidos}}</td>
                     <td>
-                        <div class="selectRol" *ngIf="admin && jugador.dni_usuario != usuarioLogeado.dni">
+                        <div class="selectRol" *ngIf="admin">
                             <input type="number" [value]="jugador.dorsal"
                                 (change)="cambiarDorsalEquipo(jugador.dni_usuario, $event)">
                         </div>
-                        <div class="rol" *ngIf="!admin || jugador.dni_usuario == usuarioLogeado.dni">
+                        <div class="rol" *ngIf="!admin">
                             {{jugador.dorsal}}</div>
                     </td>
                     <td>
-                        <div class="selectRol" *ngIf="admin && jugador.dni_usuario != usuarioLogeado.dni">
+                        <div class="selectRol" *ngIf="admin">
                             <select name="funcion" id="funcion"
                                 (change)="cambiarFuncionEquipo(jugador.dni_usuario, $event)">
                                 <option [selected]="jugador.funcion === 'jugador'" value="jugador">Jugador</option>
@@ -82,7 +82,7 @@
                             </select>
 
                         </div>
-                        <div class="rol" *ngIf="!admin || jugador.dni_usuario == usuarioLogeado.dni">
+                        <div class="rol" *ngIf="!admin">
                             {{jugador.funcion}}</div>
                     </td>
                     <td>
