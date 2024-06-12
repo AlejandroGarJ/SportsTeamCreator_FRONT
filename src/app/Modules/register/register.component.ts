@@ -5,7 +5,7 @@ import { environment, rutas } from '../../../environments/environment';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { File } from 'buffer';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { el } from '@fullcalendar/core/internal-common';
 
@@ -43,7 +43,7 @@ export class RegisterComponent {
     this.dateAdapter.setLocale('es');
     //Form initialize
     this.form = this.formBuilder.group({
-      dni: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
+      dni: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9), this.dniValidator()]],
       nombre: ['', Validators.required],
       apellidos: ['', Validators.required],
       correo: ['', [Validators.required, Validators.email]],
@@ -117,4 +117,21 @@ export class RegisterComponent {
     this.router.navigate([this.rutas.login]);
   }
 
+  dniValidator(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      const dni = control.value;
+      const tablaLetras = "TRWAGMYFPDXBNJZSQVHLCKE";
+
+      if (typeof dni !== 'string' || dni.length !== 9 || !/^\d{8}[A-Z]$/.test(dni)) {
+        return { invalidDni: true };
+      }
+
+      const numero = parseInt(dni.slice(0, 8), 10);
+      const letra = dni.charAt(8).toUpperCase();
+      const letraCalculada = tablaLetras[numero % 23];
+
+      return letra === letraCalculada ? null : { invalidDni: true };
+    };
+
+  }
 }

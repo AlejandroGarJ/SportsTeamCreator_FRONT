@@ -118,9 +118,10 @@ export class BanerLateralComponent implements OnInit {
 * ruta del panel, oculta los equipos y recupera los equipos de los usuarios nuevamente.
 */
   irDashbordPrincipal() {
+    this.router.navigate(['/dashboard']);
     this.compartido.setIdEquipo(0);
     this.obtenerEquiposUsuario();
-    this.router.navigate(['/dashboard']);
+
     this.obtenerEquiposUsuario();
     this.compartido.setMostrarEquipos(false);
   }

@@ -142,7 +142,7 @@ export class DashboardClubUsuarioComponent {
       right: 'dayGridMonth,dayGridWeek,dayGridDay'
     },
     locale: 'es',
-    buttonText: { today: "Hoy", dayGridMonth: 'Mes', dayGridWeek: 'Semana', dayGridDay: "Dia" }, // Establece el texto del botón "Hoy" en español
+    buttonText: { today: "Hoy", dayGridMonth: 'Mes', dayGridWeek: 'Semana', dayGridDay: "Día" }, // Establece el texto del botón "Hoy" en español
 
     windowResize: function (arg) {
       const windowWidth = window.innerWidth;

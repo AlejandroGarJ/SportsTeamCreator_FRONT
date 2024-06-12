@@ -32,6 +32,7 @@ header nav a {
     margin: 0 15px;
     text-decoration: none;
     color: white;
+
 }
 
 header nav a:hover {
@@ -75,6 +76,7 @@ header .auth-buttons button:hover {
     border-radius: 40px;
     box-shadow: inset 0px 40px rgb(0, 0, 0, 0.0);
     width: 45%;
+    padding: 20px;
 }
 
 .main-banner .text p {
@@ -134,7 +136,7 @@ header .auth-buttons button:hover {
 
 .learn-more-div {
     width: 50%;
-    text-align: center;
+    text-align: start;
 }
 
 .learn-more img {
@@ -147,6 +149,7 @@ header .auth-buttons button:hover {
     font-size: 28px;
     margin-bottom: 20px;
     color: white;
+    text-align: center;
 }
 
 .learn-more p {
@@ -162,6 +165,8 @@ header .auth-buttons button:hover {
     background-color: #264F73;
     color: white;
     cursor: pointer;
+    margin-top: 40px;
+
 }
 
 .learn-more button:hover {

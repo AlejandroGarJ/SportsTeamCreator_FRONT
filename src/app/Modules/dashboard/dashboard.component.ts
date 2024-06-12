@@ -223,7 +223,7 @@ en TypeScript. Define varias propiedades como la vista inicial, los complementos
       right: 'dayGridMonth,dayGridWeek,dayGridDay'
     },
     locale: 'es',
-    buttonText: { today: "Hoy", dayGridMonth: 'Mes', dayGridWeek: 'Semana', dayGridDay: "Dia" }, // Establece el texto del botón "Hoy" en español
+    buttonText: { today: "Hoy", dayGridMonth: 'Mes', dayGridWeek: 'Semana', dayGridDay: "Día" }, // Establece el texto del botón "Hoy" en español
 
     windowResize: function (arg) {
       const windowWidth = window.innerWidth;
