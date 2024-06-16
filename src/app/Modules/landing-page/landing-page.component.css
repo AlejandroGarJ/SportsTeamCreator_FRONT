@@ -51,6 +51,7 @@ header .auth-buttons button {
 
 header .auth-buttons button:hover {
     background-color: #47A1F6;
+
 }
 
 .main-banner {
@@ -129,19 +130,26 @@ header .auth-buttons button:hover {
 .learn-more {
     display: flex;
     justify-content: space-around;
-    align-items: center;
-    padding: 40px 20px;
+
+    padding: 40px;
     text-align: center;
 }
 
 .learn-more-div {
     width: 50%;
+    padding-top: 50px;
     text-align: start;
+    font-family: 'Quicksand';
 }
+
+.learn-more-div p {
+    font-size: 23px !important;
+}
+
 
 .learn-more img {
     width: 100%;
-    max-width: 600px;
+    max-width: 800px;
     margin-bottom: 20px;
 }
 
@@ -168,6 +176,19 @@ header .auth-buttons button:hover {
     margin-top: 40px;
 
 }
+
+.joinNow {
+    background-color: #efb810 !important;
+    transition: transform 0.3s;
+    font-size: 20px;
+    color: #081b26 !important;
+}
+
+.joinNow:hover {
+    resize: 1.2;
+    transform: scale(1.2);
+}
+
 
 .learn-more button:hover {
     background-color: #47A1F6;
@@ -211,4 +232,8 @@ header .auth-buttons button:hover {
         flex-direction: column;
         align-items: center;
     }
+}
+
+button {
+    font-weight: 900;
 }
